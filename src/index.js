@@ -5,6 +5,8 @@ const http = require('http');
 const SERVER_PORT = 8080;
 const app = express();
 
+console.log('log boy', process.env.SLACK_TOKEN);
+
 let bot = new SlackBot({
     token:process.env.SLACK_TOKEN,
     name: 'Slackboit'
