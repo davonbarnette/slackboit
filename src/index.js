@@ -14,7 +14,7 @@ let bot = new SlackBot({
 
 const onMessage = async (data) => {
     console.log(data);
-    const {type, user, text, channel} = data;
+    const {type, username, text, channel} = data;
 
     if (type === 'message') {
 
@@ -22,7 +22,7 @@ const onMessage = async (data) => {
         let toLowered = text.toLowerCase();
         const ackString = 'slackboit';
 
-        if (toLowered.indexOf(ackString) !== -1) {
+        if (toLowered.indexOf(ackString) !== -1 && username !== 'Slackboit') {
             let newString = text.split('');
             newString = newString.map((char, index) => {
                 if (index % 2 === 0) return char.toLowerCase();
