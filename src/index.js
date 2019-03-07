@@ -20,8 +20,8 @@ app.use(express.json({limit: '10mb'}));
 app.use(express.urlencoded({limit: '10mb', extended: true}));
 
 const consume = (req, res, next) => {
-    const { data } = req;
-    const {token, challenge, type} = data;
+    const { body } = req;
+    const {token, challenge, type} = body;
 
     if (token && challenge){
         console.log('token', token);
