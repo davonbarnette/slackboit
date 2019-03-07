@@ -21,7 +21,7 @@ const onMessage = async (data) => {
         //Respond to string 'slackboit' with spongebob meme
         let toLowered = text.toLowerCase();
         const ackString = 'slackboit';
-        
+
         if (toLowered.indexOf(ackString) !== -1) {
             let newString = text.split('');
             newString = newString.map((char, index) => {
@@ -29,7 +29,9 @@ const onMessage = async (data) => {
                 else return char.toUpperCase();
             });
 
-            bot.postMessage(channel, newString, {});
+            newString = newString.join('');
+
+            bot.postMessage(channel, newString, {icon_emoji:':chart_with_upwards_trend:'});
         }
 
         //Write new things to do here, maybe??
