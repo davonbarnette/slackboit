@@ -12,8 +12,23 @@ let bot = new SlackBot({
     name: 'Slackboit'
 });
 
-const onMessage = (data) => {
+const onMessage = async (data) => {
     console.log(data);
+
+    const ackString = 'slackboit';
+    const {type, user, text, channel} = data;
+
+    let toLowered = text.toLowerCase();
+
+    if (toLowered.indexOf(ackString)){
+        let newString = text.split('');
+        newString = newString.map((char, index)=>{
+            if (index % 2 === 0) return char.toLowerCase();
+            else return char.toUpperCase();
+        });
+
+        bot.postMessage(channel, newString, {});
+    }
 };
 
 bot.on('message', onMessage);
