@@ -21,7 +21,8 @@ const onMessage = async (data) => {
         //Respond to string 'slackboit' with spongebob meme
         let toLowered = text.toLowerCase();
         const ackString = 'slackboit';
-        if (toLowered.indexOf(ackString)) {
+        
+        if (toLowered.indexOf(ackString) !== -1) {
             let newString = text.split('');
             newString = newString.map((char, index) => {
                 if (index % 2 === 0) return char.toLowerCase();
