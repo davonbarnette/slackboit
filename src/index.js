@@ -14,20 +14,24 @@ let bot = new SlackBot({
 
 const onMessage = async (data) => {
     console.log(data);
-
-    const ackString = 'slackboit';
     const {type, user, text, channel} = data;
 
-    let toLowered = text.toLowerCase();
+    if (type === 'message') {
 
-    if (toLowered.indexOf(ackString)){
-        let newString = text.split('');
-        newString = newString.map((char, index)=>{
-            if (index % 2 === 0) return char.toLowerCase();
-            else return char.toUpperCase();
-        });
+        //Respond to string 'slackboit' with spongebob meme
+        let toLowered = text.toLowerCase();
+        const ackString = 'slackboit';
+        if (toLowered.indexOf(ackString)) {
+            let newString = text.split('');
+            newString = newString.map((char, index) => {
+                if (index % 2 === 0) return char.toLowerCase();
+                else return char.toUpperCase();
+            });
 
-        bot.postMessage(channel, newString, {});
+            bot.postMessage(channel, newString, {});
+        }
+
+        //Write new things to do here, maybe??
     }
 };
 
