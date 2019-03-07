@@ -1,11 +1,20 @@
 const express = require('express');
-const SlackBots = require('slackbots');
+const SlackBot = require('slackbots');
 const http = require('http');
 
+const SERVER_PORT = 8080;
 const app = express();
 
-let bot;
-const SERVER_PORT = 8080;
+let bot = new SlackBot({
+    token:process.env.SLACK_TOKEN,
+    name: 'Slackboit'
+});
+
+const onMessage = (data) => {
+    console.log(data);
+};
+
+bot.on('message', onMessage);
 
 app.use((req, res, next) => {
     res.setHeader(`Access-Control-Allow-Origin`, `*`);
@@ -24,8 +33,6 @@ const consume = (req, res, next) => {
     const {token, challenge, type} = body;
 
     if (token && challenge){
-        console.log('token', token);
-        console.log('challenge', challenge);
         res.status(200).json({challenge})
     }
 };
