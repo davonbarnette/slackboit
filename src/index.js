@@ -20,10 +20,11 @@ const onMessage = async (data) => {
 
         //Respond to string 'slackboit' with spongebob meme
         let toLowered = text.toLowerCase();
-        const ackString = 'slackboit';
+        const ackString = 'slackboit ';
 
-        if (toLowered.indexOf(ackString) !== -1 && username !== 'Slackboit') {
+        if (toLowered.startsWith(ackString) && username !== 'Slackboit') {
             let newString = text.split('');
+            newString.splice(0, 10);
             newString = newString.map((char, index) => {
                 if (index % 2 === 0) return char.toLowerCase();
                 else return char.toUpperCase();
