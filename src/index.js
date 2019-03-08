@@ -12,15 +12,26 @@ let bot = new SlackBot({
     name: 'Slackboit'
 });
 
+let timeUntilSpeak = 0;
+
 const onMessage = async (data) => {
     console.log(data);
     const {type, username, text, channel} = data;
 
     if (type === 'message') {
 
+        let curTime = new Date().getTime();
+        if (timeUntilSpeak > curTime) return null;
+
         //Respond to string 'slackboit' with spongebob meme
         let toLowered = text.toLowerCase();
         const ackString = 'slackboit ';
+        let kill = 'お前はもう死んでいる';
+
+        if (toLowered === ackString + kill){
+            timeUntilSpeak = new Date().getTime() + 60 * 1000;
+            return bot.postMessage(channel, 'なに', {icon_emoji:':chart_with_upwards_trend:'})
+        }
 
         if (toLowered.startsWith(ackString) && username !== 'Slackboit') {
             let newString = text.split('');
