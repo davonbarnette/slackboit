@@ -5,8 +5,6 @@ const http = require('http');
 const SERVER_PORT = 8080;
 const app = express();
 
-console.log('log boy', process.env.SLACK_TOKEN);
-
 let bot = new SlackBot({
     token:process.env.SLACK_TOKEN,
     name: 'Slackboit'
@@ -30,7 +28,7 @@ const onMessage = async (data) => {
 
         if (toLowered === ackString + kill){
             timeUntilSpeak = new Date().getTime() + 60 * 1000;
-            return bot.postMessage(channel, 'なに', {icon_emoji:':chart_with_upwards_trend:'})
+            return bot.postMessage(channel, 'なに', {})
         }
 
         if (toLowered.startsWith(ackString) && username !== 'Slackboit') {
@@ -43,7 +41,7 @@ const onMessage = async (data) => {
 
             newString = newString.join('');
 
-            bot.postMessage(channel, newString, {icon_emoji:':chart_with_upwards_trend:'});
+            bot.postMessage(channel, newString, {});
         }
 
         //Write new things to do here, maybe??
