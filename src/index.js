@@ -44,6 +44,13 @@ const onMessage = async (data) => {
             bot.postMessage(channel, newString, {});
         }
 
+        if (toLowered.contains("good boit") && username !== 'Slackboit') {
+
+            newString = "tHaNkS DaD";
+
+            bot.postMessage(channel, newString, {});
+        }
+
         //Write new things to do here, maybe??
     }
 };
