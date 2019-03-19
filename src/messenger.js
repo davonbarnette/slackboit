@@ -5,11 +5,13 @@ const Store = require('./store');
  * passed the same parameters: bot, username, text, channel, and submittedAt. When you want to send a message, the
  * bot has a method called postMessage. Lastly, when you create your function, throw it in the Register constant
  * at the bottom of the file to make sure Slackboit uses it.
+ *
+ * NOTE: For storedUser, check the store.js file for more details.
  */
 
 class Messenger {
 
-    static omaeWaMouShindeiru(bot, username, text, channel, submittedAt){
+    static omaeWaMouShindeiru(bot, storedUser, text, channel, submittedAt){
         const kill = 'お前はもう死んでいる';
         const acknowledge = 'slackboit ';
         let lowered = text.toLowerCase();
@@ -20,21 +22,28 @@ class Messenger {
         }
     }
 
-    static spongebobMeme(bot, username, text, channel, submittedAt){
+    static spongebobMeme(bot, storedUser, text, channel, submittedAt){
         const acknowledge = 'slackboit ';
         let lowered = text.toLowerCase();
-        if (lowered.startsWith(acknowledge)) return bot.postMessage(channel, IDoThings.spongebobMemeify(lowered), {});     
+        if (lowered.startsWith(acknowledge)) {
+            let profile = storedUser['profile'];
+            let image = profile['image_48'];
+            return bot.postMessage(channel, IDoThings.spongebobMemeify(lowered), {icon_url:image});
+        }
     }
 
-    static goodBoit(bot, username, text, channel, submittedAt){
+    static goodBoit(bot, storedUser, text, channel, submittedAt){
         const acknowledge = "good boit";
         let lowered = text.toLowerCase();
         if (lowered.includes(acknowledge)) return bot.postMessage(channel, IDoThings.spongebobMemeify("thanks dad"), {});
     }
 
-    static greetingBoit(bot, username, text, channel, submittedAt){
+    static greetingBoit(bot, storedUser, text, channel, submittedAt){
         const acknowledge = ["good morning", "morno", "hello"];
         let lowered = text.toLowerCase();
+        let profile = storedUser['profile'];
+        let username = profile['display_name'];
+
         if (acknowledge.includes(lowered))
         {
             let message = '';

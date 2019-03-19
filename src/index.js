@@ -13,16 +13,33 @@ let bot = new SlackBot({
     name: 'Slackboit'
 });
 
+bot.on('open', async () => {
+    let users = await bot.getUsers();
+    let usersById = {};
+
+    if (users){
+        users = users.members;
+        users.forEach(user => {
+            usersById[user.id] = user;
+        })
+    }
+
+    Store.usersById = usersById;
+});
+
 const onMessage = async (data) => {
     console.log(data);
-    const {type, username, text, channel} = data;
+    if (!Store.usersById) return null;
+
+    let {type, username, text, channel, user} = data; // prop "user" is actually an id...
     if (type === 'message') {
         if (username === 'Slackboit') return null; // Prevent Slackboit recursion
+        let storedUser = Store.usersById[user];
 
         let submittedAt = new Date().getTime();
         if (Store.disabledUntil > submittedAt) return null; // Prevent Slackboit from messaging if he's killed
 
-        Register.forEach(func => func(bot, username, text, channel, submittedAt))
+        Register.forEach(func => func(bot, storedUser, text, channel, submittedAt))
     }
 };
 
