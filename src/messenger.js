@@ -90,6 +90,9 @@ class IDoThings {
         }else if(username.includes('Jamz'))
         {
             return 'james-kun'
+        }else 
+        {
+            return username;
         }
     }
 }
