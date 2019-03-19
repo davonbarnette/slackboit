@@ -35,7 +35,12 @@ class Messenger {
     static greetingBoit(bot, username, text, channel, submittedAt){
         const acknowledge = ["good morning", "morno", "hello"];
         let lowered = text.toLowerCase();
-        if (acknowledge.includes(lowered))
+        let boitRespond = false;
+        for(var index in acknowledge)
+        {
+            if(text.includes(acknowledge[index])) boitRespond = true;
+        }
+        if (boitRespond)
         {
             let message = '';
             if(lowered.includes('good morning') || lowered.includes('morno'))
@@ -72,6 +77,7 @@ class IDoThings {
 
     static getName(username)
     {
+        return username;
         if(username.includes('logab'))
         {
             return 'logan-san'
