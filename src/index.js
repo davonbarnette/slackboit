@@ -5,53 +5,24 @@ const http = require('http');
 const SERVER_PORT = 8080;
 const app = express();
 
+const Register = require('./messenger');
+const Store = require('./store');
+
 let bot = new SlackBot({
     token:process.env.SLACK_TOKEN,
     name: 'Slackboit'
 });
 
-let timeUntilSpeak = 0;
-
 const onMessage = async (data) => {
     console.log(data);
     const {type, username, text, channel} = data;
-
     if (type === 'message') {
+        if (username === 'Slackboit') return null; // Prevent Slackboit recursion
 
-        let curTime = new Date().getTime();
-        if (timeUntilSpeak > curTime) return null;
+        let submittedAt = new Date().getTime();
+        if (Store.disabledUntil > submittedAt) return null; // Prevent Slackboit from messaging if he's killed
 
-        //Respond to string 'slackboit' with spongebob meme
-        let toLowered = text.toLowerCase();
-        const ackString = 'slackboit ';
-        let kill = 'お前はもう死んでいる';
-
-        if (toLowered === ackString + kill){
-            timeUntilSpeak = new Date().getTime() + 60 * 1000;
-            return bot.postMessage(channel, 'なに', {})
-        }
-
-        if (toLowered.startsWith(ackString) && username !== 'Slackboit') {
-            let newString = text.split('');
-            newString.splice(0, 10);
-            newString = newString.map((char, index) => {
-                if (index % 2 === 0) return char.toLowerCase();
-                else return char.toUpperCase();
-            });
-
-            newString = newString.join('');
-
-            bot.postMessage(channel, newString, {});
-        }
-
-        if (toLowered.contains("good boit") && username !== 'Slackboit') {
-
-            newString = "tHaNkS DaD";
-
-            bot.postMessage(channel, newString, {});
-        }
-
-        //Write new things to do here, maybe??
+        Register.forEach(func => func(bot, username, text, channel, submittedAt))
     }
 };
 
