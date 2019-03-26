@@ -27,8 +27,7 @@ class Messenger {
         let lowered = text.toLowerCase();
         if (lowered.startsWith(acknowledge)) {
             let profile = storedUser['profile'];
-            let image = profile['image_48'];
-            return bot.postMessage(channel, IDoThings.spongebobMemeify(lowered), {icon_url:image});
+            return bot.postMessage(channel, IDoThings.spongebobMemeify(lowered), {});
         }
     }
 

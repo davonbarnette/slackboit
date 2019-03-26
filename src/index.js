@@ -31,10 +31,21 @@ const onMessage = async (data) => {
     console.log(data);
     if (!Store.usersById) return null;
 
-    let {type, username, text, channel, user} = data; // prop "user" is actually an id...
+    let {type, username, text, channel, user, subtype, previous_message} = data; // prop "user" is actually an id...
     if (type === 'message') {
         if (username === 'Slackboit') return null; // Prevent Slackboit recursion
         let storedUser = Store.usersById[user];
+
+        if (subtype === 'message_deleted' && previous_message){
+            const {text, user} = previous_message;
+            let storedUser = Store.usersById[user];
+            let acknowledge = 'slackboit ';
+            if (text.startsWith(acknowledge)) {
+                let response = `[CRIME ALERT] ${storedUser['profile']['display_name']} tried to delete a message that he made me say [CRIME ALERT]`;
+                return bot.postMessage(channel, response, {});
+            }
+        }
+
 
         let submittedAt = new Date().getTime();
         if (Store.disabledUntil > submittedAt) return null; // Prevent Slackboit from messaging if he's killed
