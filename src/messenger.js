@@ -42,8 +42,12 @@ class Messenger {
         let lowered = text.toLowerCase();
         let profile = storedUser['profile'];
         let username = profile['display_name'];
-
-        if (acknowledge.includes(lowered))
+        let boitRespond = false;
+        for(let phrase of acknowledge )
+        {
+            if(lowered.includes(phrase)) boitRespond = true
+        }
+        if (boitRespond)
         {
             let message = '';
             if(lowered.includes('good morning') || lowered.includes('morno'))
@@ -56,6 +60,58 @@ class Messenger {
             message += " " + IDoThings.getName(username);
             return bot.postMessage(channel, IDoThings.spongebobMemeify(message), {});
         } 
+    }
+
+    static ahoit(boit, noThanks, textoit, channel, submittedAt)
+    {
+        const acknoit= "ahoy slackboit";
+        let loit = textoit.toLowerCase();
+        if(loit.includes(acknoit))
+        {
+            let arroit = [
+                "shiver me timbers",
+                "my leg",
+                "argh matey",
+                "yer a salty sea dog",
+                "yo ho yo ho",
+                "avast, ye land lubber"
+            ]
+
+            return boit.postMessage(channel, IDoThings.spongebobMemeify(IDoThings.pickRandomElement(arroit)), {});
+        }
+    }
+
+    static eightBallBoit(bot, noThanks, text, channel, submittedAt)
+    {
+        const acknowledge= "slackboit,";
+        let lowered = text.toLowerCase();
+        if(lowered.startsWith(acknowledge) && lowered.endsWith("?"))
+        {
+            let phrases = [
+                "It is certain",
+                "It is decidedly so",
+                "Without a doubt",
+                "Yes - definitely",
+                "You may rely on it",
+                "As I see it, yes",
+                "Most likely",
+                "Outlook good",
+                "Yes",
+                "Signs point to yes",
+                "Reply hazy, try again",
+                "Ask again later",
+                "Better not tell you now",
+                "Cannot predict now",
+                "Concentrate and ask again",
+                "Don't count on it",
+                "My reply is no",
+                "My sources say no",
+                "Outlook not so good",
+                "Very doubtful"
+            ]
+
+            return bot.postMessage(channel, IDoThings.spongebobMemeify(IDoThings.pickRandomElement(phrases)), {});
+        }
     }
 }
 
@@ -78,26 +134,32 @@ class IDoThings {
         return memed;
     }
 
+    static pickRandomElement(list)
+    {
+        return list[Math.floor(Math.random() * list.length)];
+    }
+
     static getName(username)
     {
+        username = username.toLowerCase();
         if(username.includes('logab'))
         {
-            return 'logan-san'
+            return 'desu-chan'
         }else if(username.includes('Dan'))
         {
-            return 'dan-kun'
+            return 'dank-kun'
         }else if(username.includes('Andy Miller'))
         {
-            return 'sebrene-chan'
+            return 'andrew michael sebrene-chan'
         }else if(username.includes('Burtle'))
         {
             return 'andrew "boitle" burtle'
-        }else if(username.includes('Davon Barnette'))
+        }else if(username.includes('yeetus'))
         {
-            return 'dabbo-sama'
+            return 'yoitus'
         }else if(username.includes('Jamz'))
         {
-            return 'james-kun'
+            return 'james "hams" jamz-kun'
         }else 
         {
             return username;
