@@ -79,5 +79,7 @@ const consume = (req, res, next) => {
 
 app.post('/slack/action-endpoint', consume);
 
+app.get('/ping', (req, res, next) => res.status(200).json({message:'success'}));
+
 let server = http.createServer(app);
 server.listen(SERVER_PORT, () => console.log('[Server] Listening on port > ', SERVER_PORT));
