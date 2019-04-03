@@ -6,6 +6,8 @@ const Store = require('./store');
  * bot has a method called postMessage. Lastly, when you create your function, throw it in the Register constant
  * at the bottom of the file to make sure Slackboit uses it.
  *
+ * You can return 'stop' as a string to make sure that none of the remaining functions in Register are executed.
+ *
  * NOTE: For storedUser, check the store.js file for more details.
  */
 
@@ -18,7 +20,8 @@ class Messenger {
 
         if (lowered === acknowledge + kill){
             bot.postMessage(channel, 'なに', {});
-            return Store.disabledUntil = new Date().getTime() + 60 * 1000;
+            Store.disabledUntil = new Date().getTime() + 60 * 1000;
+            return 'stop';
         }
     }
 
@@ -34,7 +37,8 @@ class Messenger {
     static goodBoit(bot, storedUser, text, channel, submittedAt){
         const acknowledge = "good boit";
         let lowered = text.toLowerCase();
-        if (lowered.includes(acknowledge)) return bot.postMessage(channel, IDoThings.spongebobMemeify("thanks dad"), {});
+        if (lowered.includes(acknowledge))
+            return bot.postMessage(channel, IDoThings.spongebobMemeify("thanks dad"), {});
     }
 
     static greetingBoit(bot, storedUser, text, channel, submittedAt){
@@ -75,9 +79,11 @@ class Messenger {
                 "yer a salty sea dog",
                 "yo ho yo ho",
                 "avast, ye land lubber"
-            ]
+            ];
 
-            return boit.postMessage(channel, IDoThings.spongebobMemeify(IDoThings.pickRandomElement(arroit)), {});
+            return boit.postMessage(channel, IDoThings.spongebobMemeify(IDoThings.pickRandomElement(arroit)), {
+                icon_url:'https://slackboit.davon.dev/static/imgs/slackboit_final_piraoit.png'
+            });
         }
     }
 
@@ -108,9 +114,11 @@ class Messenger {
                 "My sources say no",
                 "Outlook not so good",
                 "Very doubtful"
-            ]
+            ];
 
-            return bot.postMessage(channel, IDoThings.spongebobMemeify(IDoThings.pickRandomElement(phrases)), {});
+            return bot.postMessage(channel, IDoThings.spongebobMemeify(IDoThings.pickRandomElement(phrases)), {
+                icon_url:'https://slackboit.davon.dev/static/imgs/slackboit_final_eightboit.png'
+            });
         }
     }
 }
@@ -168,9 +176,11 @@ class IDoThings {
 }
 
 const Register = [
+    Messenger.ahoit,
+    Messenger.eightBallBoit,
+    Messenger.omaeWaMouShindeiru,
     Messenger.goodBoit,
     Messenger.spongebobMeme,
-    Messenger.omaeWaMouShindeiru,
     Messenger.greetingBoit
 ];
 

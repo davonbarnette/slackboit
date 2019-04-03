@@ -1,6 +1,7 @@
 const express = require('express');
 const SlackBot = require('slackbots');
 const http = require('http');
+const path = require('path');
 
 const SERVER_PORT = 8080;
 const app = express();
@@ -50,7 +51,11 @@ const onMessage = async (data) => {
         let submittedAt = new Date().getTime();
         if (Store.disabledUntil > submittedAt) return null; // Prevent Slackboit from messaging if he's killed
 
-        Register.forEach(func => func(bot, storedUser, text, channel, submittedAt))
+        for (let i = 0; i < Register.length; i++) {
+            const func = Register[i];
+            func(bot, storedUser, text, channel, submittedAt);
+            if (func === 'stop') return;
+        }
     }
 };
 
@@ -65,8 +70,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('/static', express.static(path.resolve(__dirname, 'assets')));
 app.use(express.json({limit: '10mb'}));
 app.use(express.urlencoded({limit: '10mb', extended: true}));
+
 
 const consume = (req, res, next) => {
     const { body } = req;
