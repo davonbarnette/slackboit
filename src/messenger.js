@@ -1,5 +1,5 @@
 const Store = require('./store');
-
+const CryptoManager = require('./crypto');
 /*
  * This file is where you'll create all functions that you want the bot to run through. Each function will always be
  * passed the same parameters: bot, username, text, channel, and submittedAt. When you want to send a message, the
@@ -11,7 +11,36 @@ const Store = require('./store');
  * NOTE: For storedUser, check the store.js file for more details.
  */
 
+let resetCryptoTime = new Date().getTime();
+let listingsById = {};
+
 class Messenger {
+
+    static async refreshCrypto(bot, storedUser, text, channel, submittedAt){
+        const acknowledge = 'SLACKBOITED RESET MY CRYPTO!!!';
+        if (acknowledge === text && new Date().getTime() > resetCryptoTime){
+            let res = await CryptoManager.refreshCryptoListings();
+            if (res) {
+                listingsById = res;
+                bot.postMessage(channel, IDoThings.spongebobMemeify('resetted crypto'), {});
+                resetCryptoTime = Date().getTime() + 6000;
+                return 'stop';
+            }
+        }
+    }
+
+    static getCrypto(bot, storedUser, text, channel, submittedAt){
+        const acknowledge = 'slackboiter what is ';
+
+        if (text.startsWith(acknowledge) && text.length === 23){
+            let symbol = text.substring(text.length - 3).toUpperCase();
+            let cryptoObject = CryptoManager.getCryptoObjectBySymbol(listingsById, symbol);
+            const {cmc_rank, quote} = cryptoObject;
+            let newObject = {cmc_rank, quote};
+
+            bot.postMessage(channel, JSON.stringify(newObject), {});
+        }
+    }
 
     static omaeWaMouShindeiru(bot, storedUser, text, channel, submittedAt){
         const kill = 'お前はもう死んでいる';
@@ -176,6 +205,8 @@ class IDoThings {
 }
 
 const Register = [
+    Messenger.getCrypto,
+    Messenger.refreshCrypto,
     Messenger.ahoit,
     Messenger.eightBallBoit,
     Messenger.omaeWaMouShindeiru,
