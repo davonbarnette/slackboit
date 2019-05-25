@@ -41,17 +41,17 @@ class Messenger {
             let separator = ' | '
 
             let pretty = '' +
-                `*rank:* ${newObject.cmc_rank}${separator}` +
-                `*price:* ${newObject.price}${separator}` +
-                `*volume_24h:* ${newObject.volume_24h}${separator}` +
-                `*percent_change_1h:* ${newObject.percent_change_1h}${separator}` +
-                `*percent_change_24h:* ${newObject.percent_change_24h}${separator}` +
-                `*percent_change_7d:* ${newObject.percent_change_7d}${separator}` +
-                `*market_cap:* ${newObject.market_cap}${separator}` +
-                `*last_updated:* ${newObject.last_updated}`
+                `*Rank:* ${newObject.cmc_rank}${separator}` +
+                `*Price:* ${newObject.price}${separator}` +
+                `*Volume 24h:* ${newObject.volume_24h}${separator}` +
+                `*% Change 1h:* ${newObject.percent_change_1h}${separator}` +
+                `*% Change 24h:* ${newObject.percent_change_24h}${separator}` +
+                `*% Change 7d:* ${newObject.percent_change_7d}${separator}` +
+                `*Market Cap:* ${newObject.market_cap}${separator}` +
+                `*Last Updated:* ${newObject.last_updated}`
 
 
-            bot.postMessage(channel, pretty, {});
+            bot.postMessage(channel, IDoThings.spongebobMemeify(pretty), {});
         }
     }
 
