@@ -38,7 +38,20 @@ class Messenger {
             const {cmc_rank, quote} = cryptoObject;
             let newObject = {cmc_rank, quote};
 
-            bot.postMessage(channel, JSON.stringify(newObject), {});
+            let separator = ' | '
+
+            let pretty = '' +
+                `*rank:* ${newObject.cmc_rank}${separator}` +
+                `*price:* ${newObject.price}${separator}` +
+                `*volume_24h:* ${newObject.volume_24h}${separator}` +
+                `*percent_change_1h:* ${newObject.percent_change_1h}${separator}` +
+                `*percent_change_24h:* ${newObject.percent_change_24h}${separator}` +
+                `*percent_change_7d:* ${newObject.percent_change_7d}${separator}` +
+                `*market_cap:* ${newObject.market_cap}${separator}` +
+                `*last_updated:* ${newObject.last_updated}`
+
+
+            bot.postMessage(channel, pretty, {});
         }
     }
 
@@ -92,11 +105,10 @@ class Messenger {
             }
             message += " " + IDoThings.getName(username);
             return bot.postMessage(channel, IDoThings.spongebobMemeify(message), {});
-        } 
+        }
     }
 
-    static ahoit(boit, noThanks, textoit, channel, submittedAt)
-    {
+    static ahoit(boit, noThanks, textoit, channel, submittedAt) {
         const acknoit= "ahoy slackboit";
         let loit = textoit.toLowerCase();
         if(loit.includes(acknoit))
@@ -116,8 +128,7 @@ class Messenger {
         }
     }
 
-    static eightBallBoit(bot, noThanks, text, channel, submittedAt)
-    {
+    static eightBallBoit(bot, noThanks, text, channel, submittedAt) {
         const acknowledge= "slackboit,";
         let lowered = text.toLowerCase();
         if(lowered.startsWith(acknowledge) && lowered.endsWith("?"))
@@ -197,7 +208,7 @@ class IDoThings {
         }else if(username.includes('Jamz'))
         {
             return 'james "hams" jamz-kun'
-        }else 
+        }else
         {
             return username;
         }
