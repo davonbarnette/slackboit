@@ -41,16 +41,16 @@ class Messenger {
             const {USD} = quote;
             const {price, volume_24h, percent_change_1h, percent_change_24h, percent_change_7d, market_cap} = USD;
 
-            let separator = ' | ';
+            let separator = ' \n';
 
             let pretty = '' +
-                `*Rank:* ${cmc_rank}${separator}` +
-                `*Price:* ${price}${separator}` +
-                `*Volume 24h:* ${volume_24h}${separator}` +
-                `*% Change 1h:* ${percent_change_1h}${separator}` +
-                `*% Change 24h:* ${percent_change_24h}${separator}` +
-                `*% Change 7d:* ${percent_change_7d}${separator}` +
-                `*Market Cap:* ${market_cap}${separator}` +
+                `*Rank:* #${cmc_rank}${separator}` +
+                `*Price:* $${IDoThings.numberWithCommas(price)}${separator}` +
+                `*Volume 24h:* ${IDoThings.numberWithCommas(volume_24h)}${separator}` +
+                `*% Change 1h:* ${percent_change_1h}${separator}%` +
+                `*% Change 24h:* ${percent_change_24h}${separator}%` +
+                `*% Change 7d:* ${percent_change_7d}${separator}%` +
+                `*Market Cap:* $${IDoThings.numberWithCommas(market_cap)}${separator}` +
                 `*Last Updated:* ${last_updated}`;
 
 
@@ -190,6 +190,10 @@ class IDoThings {
     static pickRandomElement(list)
     {
         return list[Math.floor(Math.random() * list.length)];
+    }
+
+    static numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     static getName(username)
