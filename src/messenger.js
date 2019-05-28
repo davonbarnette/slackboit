@@ -22,7 +22,9 @@ class Messenger {
             let res = await CryptoManager.refreshCryptoListings();
             if (res) {
                 listingsById = res;
-                bot.postMessage(channel, IDoThings.spongebobMemeify('resetted crypto'), {});
+                bot.postMessage(channel, IDoThings.spongebobMemeify('resetted crypto'), {
+                    icon_url:'https://slackboit.davon.dev/static/imgs/slackboit_final_crypto.png'
+                });
                 resetCryptoTime = Date().getTime() + 6000;
                 return 'stop';
             }
@@ -38,7 +40,7 @@ class Messenger {
             const {cmc_rank, quote} = cryptoObject;
             let newObject = {cmc_rank, quote};
 
-            let separator = ' | '
+            let separator = ' | ';
 
             let pretty = '' +
                 `*Rank:* ${newObject.cmc_rank}${separator}` +
@@ -48,10 +50,12 @@ class Messenger {
                 `*% Change 24h:* ${newObject.percent_change_24h}${separator}` +
                 `*% Change 7d:* ${newObject.percent_change_7d}${separator}` +
                 `*Market Cap:* ${newObject.market_cap}${separator}` +
-                `*Last Updated:* ${newObject.last_updated}`
+                `*Last Updated:* ${newObject.last_updated}`;
 
 
-            bot.postMessage(channel, IDoThings.spongebobMemeify(pretty), {});
+            bot.postMessage(channel, IDoThings.spongebobMemeify(pretty), {
+                icon_url:'https://slackboit.davon.dev/static/imgs/slackboit_final_crypto.png'
+            });
         }
     }
 
