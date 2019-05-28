@@ -47,9 +47,9 @@ class Messenger {
                 `*Rank:* #${cmc_rank}${separator}` +
                 `*Price:* $${IDoThings.numberWithCommas(price)}${separator}` +
                 `*Volume 24h:* ${IDoThings.numberWithCommas(volume_24h)}${separator}` +
-                `*% Change 1h:* ${percent_change_1h}${separator}%` +
-                `*% Change 24h:* ${percent_change_24h}${separator}%` +
-                `*% Change 7d:* ${percent_change_7d}${separator}%` +
+                `*% Change 1h:* ${percent_change_1h}%${separator}` +
+                `*% Change 24h:* ${percent_change_24h}%${separator}` +
+                `*% Change 7d:* ${percent_change_7d}%${separator}` +
                 `*Market Cap:* $${IDoThings.numberWithCommas(market_cap)}${separator}` +
                 `*Last Updated:* ${last_updated}`;
 
@@ -193,7 +193,8 @@ class IDoThings {
     }
 
     static numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        const rounded = Math.round(x);
+        return rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     static getName(username)
