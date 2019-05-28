@@ -37,20 +37,21 @@ class Messenger {
         if (text.startsWith(acknowledge) && text.length === 23){
             let symbol = text.substring(text.length - 3).toUpperCase();
             let cryptoObject = CryptoManager.getCryptoObjectBySymbol(listingsById, symbol);
-            const {cmc_rank, quote} = cryptoObject;
-            let newObject = {cmc_rank, quote};
+            const {cmc_rank, quote, last_updated} = cryptoObject;
+            const {USD} = quote;
+            const {price, volume_24h, percent_change_1h, percent_change_24h, percent_change_7d, market_cap} = USD;
 
             let separator = ' | ';
 
             let pretty = '' +
-                `*Rank:* ${newObject.cmc_rank}${separator}` +
-                `*Price:* ${newObject.price}${separator}` +
-                `*Volume 24h:* ${newObject.volume_24h}${separator}` +
-                `*% Change 1h:* ${newObject.percent_change_1h}${separator}` +
-                `*% Change 24h:* ${newObject.percent_change_24h}${separator}` +
-                `*% Change 7d:* ${newObject.percent_change_7d}${separator}` +
-                `*Market Cap:* ${newObject.market_cap}${separator}` +
-                `*Last Updated:* ${newObject.last_updated}`;
+                `*Rank:* ${cmc_rank}${separator}` +
+                `*Price:* ${price}${separator}` +
+                `*Volume 24h:* ${volume_24h}${separator}` +
+                `*% Change 1h:* ${percent_change_1h}${separator}` +
+                `*% Change 24h:* ${percent_change_24h}${separator}` +
+                `*% Change 7d:* ${percent_change_7d}${separator}` +
+                `*Market Cap:* ${market_cap}${separator}` +
+                `*Last Updated:* ${last_updated}`;
 
 
             bot.postMessage(channel, IDoThings.spongebobMemeify(pretty), {
