@@ -1,5 +1,6 @@
 const Store = require('./store');
 const CryptoManager = require('./crypto');
+const zalgo = require('to-zalgo');
 /*
  * This file is where you'll create all functions that you want the bot to run through. Each function will always be
  * passed the same parameters: bot, username, text, channel, and submittedAt. When you want to send a message, the
@@ -15,6 +16,16 @@ let resetCryptoTime = new Date().getTime();
 let listingsById = {};
 
 class Messenger {
+
+    static imSorryJon(bot, storedUser, text, channel, submittedAt){
+        const acknowledge = 'imsorryslackboit ';
+        let lowered = text.toLowerCase();
+        if (lowered.startsWith(acknowledge)) {
+            let profile = storedUser['profile'];
+            let meme = IDoThings.spongebobMemeify(lowered, acknowledge);
+            return bot.postMessage(channel, zalgo(meme, 'mini'), {});
+        }
+    }
 
     static async refreshCrypto(bot, storedUser, text, channel, submittedAt){
         const acknowledge = 'SLACKBOITED RESET MY CRYPTO!!!';
@@ -77,7 +88,8 @@ class Messenger {
         let lowered = text.toLowerCase();
         if (lowered.startsWith(acknowledge)) {
             let profile = storedUser['profile'];
-            return bot.postMessage(channel, IDoThings.spongebobMemeify(lowered), {});
+            let meme = IDoThings.spongebobMemeify(lowered, acknowledge);
+            return bot.postMessage(channel, meme, {});
         }
     }
 
@@ -170,12 +182,12 @@ class Messenger {
 
 class IDoThings {
     //this functions expects a string
-    static spongebobMemeify(text)
+    static spongebobMemeify(text, acknowledge)
     {
-        if(text.startsWith('slackboit '))
+        if(acknowledge && acknowledge.length && text.startsWith(acknowledge))
         {
             text = text.split('');
-            text.splice(0,10);
+            text.splice(0,acknowledge.length);
         }else{
             text = text.split('')
         }
@@ -226,6 +238,7 @@ class IDoThings {
 }
 
 const Register = [
+    Messenger.imSorryJon,
     Messenger.getCrypto,
     Messenger.refreshCrypto,
     Messenger.ahoit,

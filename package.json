@@ -9,8 +9,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "express": "^4.16.4",
-    "slackbots": "^1.2.0"
+    "slackbots": "^1.2.0",
+    "to-zalgo": "^1.0.1"
   }
 }
