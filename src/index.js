@@ -6,24 +6,24 @@ const path = require('path');
 const SERVER_PORT = 8080;
 const app = express();
 
-const Register = require('./messenger');
+const Register = require('./register');
 const Store = require('./store');
 
-let bot = new SlackBot({
+/*
+ * This file should almost never be changed if you're just trying to add a function. If you feel like you need to
+ * change something in here, ask Davon first.
+ */
+
+Store.bot = new SlackBot({
     token:process.env.SLACK_TOKEN,
     name: 'Slackboit'
 });
 
-bot.on('open', async () => {
-    let users = await bot.getUsers();
+Store.bot.on('open', async () => {
+    //On connection to the bot, slackboit gets the current user objects
+    let users = await Store.bot.getUsers();
     let usersById = {};
-
-    if (users){
-        users = users.members;
-        users.forEach(user => {
-            usersById[user.id] = user;
-        })
-    }
+    if (users && users.members) users.members.forEach(user => usersById[user.id] = user);
 
     Store.usersById = usersById;
 });
@@ -32,34 +32,41 @@ const onMessage = async (data) => {
     console.log(data);
     if (!Store.usersById) return null;
 
-    let {type, username, text, channel, user, subtype, previous_message} = data; // prop "user" is actually an id...
+    // prop "user" is actually an id, so we access Store.usersById to get the storedUser object
+    let {type, username, text, channel, user, subtype, previous_message, event_ts: submittedAt} = data;
     if (type === 'message') {
         if (username === 'Slackboit') return null; // Prevent Slackboit recursion
         let storedUser = Store.usersById[user];
 
-        if (subtype === 'message_deleted' && previous_message){
-            const {text, user} = previous_message;
-            let storedUser = Store.usersById[user];
-            let acknowledge = 'slackboit ';
-            if (text.startsWith(acknowledge)) {
-                let response = `[CRIME ALERT] ${storedUser['profile']['display_name']} tried to delete a message that he made me say [CRIME ALERT]`;
-                return bot.postMessage(channel, response, {});
+        if (text === 'calling slackboit helpdesk') {
+            let start = '';
+            for (let i = 0; i < Register.length; i++) {
+                const item = Register[i];
+                if (item.hasOwnProperty('command')){
+                    const {description, command} = item;
+                    start += `*${command}*\n_${description}_\n`;
+                }
+                start += '\n\n'
             }
+            return Store.bot.postMessage(channel, start);
         }
 
-
-        let submittedAt = new Date().getTime();
-        if (Store.disabledUntil > submittedAt) return null; // Prevent Slackboit from messaging if he's killed
+        if (Store.disabledUntil > new Date().getTime()) return;
 
         for (let i = 0; i < Register.length; i++) {
-            const func = Register[i];
-            func(bot, storedUser, text, channel, submittedAt);
-            if (func === 'stop') return;
+            const item = Register[i];
+            let res;
+
+            if (item.hasOwnProperty('function'))
+                res = await item.function(Store.bot, storedUser, text, channel, submittedAt, subtype, previous_message);
+            else res = await item(Store.bot, storedUser, text, channel, submittedAt, subtype, previous_message);
+
+            if (res === 'stop') return;
         }
     }
 };
 
-bot.on('message', onMessage);
+Store.bot.on('message', onMessage);
 
 app.use((req, res, next) => {
     res.setHeader(`Access-Control-Allow-Origin`, `*`);
