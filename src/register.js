@@ -94,16 +94,16 @@ const Register = [
     },
 
     // *** Andy *** //
-    Andy.exampleFunction,
+    // Andy.exampleFunction,
 
     // *** Burtle *** //
-    Burtle.exampleFunction,
+    // Burtle.exampleFunction,
 
     // *** James *** //
-    James.exampleFunction,
+    // James.exampleFunction,
 
     // *** Logan *** //
-    Logan.exampleFunction,
+    // Logan.exampleFunction,
 
 ];
 
