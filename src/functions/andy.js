@@ -1,3 +1,5 @@
+const Store = require('../store');
+const IDoThings = require('../utils/idothings')
 /*
  * This file is where you should put all of your slackboit functions. This codebase is structured so that you never
  * really have to deal with all the moving pieces of the code, and you can practically stay in this and the register.js
@@ -53,14 +55,12 @@ class Andy {
     }
 
     static tobefair(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
-        const Store = require('../store');
         const acknowledge = 'to be fair';
         if (text.includes(acknowledge)) {
-            Store.tbfCounter = Store.tbfCounter + 1
+            Store.tbfCounter = Store.tbfCounter + 1;
             const icon_url = IDoThings.getImageURL('slackboit_monocle.png');
-
             let message = 'to be fair number: ' + Store.tbfCounter;
-            bot.postMessage(channel, message, {icon_url})
+            bot.postMessage(channel, message, {icon_url});
             return 'stop';
         }
     }
