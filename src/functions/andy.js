@@ -56,7 +56,8 @@ class Andy {
 
     static tobefair(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
         const acknowledge = 'to be fair';
-        if (text.includes(acknowledge)) {
+        let lowered = text.toLowerCase();
+        if (lowered.includes(acknowledge)) {
             Store.tbfCounter = Store.tbfCounter + 1;
             const icon_url = IDoThings.getImageURL('slackboit_monocle.png');
             let message = 'to be fair number: ' + Store.tbfCounter;
@@ -69,7 +70,7 @@ class Andy {
         const acknowledge = 'technically';
         let lowered = text.toLowerCase();
         if (lowered.includes(acknowledge)) {
-            let technically = IDoThings.spongebobMemeify(lowered, 'technically');
+            let technically = IDoThings.spongebobMemeify(lowered);
             const icon_url = IDoThings.getImageURL('slackboit_matrix.png');
 
             return bot.postMessage(channel, technically, {icon_url});
