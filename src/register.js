@@ -94,7 +94,20 @@ const Register = [
     },
 
     // *** Andy *** //
-    // Andy.exampleFunction,
+    {
+        acknowledge: ["to be fair"],
+        name: "To Be Fair Counter",
+        command: ["to be fair"],
+        description: "Slackboit counts the amount of To Be Fairs ever said",
+        function: Andy.tobefair,
+    },
+    {
+        acknowledge: ["technically"],
+        name: "Technically Matrix Boit",
+        command: ["technically"],
+        description: "Slackboit repeats whenever someone says technically with matrix icon",
+        function: Andy.technically,
+    },
 
     // *** Burtle *** //
     // Burtle.exampleFunction,

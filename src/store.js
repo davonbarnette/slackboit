@@ -10,6 +10,7 @@ const Store = {
     resetCryptoTime: 0,
     listingsById:{},
     bot:null,
+    tbfCounter:0,
 };
 
 module.exports = Store;

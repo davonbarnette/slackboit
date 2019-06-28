@@ -51,6 +51,31 @@ class Andy {
             // return 'stop' //Uncomment this line if you want to make sure no functions run after this one
         }
     }
+
+    static tobefair(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
+        const Store = require('../store');
+        const acknowledge = 'to be fair';
+        if (text.includes(acknowledge)) {
+            Store.tbfCounter = Store.tbfCounter + 1
+            const icon_url = IDoThings.getImageURL('slackboit_monocle.png');
+
+            let message = 'to be fair number: ' + Store.tbfCounter;
+            bot.postMessage(channel, message, {icon_url})
+            return 'stop';
+        }
+    }
+
+    static technically(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
+        const acknowledge = 'technically';
+        let lowered = text.toLowerCase();
+        if (lowered.includes(acknowledge)) {
+            let technically = IDoThings.spongebobMemeify(lowered, 'technically');
+            const icon_url = IDoThings.getImageURL('slackboit_matrix.png');
+
+            return bot.postMessage(channel, technically, {icon_url});
+        }
+    }
 }
 
 module.exports = Andy;
+
