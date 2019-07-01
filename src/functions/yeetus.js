@@ -34,7 +34,8 @@ class Yeetus {
         let lowered = text.toLowerCase();
         if (lowered.startsWith(acknowledge)) {
             let meme = IDoThings.spongebobMemeify(lowered, acknowledge);
-            return bot.postMessage(channel, zalgo(meme, 'mini'), {});
+            const icon_url = IDoThings.getImageURL('slackboit_fuck.jpg');
+            return bot.postMessage(channel, zalgo(meme, 'mini'), {icon_url});
         }
     }
 
