@@ -60,7 +60,7 @@ class Andy {
         if (lowered.includes(acknowledge)) {
             Store.tbfCounter = Store.tbfCounter + 1;
             const icon_url = IDoThings.getImageURL('slackboit_monocle.png');
-            let message = 'to be fair number: ' + Store.tbfCounter;
+            let message = IDoThings.spongebobMemeify('to be fair number: ' + Store.tbfCounter);
             bot.postMessage(channel, message, {icon_url});
             return 'stop';
         }
@@ -70,7 +70,7 @@ class Andy {
         const acknowledge = 'technically';
         let lowered = text.toLowerCase();
         if (lowered.includes(acknowledge)) {
-            let technically = IDoThings.spongebobMemeify(lowered);
+            let technically = IDoThings.spongebobMemeify('technically');
             const icon_url = IDoThings.getImageURL('slackboit_matrix.png');
 
             return bot.postMessage(channel, technically, {icon_url});
