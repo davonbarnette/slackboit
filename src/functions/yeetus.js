@@ -64,6 +64,18 @@ class Yeetus {
         }
     }
 
+    static async lmgtfyBitch(bot, storedUser, text, channel){
+        const acknowledge = 'lmgtfy ';
+        let lowered = text.toLowerCase();
+        if (lowered.startsWith(acknowledge)) {
+            let meme = IDoThings.spongebobMemeify(lowered, acknowledge);
+            let encodedMemeQuery = encodeURIComponent(meme);
+            let lmgtfy = IDoThings.spongebobMemeify('https://lmgtfy.com/?q=');
+            let memeUrl = `${lmgtfy}${encodedMemeQuery}`;
+            return bot.postMessage(channel, memeUrl);
+        }
+    }
+
     static getCrypto(bot, storedUser, text, channel){
         const acknowledge = 'slackboit what is ';
 

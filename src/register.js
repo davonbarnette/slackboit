@@ -61,6 +61,13 @@ const Register = [
         description: 'Slackboit from the void',
         function: Yeetus.imSorryJon,
     },
+    {
+        acknowledge: 'lmgtfy ',
+        name: "Googley Woogley",
+        command: 'lmgtfy [PHRASE]',
+        description: 'Slackboit shows you how to google',
+        function: Yeetus.lmgtfyBitch,
+    },
 
 
     // *** Dan *** //
