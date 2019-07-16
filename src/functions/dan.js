@@ -11,7 +11,7 @@ class Dan {
     static greetingBoit(bot, storedUser, text, channel){
         const acknowledge = ["good morning", "morno", "hello"];
         let lowered = text.toLowerCase();
-        let username = storedUser.profile.display_name;
+        let userId = storedUser.id;
         let boitRespond = false;
         for(let phrase of acknowledge )
         {
@@ -27,7 +27,7 @@ class Dan {
             {
                 message = "greetings"
             }
-            message += " " + IDoThings.convertToAids(username.toLowerCase());
+            message += " " + IDoThings.convertToAids(userId);
             return bot.postMessage(channel, IDoThings.spongebobMemeify(message), {});
         }
     }
