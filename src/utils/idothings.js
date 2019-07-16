@@ -29,10 +29,12 @@ class IDoThings {
         const nameMap = {
             'logab': 'desu-chan',
             'dan': 'dank-kun',
-            'andy miller': 'andrew michael sebrene-chan',
-            'burtle': 'andrew "boitle" burtle',
-            'yeetus': 'yoitus',
+            'andy': 'andrew michael sebrene-chan',
+            'Jabroni37': 'andrew "boitle" burtle',
+            'yeetus': 'yoitus "hot_cheeto_big_yeeto"',
             'jamz': 'james "hams" jamz-kun',
+            'No Hué': 'meghoit',
+            'Slobbitonmyhobbit': 'chinn-chan'
         };
         return nameMap[username] || username;
     }
