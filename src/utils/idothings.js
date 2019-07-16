@@ -34,7 +34,7 @@ class IDoThings {
             'yeetus': 'yoitus "hot_cheeto_big_yeeto"',
             'jamz': 'james "hams" jamz-kun',
             'No Hué': 'meghoit',
-            'Slobbitonmyhobbit': 'chinn-chan'
+            'SlobbitOnMyHobbit': 'chinn-chan',
         };
         return nameMap[username] || username;
     }
