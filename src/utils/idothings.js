@@ -31,7 +31,7 @@ class IDoThings {
             'U8F1U7VRS': 'dank-kun', //Dan
             'U8DJE663U': 'andrew michael sebrene-chan', //Andy
             'U8NK2RBT9': 'andrew "boitle" burtle', //Burtle
-            'U9ADFB6H1': 'yoitus "hot_cheeto_big_yeeto"', //Davon
+            'U9ADFB6H1': 'yoitus "hotto cheeto bigg yeeto"', //Davon
             'U8ELJLTHV': 'james "hams" jamz-kun', //James
             'UL4TKUJG3': 'meghoit', //Meghan
             'UDKRCNYUU': 'chinn-chan', //Jessica
