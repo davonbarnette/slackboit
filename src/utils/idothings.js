@@ -35,6 +35,7 @@ class IDoThings {
             'U8ELJLTHV': 'james "hams" jamz-kun', //James
             'UL4TKUJG3': 'meghoit', //Meghan
             'UDKRCNYUU': 'chinn-chan', //Jessica
+            'UL6FD65TM': 'coitnoisty "the noistiest"', //Cortney
         };
         return nameMap[username] || username;
     }
