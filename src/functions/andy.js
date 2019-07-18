@@ -1,5 +1,7 @@
 const Store = require('../store');
-const IDoThings = require('../utils/idothings')
+const IDoThings = require('../utils/idothings');
+const ToBeFairService = require('../services/tbf_service');
+
 /*
  * This file is where you should put all of your slackboit functions. This codebase is structured so that you never
  * really have to deal with all the moving pieces of the code, and you can practically stay in this and the register.js
@@ -54,13 +56,15 @@ class Andy {
         }
     }
 
-    static tobefair(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
+    static async tobefair(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
         const acknowledge = 'to be fair';
         let lowered = text.toLowerCase();
         if (lowered.includes(acknowledge)) {
-            Store.tbfCounter = Store.tbfCounter + 1;
+
+            //For Andy: this new service creates a database entry for
+            let tbfCount = await ToBeFairService.createToBeFairEntry(storedUser.id);
             const icon_url = IDoThings.getImageURL('slackboit_monocle.png');
-            let message = IDoThings.spongebobMemeify('to be fair number: ' + Store.tbfCounter);
+            let message = IDoThings.spongebobMemeify('to be fair number: ' + tbfCount);
             bot.postMessage(channel, message, {icon_url});
             return 'stop';
         }
