@@ -1,6 +1,8 @@
 const SlackBot = require('slackbots');
 const Store = require('./store');
 const Logger = require('./utils/logger');
+const ORMService = require('./database/orm');
+const MODEL_NAMES = require('./database/models/model_names');
 
 class Slackboit {
     constructor(register){
@@ -14,10 +16,24 @@ class Slackboit {
         this.bot.on('message', this.onMessage.bind(this));
     }
 
+    static async updateUserRegistry(members){
+        for (let i = 0; i < members.length; i++) {
+            const user = members[i];
+            let query = {where: {uuid: user.id}};
+            let onErr = (err, code, obj) => Logger.error(obj.err);
+            let dbUser = await ORMService.findAllInstancesOfModel(MODEL_NAMES.USER, query, onErr);
+            if (!dbUser[0]) {
+                let values = {uuid: user.id.toString()};
+                await ORMService.createInstanceOfModel(MODEL_NAMES.USER, values, onErr)
+            }
+        }
+    }
+
     async onOpen(){
         let users = await this.bot.getUsers();
         let usersById = {};
         if (users && users.members) {
+            Slackboit.updateUserRegistry(users.members);
             for (let i = 0; i < users.members.length; i++) {
                 const user = users.members[i];
                 usersById[user.id] = user

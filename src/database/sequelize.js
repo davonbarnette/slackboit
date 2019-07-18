@@ -3,12 +3,12 @@ const ModelRegistry = require('./models/model_registry');
 const Logger = require('../utils/logger');
 const SETTINGS = require('../settings');
 
-class Database {
-    constructor(onConnection){
-        this.init(onConnection);
+class DatabaseClass {
+    constructor(){
+        this.init();
     }
 
-    async init(onConnection) {
+    async init() {
         const { SEQUELIZE_DIALECT, LOGS, HOST, PORT, NAME, USERNAME, PASSWORD } = SETTINGS.DB;
 
         if (!NAME) return Logger.error('No DB_NAME provided in environment.');
@@ -29,7 +29,7 @@ class Database {
         this.instance = new Sequelize(NAME, USERNAME, PASSWORD, config);
         this.buildModels();
 
-        return this.authenticate(onConnection);
+        return this.authenticate();
     }
 
     buildModels(){
@@ -71,32 +71,34 @@ class Database {
         })
     }
 
-    async authenticate(onConnection){
+    async authenticate(){
         try{
-            let auth = this.models.sequelize.authenticate();
-            if (auth) await this.onConnection(onConnection);
+            Logger.info('[Sequelize] Connecting to database...');
+            await this.models.sequelize.authenticate();
+            await this.onConnection();
         }catch(e){
-            this.onConnectionRefusal(e,onConnection)
+            this.onConnectionRefusal(e)
         }
     }
 
-    async onConnection(onConnection){
+    async onConnection(){
         Logger.success('[Sequelize] Connected to database. Syncing models...');
         try{
             let synced = await this.models.sequelize.sync();
             if (synced) {
                 Logger.success('[Sequelize] Initialized & models synced');
-                onConnection();
             }
         }catch(e){
             Logger.error('[Sequelize] Could not sync sequelize',e);
         }
     }
 
-    onConnectionRefusal(err, onConnection){
+    onConnectionRefusal(err){
         Logger.error('[Sequelize] Not connected to database. Trying again...', err.original);
-        setTimeout(()=>this.authenticate(onConnection), 1000);
+        setTimeout(()=>this.authenticate(), 1000);
     }
 }
+
+const Database = new DatabaseClass();
 
 module.exports = Database;

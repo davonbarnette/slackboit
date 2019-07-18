@@ -14,7 +14,7 @@ const ToBeFair = {
     },
     associations: {
         belongsTo: [
-            {model: MODEL_NAMES.USER, foreignKey: 'user_id'}
+            {model: MODEL_NAMES.USER, foreignKey: 'user_uuid'}
         ]
     },
 };

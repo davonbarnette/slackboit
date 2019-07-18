@@ -2,9 +2,6 @@ const Store = require('../store');
 const IDoThings = require('../utils/idothings');
 const CryptoManager = require('../utils/crypto');
 const Settings = require('../settings');
-const ORMService = require('../database/orm');
-const MODEL_NAMES = require('../database/models/model_names');
-const Logger = require('../utils/logger');
 const zalgo = require('to-zalgo');
 
 class Yeetus {
@@ -105,29 +102,6 @@ class Yeetus {
             bot.postMessage(channel, IDoThings.spongebobMemeify(pretty), {icon_url});
             return 'stop';
         }
-    }
-
-    static async updateUserRegistry(){
-        const acknowledge = 'slackboit update user registry';
-        if (text.startsWith(acknowledge)) {
-            let users = await this.bot.getUsers();
-            let usersById = {};
-            if (users && users.members) {
-                for (let i = 0; i < users.members.length; i++) {
-                    const user = users.members[i];
-                    let query = {where: {uuid: user.id}};
-                    let onErr = () => Logger.error('Error in DB user find/creation');
-                    let dbUser = await ORMService.findAllInstancesOfModel(MODEL_NAMES.USER, query, onErr)[0];
-                    if (!dbUser) {
-                        let values = {uuid: user.id};
-                        await ORMService.createInstanceOfModel(MODEL_NAMES.USER, values, onErr)
-                    }
-                    usersById[user.id] = user
-                }
-            }
-            Store.usersById = usersById;
-        }
-
     }
 }
 

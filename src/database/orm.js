@@ -1,11 +1,11 @@
 const Application = require('../index');
 const Logger = require('../utils/logger');
-
+const Database = require('./sequelize');
 class ORMService {
 
     static async createInstanceOfModel(modelString, values, onErr, associations){
         Logger.db(`createInstanceOfModel${modelString}: `, values);
-        return await Application.database.models[modelString].create(values, associations)
+        return await Database.models[modelString].create(values, associations)
             .then((created) => created)
             .catch((e) =>
                 onErr(`Could not create new ${modelString}`, 500, {text:`createInstanceOfModel: ${modelString}.create > `,err:e}));
@@ -13,8 +13,7 @@ class ORMService {
 
     static async findAllInstancesOfModel(modelString, query, onErr){
         Logger.db(`findAllInstancesOf${modelString}: `, query);
-        console.log('Application in Find', Application);
-        return await Application.database.models[modelString].findAll(query)
+        return await Database.models[modelString].findAll(query)
             .then((found) => found)
             .catch((e) =>
                 onErr(`Error finding instances of ${modelString}`, 500, {text:`findAllInstancesOfModel: ${modelString}.findAll > `,err:e}));
@@ -64,7 +63,7 @@ class ORMService {
 
     static async destroyAllInstancesOfModel(modelString, query, onErr){
         Logger.db(`destroyAllInstancesOf${modelString}: `, query);
-        return await Application.database.models[modelString].destroy(query)
+        return await Database.models[modelString].destroy(query)
             .then((destroyed) => destroyed)
             .catch((e) =>
                 onErr(`Error finding instances of ${modelString}`, 500, {text:`findAllInstancesOfModel: ${modelString}.findAll > `,err:e}));

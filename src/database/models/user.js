@@ -1,12 +1,12 @@
 const Sequelize = require('sequelize');
 const MODEL_NAMES = require('./model_names');
 
-const { STRING, UUIDV1 } = Sequelize;
+const { STRING } = Sequelize;
 
 const User = {
     db_name: 'user',
     schema: {
-        uuid: {type: STRING, primaryKey: true, defaultValue: UUIDV1},
+        uuid: {type: STRING, primaryKey: true},
     },
     options: {
         indexes: [{unique: true, fields: ['uuid']}],
@@ -14,7 +14,7 @@ const User = {
     },
     associations: {
         hasMany:[
-            {model:MODEL_NAMES.TO_BE_FAIR, options: {targetKey: 'user_id'}}
+            {model:MODEL_NAMES.TO_BE_FAIR, options: {targetKey: 'user_uuid'}}
         ]
     },
 };
