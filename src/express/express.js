@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const SETTINGS = require('../settings');
 
 class Express {
     constructor(routes){
@@ -20,7 +21,7 @@ class Express {
     }
 
     setAncillary(){
-        this.app.use('/static', express.static(path.resolve(__dirname, 'assets')));
+        this.app.use('/static', express.static(SETTINGS.RELATIVE_ASSET_DIR));
         this.app.use(express.json({limit: '10mb'}));
         this.app.use(express.urlencoded({limit: '10mb', extended: true}));
     }
