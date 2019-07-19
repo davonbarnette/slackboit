@@ -3,6 +3,7 @@ const IDoThings = require('../utils/idothings');
 const CryptoManager = require('../utils/crypto');
 const Settings = require('../settings');
 const zalgo = require('to-zalgo');
+const UserService = require('../services/user_service');
 
 class Yeetus {
 
@@ -101,6 +102,19 @@ class Yeetus {
             const icon_url = IDoThings.getImageURL(Settings.COIN_MARKET_CAP.ICON_NAME);
             bot.postMessage(channel, IDoThings.spongebobMemeify(pretty), {icon_url});
             return 'stop';
+        }
+    }
+
+    static async updeetusThatYeetus(bot, storedUser, text, channel){
+        const acknowledge = 'slackboit updeetus the yeetus';
+        if (text.startsWith(acknowledge)){
+            const users = await UserService.updateUserRegistry(bot);
+            if (users){
+                bot.postMessage(channel, IDoThings.spongebobMemeify('the yeetus has been updeetused'));
+                return 'stop'
+            }
+            else bot.postMessage(channel, IDoThings.spongebobMemeify('could not updeetus the yeetus :('));
+            return 'stop'
         }
     }
 }

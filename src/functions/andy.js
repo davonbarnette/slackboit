@@ -64,7 +64,7 @@ class Andy {
             //For Andy: this new service creates a database entry for
             let tbfCount = await ToBeFairService.createToBeFairEntry(storedUser.id);
             const icon_url = IDoThings.getImageURL('slackboit_monocle.png');
-            let message = IDoThings.spongebobMemeify('to be fair number: ' + tbfCount);
+            let message = IDoThings.spongebobMemeify(`${storedUser.profile.display_name}'s to be fair number: ` + tbfCount);
             bot.postMessage(channel, message, {icon_url});
             return 'stop';
         }

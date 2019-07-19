@@ -1,4 +1,3 @@
-const Application = require('../index');
 const Logger = require('../utils/logger');
 const Database = require('./sequelize');
 class ORMService {

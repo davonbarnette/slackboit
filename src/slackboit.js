@@ -1,8 +1,7 @@
 const SlackBot = require('slackbots');
 const Store = require('./store');
 const Logger = require('./utils/logger');
-const ORMService = require('./database/orm');
-const MODEL_NAMES = require('./database/models/model_names');
+const UserService = require('./services/user_service');
 
 class Slackboit {
     constructor(register){
@@ -16,30 +15,8 @@ class Slackboit {
         this.bot.on('message', this.onMessage.bind(this));
     }
 
-    static async updateUserRegistry(members){
-        for (let i = 0; i < members.length; i++) {
-            const user = members[i];
-            let query = {where: {uuid: user.id}};
-            let onErr = (err, code, obj) => Logger.error(obj.err);
-            let dbUser = await ORMService.findAllInstancesOfModel(MODEL_NAMES.USER, query, onErr);
-            if (!dbUser[0]) {
-                let values = {uuid: user.id.toString()};
-                await ORMService.createInstanceOfModel(MODEL_NAMES.USER, values, onErr)
-            }
-        }
-    }
-
     async onOpen(){
-        let users = await this.bot.getUsers();
-        let usersById = {};
-        if (users && users.members) {
-            Slackboit.updateUserRegistry(users.members);
-            for (let i = 0; i < users.members.length; i++) {
-                const user = users.members[i];
-                usersById[user.id] = user
-            }
-        }
-        Store.usersById = usersById;
+        return UserService.updateUserRegistry(this.bot);
     }
 
     async onMessage(data){
@@ -47,13 +24,12 @@ class Slackboit {
         if (!Store.usersById) return null;
 
         // prop "user" is actually an id, so we access Store.usersById to get the storedUser object
-        let {type, username, text, channel, user, subtype, previous_message, event_ts: submittedAt} = data;
+        let {type, username, text, channel, user:userId, subtype, previous_message, event_ts: submittedAt} = data;
         if (type === 'message') {
             if (username === 'Slackboit') return null; // Prevent Slackboit recursion
-            let storedUser = Store.usersById[user];
+            let storedUser = Store.usersById[userId];
 
             if (text === 'calling slackboit helpdesk') this.sendHelpDesk(channel);
-
             if (Store.disabledUntil > new Date().getTime()) return;
 
             for (let i = 0; i < this.register.length; i++) {
@@ -78,7 +54,7 @@ class Slackboit {
             }
             start += '\n\n'
         }
-        return this.bot.postMessage(channel, start);
+        return this.bot.postMessage(channel, start, {});
     }
 }
 

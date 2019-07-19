@@ -8,6 +8,7 @@ const http = require('http');
 
 const Express = require('./express/express');
 const Register = require('./register');
+// Need to keep this here to instantiate the Database class before the rest of the application starts
 const Database = require('./database/sequelize');
 const SETTINGS = require('./settings');
 const Routes = require('./express/routes');
@@ -28,7 +29,6 @@ class ApplicationClass {
     }
 }
 
-// const Application = new ApplicationClass();
 module.exports.instance = new ApplicationClass();
 
 

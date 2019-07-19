@@ -1,3 +1,5 @@
+const Store = require('../store');
+const IDoThings = require('../utils/idothings');
 /*
  * This file is where you should put all of your slackboit functions. This codebase is structured so that you never
  * really have to deal with all the moving pieces of the code, and you can practically stay in this and the register.js
@@ -51,18 +53,12 @@ class James {
             // return 'stop' //Uncomment this line if you want to make sure no functions run after this one
         }
     }
-}
 
-module.exports = James;
-
-/* This is my version Bitches*/
-
-class James {
-
-    static fatBoit(bot, text, channel){
+    /* This is my version Bitches*/
+    static fatBoit(bot, storedUser, text, channel){
         const hangry = 'feed me boit';
         let lCase = text.toLowerCase();
-        if (lcase.startsWith(hangry)) {
+        if (lCase.startsWith(hangry)) {
             let foodChoices =
                 [
                     "Victory",
@@ -96,6 +92,7 @@ class James {
                     "Logan's Cooking!",
                     "Dan's Cooking!",
                 ];
+
             /* Add a nice logo for me bb!*/
             const icon_url = IDoThings.getImageURL('slackboit_chef.png');
             const choice = IDoThings.pickRandomElement(foodChoices);

@@ -7,6 +7,9 @@ const User = {
     db_name: 'user',
     schema: {
         uuid: {type: STRING, primaryKey: true},
+        display_name: {type: STRING},
+        first_name: {type: STRING},
+        last_name: {type: STRING},
     },
     options: {
         indexes: [{unique: true, fields: ['uuid']}],

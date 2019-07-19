@@ -1,3 +1,5 @@
+const Store = require('../store');
+const IDoThings = require('../utils/idothings');
 /*
  * This file is where you should put all of your slackboit functions. This codebase is structured so that you never
  * really have to deal with all the moving pieces of the code, and you can practically stay in this and the register.js
