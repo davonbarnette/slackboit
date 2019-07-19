@@ -98,8 +98,8 @@ class James {
                 ];
             /* Add a nice logo for me bb!*/
             const icon_url = IDoThings.getImageURL('slackboit_chef.png');
-            const choice = IDoThings.pickRandomElement('Today I think you should try, (foodChoices)');
-            return bot.postMessage(channel, choice, {icon_url});
+            const choice = IDoThings.pickRandomElement(foodChoices);
+            return bot.postMessage(channel,`Today I think you should try, ${choice}`, {icon_url});
         }
     }
 }
