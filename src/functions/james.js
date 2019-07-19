@@ -54,3 +54,54 @@ class James {
 }
 
 module.exports = James;
+
+/* This is my version Bitches*/
+
+class James {
+
+    static fatBoit(bot, text, channel){
+        const hangry = 'feed me boit';
+        let lCase = text.toLowerCase();
+        if (lcase.startsWith(hangry)) {
+            let foodChoices =
+                [
+                    "Victory",
+                    "Taco Bell",
+                    "Zaxby's",
+                    "Da Vincis",
+                    "Bell Street Burrito",
+                    "Five Guys",
+                    "Superica",
+                    "bartaco",
+                    "Pub Subs",
+                    "KFC",
+                    "Arby's",
+                    "The Vortex",
+                    "Chipotle",
+                    "Wagaya",
+                    "Ton Ton",
+                    "Co",
+                    "Wendy's",
+                    "McDonalds",
+                    "Waffle House",
+                    "Chick Fil a",
+                    "Stevi B's",
+                    "9292",
+                    "D92",
+                    "Babs",
+                    "Bring food, quit being lazy.",
+                    "Davon's Cooking!",
+                    "Andy's Cooking!",
+                    "Burtle's Wings!",
+                    "Logan's Cooking!",
+                    "Dan's Cooking!",
+                ];
+            /* Add a nice logo for me bb!*/
+            const icon_url = IDoThings.getImageURL('slackboit_chef.png');
+            const choice = IDoThings.pickRandomElement('Today I think you should try, (foodChoices)');
+            return bot.postMessage(channel, choice, {icon_url});
+        }
+    }
+}
+
+module.exports = James;

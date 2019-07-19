@@ -120,7 +120,13 @@ const Register = [
     // Burtle.exampleFunction,
 
     // *** James *** //
-    // James.exampleFunction,
+    {
+        acknowledge: 'feed me boit',
+        name: "Food Choices",
+        command: 'feed me boit',
+        description: "Slackboit will present to you a choice for food randomly from his list of choices.",
+        function: James.fatBoit,
+    },
 
     // *** Logan *** //
     // Logan.exampleFunction,
