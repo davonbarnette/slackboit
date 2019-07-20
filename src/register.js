@@ -134,6 +134,13 @@ const Register = [
         description: "Slackboit will present to you a choice for food randomly from his list of choices.",
         function: James.fatBoit,
     },
+    {
+        acknowledge: 'where is ',
+        name: "Where the boit is this?",
+        command: 'where is [food choice]',
+        desctiption: "Ask boit where something is and he will let you know."
+        function: James.whereFoodBoit, 
+    },
 
     // *** Logan *** //
     // Logan.exampleFunction,

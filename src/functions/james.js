@@ -63,6 +63,7 @@ class James {
                 [
                     "Victory",
                     "Taco Bell",
+                    "Del Taco",
                     "Zaxby's",
                     "Da Vincis",
                     "Bell Street Burrito",
@@ -98,6 +99,20 @@ class James {
             const choice = IDoThings.pickRandomElement(foodChoices);
             return bot.postMessage(channel,`Today I think you should try, ${choice}`, {icon_url});
         }
+    }
+    
+    /* Where the boit is that establishment?!*/
+    static async whereFoodBoit(bot, storedUser, text, channel)
+    {
+        const mapMe = 'where is ';
+        let lCase = text.toLowerCase();
+        if (lCase.startsWith(mapMe))
+            {
+                let encodeBoit = encodedURIComponent(mapMe);
+                let maps = 'google.com/maps/search/';
+                let youAreEl = '${maps}${encodedBoit}';
+                return bot.postMessage(channel, youAreEl);
+            }
     }
 }
 
