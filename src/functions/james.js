@@ -108,9 +108,9 @@ class James {
         let lCase = text.toLowerCase();
         if (lCase.startsWith(mapMe))
             {
-                let encodeBoit = encodedURIComponent(mapMe);
-                let maps = 'google.com/maps/search/';
-                let youAreEl = '${maps}${encodedBoit}';
+                let encodeBoit = encodeURIComponent(mapMe);
+                let maps = 'https://google.com/maps/search';
+                let youAreEl = `${maps}/${encodeBoit}`;
                 return bot.postMessage(channel, youAreEl);
             }
     }
