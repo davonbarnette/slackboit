@@ -108,10 +108,11 @@ class James {
         const mapMe = 'mapboit ';
         let lCase = text.toLowerCase();
         let place = mapMe.substr(7);
-        if (lCase.startsWith(mapMe)) {
-                let encodeBoit = encodedURIComponent(place);
-                let maps = 'google.com/maps/search/';
-                let youAreEl = '${maps}${encodedBoit}';
+        if (lCase.startsWith(mapMe))
+            {
+                let encodeBoit = encodeURIComponent(place);
+                let maps = 'https://google.com/maps/search';
+                let youAreEl = `${maps}/${encodeBoit}`;
                 return bot.postMessage(channel, youAreEl);
             }
     }

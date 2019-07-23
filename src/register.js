@@ -138,7 +138,7 @@ const Register = [
         acknowledge: 'where is ',
         name: "Where the boit is this?",
         command: 'where is [food choice]',
-        desctiption: "Ask boit where something is and he will let you know."
+        description: "Ask boit where something is and he will let you know.",
         function: James.whereFoodBoit, 
     },
 
