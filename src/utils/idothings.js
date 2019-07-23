@@ -39,6 +39,20 @@ class IDoThings {
         };
         return nameMap[username] || username;
     }
+    
+    static introductions(oppo){
+        let logan = 'In this corner, weighing in at a buck thirty\nThe kicker of shins\nThe saver of coin\nThe wiki of memes\nYour fierce, grammatically correct...\n*LOGAB!*';
+        
+        let sequenceD = 'In this corner, weighing in at 420 and 69 pounds\nThe _To Be Fair_ Count Record Holder\nThe passenger of his Tesla\nThe fletcher of logs\nThe man to never text back, your one and only...\n*DANK-KUN!*';
+        
+        let sequenceA = 'In this corner, weighing in at one hundred and eighty one pounds\nIdeas??\nThe Evil Slackboit\nThe god of the YeetZone, your true king...\n*MILLER!*\n';
+        
+        let sequenceBoitie = 'In this corner weighing in at a mere one hundred and ninety nine pounds\nThe record holder for number of declined invites\nThe hater of concrete jungles\nThe always smorkin...\n*BOINTLER!*';
+        
+        let sequenceDavboit = 'In this corner weighing in at one hundred and fifty four pounds\nThe King of Code\nThe Back to Back Largest Nut Champion\nYour intermitate fasting expert...\n*DAVBOIT!*';
+        
+        let sequenceJ = 'In this corener weighing in at an even one hundred pounds\nMr. Speak before you think\nIdea Extraordinaire\nArgues just to Argue\nBefore you roast me...\n*JAMZ!*';
+    }
 }
 
 module.exports = IDoThings;

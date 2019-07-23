@@ -78,8 +78,6 @@ class James {
                     "Wagaya",
                     "Ton Ton",
                     "Co",
-                    "Wendy's",
-                    "McDonalds",
                     "Waffle House",
                     "Chick Fil a",
                     "Stevi B's",
@@ -92,6 +90,10 @@ class James {
                     "Burtle's Wings!",
                     "Logan's Cooking!",
                     "Dan's Cooking!",
+                    "Bojangles",
+                    "Moe's",
+                    "Cookout",
+                    "IHOP",
                 ];
 
             /* Add a nice logo for me bb!*/
@@ -102,18 +104,34 @@ class James {
     }
     
     /* Where the boit is that establishment?!*/
-    static async whereFoodBoit(bot, storedUser, text, channel)
-    {
-        const mapMe = 'where is ';
+    static async whereFoodBoit(bot, storedUser, text, channel) {
+        const mapMe = 'mapboit ';
         let lCase = text.toLowerCase();
-        if (lCase.startsWith(mapMe))
-            {
-                let encodeBoit = encodedURIComponent(mapMe);
+        let place = mapMe.substr(7);
+        if (lCase.startsWith(mapMe)) {
+                let encodeBoit = encodedURIComponent(place);
                 let maps = 'google.com/maps/search/';
                 let youAreEl = '${maps}${encodedBoit}';
                 return bot.postMessage(channel, youAreEl);
             }
     }
+    
+    /*Are you ready to rumble?
+    static rumbleBoit(bot, storedUser, text, channel){
+        const readyToRumble = 'Battle Royale ';
+        let lCase = text.toLowerCase;
+        if (lCase.startsWith(readyToRumble)){
+            let break = readyToRumble.substr(13);
+            let breakdown = break.split(" vs ");
+            let oppoOne = breakdown[0];
+            let oppoTwo = breakdown[1];
+            let oppoList = ['logan','dan','andy','burtle','davon','james',];
+            for (i = 0; oppoOne === oppoList[i]; i++){
+                return bot.postMessage(channel, IDoThings.introductions(oppoList[i]));
+            }
+            
+        }
+    }*/
 }
 
 module.exports = James;
