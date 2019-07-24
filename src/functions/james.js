@@ -115,8 +115,8 @@ class James {
                 let encodeBoit = encodeURIComponent(place);
                 let maps = 'https://google.com/maps/search/';
                 let youAreEl = `${maps}${encodeBoit}`;
-                let icon = IDoThings.getImageURL('mapboit.png');
-                return bot.postMessage(channel, youAreEl, icon);
+                let icon_url = IDoThings.getImageURL('mapboit.png');
+                return bot.postMessage(channel, youAreEl, {icon_url});
             }
     }
     
