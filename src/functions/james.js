@@ -54,7 +54,7 @@ class James {
         }
     }
 
-    /* This is my version Bitches*/
+    /* This is my version Bitches, also if you would like to add in a REAL food choice of some food establishment near the atlnata area, you are welcome to.*/
     static fatBoit(bot, storedUser, text, channel){
         const hangry = 'feed me boit';
         let lCase = text.toLowerCase();
@@ -103,7 +103,9 @@ class James {
         }
     }
     
-    /* Where the boit is that establishment?!*/
+    /* Where the boit is that establishment?! 
+        THIS IS MY NO NO SQUARE!
+    */
     static async whereFoodBoit(bot, storedUser, text, channel) {
         const mapMe = 'mapboit ';
         let lCase = text.toLowerCase();
