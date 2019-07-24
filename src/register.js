@@ -135,9 +135,9 @@ const Register = [
         function: James.fatBoit,
     },
     {
-        acknowledge: 'where is ',
+        acknowledge: 'mapboit ',
         name: "Where the boit is this?",
-        command: 'where is [food choice]',
+        command: 'mapboit [food choice]',
         description: "Ask boit where something is and he will let you know.",
         function: James.whereFoodBoit, 
     },

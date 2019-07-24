@@ -107,12 +107,12 @@ class James {
     static async whereFoodBoit(bot, storedUser, text, channel) {
         const mapMe = 'mapboit ';
         let lCase = text.toLowerCase();
-        let place = mapMe.substr(7);
         if (lCase.startsWith(mapMe))
             {
-                let encodeBoit = encodeURIComponent(place);
-                let maps = 'https://google.com/maps/search';
-                let youAreEl = `${maps}/${encodeBoit}`;
+                let memeText = IDoThings.spongebobMemeify(lCase, mapMe);
+                let encodeBoit = encodeURIComponent(memeText);
+                let maps = 'https://google.com/maps/search/';
+                let youAreEl = `${maps}${encodeBoit}`;
                 return bot.postMessage(channel, youAreEl);
             }
     }
