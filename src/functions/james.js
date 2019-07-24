@@ -107,7 +107,7 @@ class James {
     static async whereFoodBoit(bot, storedUser, text, channel) {
         const mapMe = 'mapboit ';
         let lCase = text.toLowerCase();
-        let place = mapMe.substr(7);
+        let place = IDoThings.spongebobMemeify(lCase, mapMe);
         if (lCase.startsWith(mapMe))
             {
                 let encodeBoit = encodeURIComponent(place);
