@@ -1,0 +1,10 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /development/slackboit
+hooks:
+  ApplicationStart:
+    - location: run.sh
+      timeout: 300
+      runas: root
