@@ -11,10 +11,10 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t davonbarnette:slackboit .
-      - docker tag davonbarnette:slackboit davonbarnette:slackboit
+      - docker build -t slackboit:latest .
+      - docker tag slackboit:latest davonbarnette/slackboit:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push davonbarnette:slackboit
+      - docker push davonbarnette/slackboit:latest
