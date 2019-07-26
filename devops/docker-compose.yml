@@ -28,5 +28,5 @@ services:
       - ./env/watchtower.prod.env
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --cleanup --notifications slack
+    command: --cleanup
 
