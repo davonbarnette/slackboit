@@ -54,7 +54,7 @@ class James {
         }
     }
 
-    /* This is my version Bitches, also if you would like to add in a REAL food choice of some food establishment near the atlnata area, you are welcome to.*/
+    /* This is my version Bitches, also if you would like to add in a REAL food choice of some food establishment near the Atlanta area, you are welcome to.*/
     static fatBoit(bot, storedUser, text, channel){
         const hangry = 'feed me boit';
         let lCase = text.toLowerCase();
