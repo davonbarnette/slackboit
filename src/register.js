@@ -4,7 +4,7 @@ const Andy = require('./functions/andy');
 const Burtle = require('./functions/burtle');
 const James = require('./functions/james');
 const Logan = require('./functions/logan');
-
+const Meghoit = require('./functions/meghoon');
 /*
  * This file is where you'll register all of your functions. At the very least, there are 3 things you need to have in
  * your object: description, command, and function. The rest are optional, but that may change in the future. You can also
@@ -145,6 +145,14 @@ const Register = [
     // *** Logan *** //
     // Logan.exampleFunction,
 
+    // *** Meghoon *** //
+    {
+        acknowledge: 'feed me',
+        name: 'Feed Meghoon',
+        command: 'feed me',
+        description: 'Can only be triggered by the meghoit herself',
+        function: Meghoit.ketoizeMe,
+    },
 ];
 
 module.exports = Register;
