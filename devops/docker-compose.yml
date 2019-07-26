@@ -21,4 +21,12 @@ services:
       - "5432:5432"
     env_file:
       - ./env/postgres.prod.env
+  watchtower:
+    container_name: watchtower
+    image: v2tec/watchtower
+    env_file:
+      - ./env/watchtower.prod.env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup --notifications slack
 
