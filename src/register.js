@@ -82,7 +82,7 @@ const Register = [
         acknowledge: 'ahoy slackboit',
         name: "Piroit",
         command: 'ahoy slackboit',
-        description: "Random... pirate phrases?",
+        description: "Random... pirata phrases?",
         function: Dan.ahoit,
     },
     {
@@ -106,6 +106,13 @@ const Register = [
         description: "Welcome",
         function: Dan.greetingBoit,
     },
+    {
+        acknowledge: ['kawaiiboit', 'kawaiiboit act 2', 'kawaiiboit act 3'],
+        name: "hewwo :3",
+        command: ['kawaiiboit [PHRASE]', 'kawaiiboit act 2 [PHRASE]', 'kawaiiboit act 3 [PHRASE]'],
+        description: "Forgive me master...",
+        function: Dan.uWu__Boit,
+    },
 
     // *** Andy *** //
     {
@@ -121,6 +128,13 @@ const Register = [
         command: ["technically"],
         description: "Slackboit repeats whenever someone says technically with matrix icon",
         function: Andy.technically,
+    },
+    {
+        acknowledge: 'リマインダー : Happy 420 @everyone',
+        name: "Slackboit parties with us",
+        command: 'リマインダー : Happy 420 @everyone',
+        description: "Slackboit parties with us",
+        function: Dan.partyBoit,
     },
 
     // *** Burtle *** //
@@ -139,7 +153,7 @@ const Register = [
         name: "Where the boit is this?",
         command: 'mapboit [food choice]',
         description: "Ask boit where something is and he will let you know.",
-        function: James.whereFoodBoit, 
+        function: James.whereFoodBoit,
     },
 
     // *** Logan *** //
