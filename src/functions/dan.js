@@ -215,9 +215,10 @@ class Dan {
 
     static partyBoit(bot, storedUser, text, channel){
         const acknowledge = "リマインダー : Happy 420 @everyone"
-        if (text.includes(acknowledge))
+        if (text.includes(acknowledge)){
             const icon_url = IDoThings.getImageURL('slackboit_monocle.png')
             return bot.postMessage(channel, ':snoop:', {icon_url})
+        }
     }
 }
 
