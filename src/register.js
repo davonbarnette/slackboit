@@ -20,18 +20,18 @@ const Register = [
 
     // *** Davon *** //
     {
-        acknowledge: 'slackboit updeetus the yeetus',
-        name: 'Updeetus the Yeetus',
-        command: 'slackboit updeetus the yeetus',
-        description: 'Slackboit updates all the boints in the chat',
-        function: Yeetus.updeetusThatYeetus,
-    },
-    {
         acknowledge: 'slackboit ',
         name: 'Crime Alert',
         command: 'Deleting a message',
         description: 'Slackboit helps fight crime. If you or a loved one had their message deleted, he will tell you.',
         function: Yeetus.crimeAlert,
+    },
+    {
+        acknowledge: 'slackboit updeetus the yeetus',
+        name: 'Updeetus the Yeetus',
+        command: 'slackboit updeetus the yeetus',
+        description: 'Slackboit updates all the boints in the chat',
+        function: Yeetus.updeetusThatYeetus,
     },
     {
         acknowledge: 'slackboit gimme tendies',
