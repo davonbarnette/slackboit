@@ -134,22 +134,33 @@ class James {
                     if (delWaiting){
                         return bot.postMessage(channel, IDoThings.spongebobMemeify(`you have successfully deleted ${name} from ${location}!`), {icon_url});
                     }
-                    else {return bot.postMessage(channel, "I cAnNoT dElEtE tHaT, wRoNg 4mAt", {icon_url})}
+                    else {
+                        return bot.postMessage(channel, "I cAnNoT dElEtE tHaT, wRoNg 4mAt", {icon_url});
+                    }
                 }
-                // format get|location
-                if (subStrang.startsWith("get")){
-                    let thirdSploice = subStrang.split("|");
-                    let location = thirdSploice[1];
+                // If no text or spaces after feed me boit he will return a choice from all options
+                if (subStrang === ""){ 
+                    let allChoice = await EatMeDaddyService.getAllSpotsToEatDaddy();
+                    if (allChoice) {
+                        let randomPick = IDoThings.pickRandomElement(allChoice);
+                        let memeChoice = IDoThings.spongebobMemeify(randomPick);
+                        return bot.postMessage(channel, IDoThings.spongebobMemeify(`i think you should try, ${memeChoice}`), {icon_url});
+                    }
+                }
+                // If there is text behind feed me boit it will pass it through EatMeDaddy
+                else {
+                    let location = subStrang;
                     let boitChoice = await EatMeDaddyService.getAllSpotsToEatDaddy(location);
-                    if (boitChoice){
+                    if (boitChoice !== 0){
                         let randoPick = IDoThings.pickRandomElement(boitChoice);
                         let memeBoitChoice = IDoThings.spongebobMemeify(randoPick);
                         return bot.postMessage(channel, IDoThings.spongebobMemeify(`i think you should try, ${memeBoitChoice}`), {icon_url});
                     }
-                    else {return bot.postMessage(channel, "I cAnNoT sUgGeSt CaUsE yOu No FoLlOw DiReCtIoNs", {icon_url})}
+                    // If the string passed through doesn't exist in the Database, will return error
+                    else {
+                        return bot.postMessage(channel, IDoThings.spongebobMemeify(`there is nothing on the menu for ${location}`), {icon_url});
+                    }
                 }
-                //error if they do not use the correct add|del|get
-                else { return bot.postMessage(channel, "PlS cAlL hElPdEsK", {icon_url});}
             }
         }
         
