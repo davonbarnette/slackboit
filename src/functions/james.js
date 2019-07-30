@@ -127,7 +127,7 @@ class James {
                 }
                 // format del|name|location
                 if (subStrang.startsWith("del")){
-                    let secondSploice = destroyFeedMe.split("|");
+                    let secondSploice = subStrang.split("|");
                     let name = secondSploice[1];
                     let location = secondSploice[2];
                     let delWaiting = await EatMeDaddyService.deleteASpotToEatDaddy(name, location);
@@ -138,13 +138,12 @@ class James {
                 }
                 // format get|location
                 if (subStrang.startsWith("get")){
-                    let thirdSploice = destroyFeedMe.split("|");
+                    let thirdSploice = subStrang.split("|");
                     let location = thirdSploice[1];
                     let boitChoice = await EatMeDaddyService.getAllSpotsToEatDaddy(location);
-                    let randoPick = IDoThings.pickRandomElement(boitChoice);
-                    let memeBoitChoice = IDoThings.spongebobMemeify(lowered, randoPick);
-                    let getWaiting = await EatMeDaddyService.getAllSpotsToEatDaddy(location);
-                    if (getWaiting){
+                    if (boitChoice){
+                        let randoPick = IDoThings.pickRandomElement(boitChoice);
+                        let memeBoitChoice = IDoThings.spongebobMemeify(randoPick);
                         return bot.postMessage(channel, IDoThings.spongebobMemeify(`i think you should try, ${memeBoitChoice}`), {icon_url});
                     }
                     else {return bot.postMessage(channel, "I cAnNoT sUgGeSt CaUsE yOu No FoLlOw DiReCtIoNs", {icon_url})}
