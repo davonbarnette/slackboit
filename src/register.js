@@ -4,7 +4,7 @@ const Andy = require('./functions/andy');
 const Burtle = require('./functions/burtle');
 const James = require('./functions/james');
 const Logan = require('./functions/logan');
-
+const Meghoit = require('./functions/meghoon');
 /*
  * This file is where you'll register all of your functions. At the very least, there are 3 things you need to have in
  * your object: description, command, and function. The rest are optional, but that may change in the future. You can also
@@ -20,18 +20,18 @@ const Register = [
 
     // *** Davon *** //
     {
-        acknowledge: 'slackboit updeetus the yeetus',
-        name: 'Updeetus the Yeetus',
-        command: 'slackboit updeetus the yeetus',
-        description: 'Slackboit updates all the boints in the chat',
-        function: Yeetus.updeetusThatYeetus,
-    },
-    {
         acknowledge: 'slackboit ',
         name: 'Crime Alert',
         command: 'Deleting a message',
         description: 'Slackboit helps fight crime. If you or a loved one had their message deleted, he will tell you.',
         function: Yeetus.crimeAlert,
+    },
+    {
+        acknowledge: 'slackboit updeetus the yeetus',
+        name: 'Updeetus the Yeetus',
+        command: 'slackboit updeetus the yeetus',
+        description: 'Slackboit updates all the boints in the chat',
+        function: Yeetus.updeetusThatYeetus,
     },
     {
         acknowledge: 'slackboit gimme tendies',
@@ -82,7 +82,7 @@ const Register = [
         acknowledge: 'ahoy slackboit',
         name: "Piroit",
         command: 'ahoy slackboit',
-        description: "Random... pirate phrases?",
+        description: "Random... pirata phrases?",
         function: Dan.ahoit,
     },
     {
@@ -106,6 +106,13 @@ const Register = [
         description: "Welcome",
         function: Dan.greetingBoit,
     },
+    {
+        acknowledge: ['kawaiiboit', 'kawaiiboit act 2', 'kawaiiboit act 3'],
+        name: "hewwo :3",
+        command: ['kawaiiboit [PHRASE]', 'kawaiiboit act 2 [PHRASE]', 'kawaiiboit act 3 [PHRASE]'],
+        description: "Forgive me master...",
+        function: Dan.uWu__Boit,
+    },
 
     // *** Andy *** //
     {
@@ -121,6 +128,13 @@ const Register = [
         command: ["technically"],
         description: "Slackboit repeats whenever someone says technically with matrix icon",
         function: Andy.technically,
+    },
+    {
+        acknowledge: 'リマインダー : Happy 420 @everyone',
+        name: "Slackboit parties with us",
+        command: 'リマインダー : Happy 420 @everyone',
+        description: "Slackboit parties with us",
+        function: Dan.partyBoit,
     },
 
     // *** Burtle *** //
@@ -139,12 +153,20 @@ const Register = [
         name: "Where the boit is this?",
         command: 'mapboit [food choice]',
         description: "Ask boit where something is and he will let you know.",
-        function: James.whereFoodBoit, 
+        function: James.whereFoodBoit,
     },
 
     // *** Logan *** //
     // Logan.exampleFunction,
 
+    // *** Meghoon *** //
+    {
+        acknowledge: 'feed me',
+        name: 'Feed Meghoon',
+        command: 'feed me',
+        description: 'Can only be triggered by the meghoit herself',
+        function: Meghoit.ketoizeMe,
+    },
 ];
 
 module.exports = Register;
