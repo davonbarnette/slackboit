@@ -36,7 +36,7 @@ const ToBeFairService = require('../services/tbf_service');
 
 class Andy {
 
-    static exampleFunction(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
+    static exampleFunction(bot, storedUser, text, channel, submittedAt, subtype, previous_message) {
         const acknowledge = 'slackboit';
         const message = 'example message';
         if (text.startsWith(acknowledge)) {
@@ -56,7 +56,7 @@ class Andy {
         }
     }
 
-    static async tobefair(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
+    static async tobefair(bot, storedUser, text, channel, submittedAt, subtype, previous_message) {
         const acknowledge = 'to be fair';
         let lowered = text.toLowerCase();
         if (lowered.includes(acknowledge)) {
@@ -65,22 +65,61 @@ class Andy {
             let tbfCount = await ToBeFairService.createToBeFairEntry(storedUser.id);
             const icon_url = IDoThings.getImageURL('slackboit_monocle.png');
             let message = IDoThings.spongebobMemeify(`${storedUser.profile.display_name}'s to be fair number: ` + tbfCount);
-            bot.postMessage(channel, message, {icon_url});
+            bot.postMessage(channel, message, {
+                icon_url
+            });
             return 'stop';
         }
     }
 
-    static technically(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
+    static technically(bot, storedUser, text, channel, submittedAt, subtype, previous_message) {
         const acknowledge = 'technically';
         let lowered = text.toLowerCase();
         if (lowered.includes(acknowledge)) {
             let technically = IDoThings.spongebobMemeify('technically');
             const icon_url = IDoThings.getImageURL('slackboit_matrix.png');
 
-            return bot.postMessage(channel, technically, {icon_url});
+            return bot.postMessage(channel, technically, {
+                icon_url
+            });
         }
     }
-}
 
-module.exports = Andy;
+    static lennyboit(bot, storedUser, text, channel, submittedAt, subtype, previous_message) {
+        const acknowledge = 'lennyboit';
+        let lowered = text.toLowerCase();
 
+        if (lowered.startsWith(acknowledge)) {
+
+            if (lowered.endsWith("og")) {
+                return bot.postMessage(channel, "( ͡° ͜ʖ ͡°)");
+            } else {
+                let lennyfaces = [
+                    '( ͡° ͜ʖ ͡°)',
+                    '( ͠° ͟ʖ ͡°)',
+                    '( ͡~ ͜ʖ ͡°)',
+                    '( ͡o ͜ʖ ͡o)',
+                    '( ಠ ͜ʖಠ)',
+                    '(▀̿Ĺ̯▀̿ ̿)',
+                    '( ✧≖ ͜ʖ≖)',
+                    '(ง ͠° ͟ل͜ ͡°)ง',
+                    '[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]',
+                    '( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)',
+                    '(✿❦ ͜ʖ ❦)',
+                    '/\/( ͡°͡° ͜ʖ ͡°͡°)\//',
+                    '╚═( ͡° ͜ʖ ͡°)═╝',
+                    '︵‿︵(´ ͡༎ຶ ͜ʖ ͡༎ຶ `)︵‿︵',
+                    '( ͡ ͡° ͡°  ʖ ͡° ͡°)',
+                    '( ͡°❥ ͡°)',
+                    '̿̿ ̿̿ ̿̿ ̿\̵͇̿̿\з= ( ▀ ͜͞ʖ▀) =ε/̵͇̿̿/’̿’̿ ̿ ̿̿ ̿̿ ̿̿',
+                    '( ͡◉◞ ͜ʖ◟ ͡◉)',
+                    '(∩ ͡° ͜ʖ ͡°)⊃━炎炎炎炎炎炎炎炎',
+                ];
+
+                const message = IDoThings.pickRandomElement(lennyfaces)
+                return bot.postMessage(channel, message);
+            }
+        }
+    }
+
+    module.exports = Andy;
