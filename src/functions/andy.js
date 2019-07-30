@@ -121,5 +121,6 @@ class Andy {
             }
         }
     }
+}
 
-    module.exports = Andy;
+module.exports = Andy;
