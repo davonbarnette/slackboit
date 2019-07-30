@@ -150,11 +150,7 @@ class James {
                 }
                 //error if they do not use the correct add|del|get
                 else { return bot.postMessage(channel, "PlS cAlL hElPdEsK", {icon_url});}
-            } 
-            else {
-                return bot.postMessage(channel, "sTaRt WiTh (>..)> feed me boit", {icon_url});
             }
-    
         }
         
     /* Where the boit is that establishment?! 
