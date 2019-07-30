@@ -113,7 +113,14 @@ const Register = [
         description: "Forgive me master...",
         function: Dan.uWu__Boit,
     },
-
+    //WRONG AREA DANIEL KUN
+    {
+        acknowledge: 'リマインダー : Happy 420 @everyone',
+        name: "Slackboit parties with us",
+        command: 'リマインダー : Happy 420 @everyone',
+        description: "Slackboit parties with us",
+        function: Dan.partyBoit,
+    },
     // *** Andy *** //
     {
         acknowledge: ["to be fair"],
@@ -129,13 +136,15 @@ const Register = [
         description: "Slackboit repeats whenever someone says technically with matrix icon",
         function: Andy.technically,
     },
+
     {
-        acknowledge: 'リマインダー : Happy 420 @everyone',
-        name: "Slackboit parties with us",
-        command: 'リマインダー : Happy 420 @everyone',
-        description: "Slackboit parties with us",
-        function: Dan.partyBoit,
+        acknowledge: ['lennyboit'],
+        name: "lenny face",
+        command: 'lennyboit',
+        description: "Slackboit lennyfaces us",
+        function: Andy.lennyboit,
     },
+
 
     // *** Burtle *** //
     // Burtle.exampleFunction,
@@ -170,4 +179,3 @@ const Register = [
 ];
 
 module.exports = Register;
-
