@@ -104,7 +104,59 @@ class James {
             return bot.postMessage(channel,`Today I think you should try, ${choice}`, {icon_url});
         }
     }
+
+        /*Dis my test version, biatches*/
+        static async fatBoit(bot, storedUser, text, channel){
+            const feedMe = 'feed me boit ';
+            const icon_url = IDoThings.getImageURL('slackboit_chef.png');
+            let lCase = text.toLowerCase();
+            if (lCase.startsWith(feedMe)){ 
+                //Once it contains feedMe then it will determine if they used the correct beginning word (add/del/get)
+                let subStrang = lCase.substr(feedMe.length);
+                // format >> add|name|type|location
+                if (subStrang.startsWith("add")){
+                    let sploice = subStrang.split("|");
+                    let name = sploice[1];
+                    let type = sploice[2];
+                    let location = sploice[3];
+                    let addWaiting = await EatMeDaddyService.createASpotToEatDaddy(storedUser.id, name, type, location);
+                    if (addWaiting){
+                        return bot.postMessage(channel, IDoThings.spongebobMemeify(`you have successfully added ${name} to ${location}!`), {icon_url});
+                    }
+                    else {return bot.postMessage(channel, "I cAnNoT aDd BeCaUsE wRoNg 4mAt", {icon_url});}
+                }
+                // format del|name|location
+                if (subStrang.startsWith("del")){
+                    let secondSploice = subStrang.split("|");
+                    let name = secondSploice[1];
+                    let location = secondSploice[2];
+                    let delWaiting = await EatMeDaddyService.deleteASpotToEatDaddy(name, location);
+                    if (delWaiting){
+                        return bot.postMessage(channel, IDoThings.spongebobMemeify(`you have successfully deleted ${name} from ${location}!`), {icon_url});
+                    }
+                    else {return bot.postMessage(channel, "I cAnNoT dElEtE tHaT, wRoNg 4mAt", {icon_url})}
+                }
+                // format get|location
+                if (subStrang.startsWith("get")){
+                    let thirdSploice = subStrang.split("|");
+                    let location = thirdSploice[1];
+                    let boitChoice = await EatMeDaddyService.getAllSpotsToEatDaddy(location);
+                    if (boitChoice){
+                        let randoPick = IDoThings.pickRandomElement(boitChoice);
+                        let memeBoitChoice = IDoThings.spongebobMemeify(randoPick);
+                        return bot.postMessage(channel, IDoThings.spongebobMemeify(`i think you should try, ${memeBoitChoice}`), {icon_url});
+                    }
+                    else {return bot.postMessage(channel, "I cAnNoT sUgGeSt CaUsE yOu No FoLlOw DiReCtIoNs", {icon_url})}
+                }
+                //error if they do not use the correct add|del|get
+                else { return bot.postMessage(channel, "PlS cAlL hElPdEsK", {icon_url});}
+            } 
+            else {
+                return bot.postMessage(channel, "sTaRt WiTh (>..)> feed me boit", {icon_url});
+            }
     
+        }
+        
     /* Where the boit is that establishment?! 
         THIS IS MY NO NO SQUARE!
     */

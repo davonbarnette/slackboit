@@ -144,8 +144,8 @@ const Register = [
     {
         acknowledge: 'feed me boit',
         name: "Food Choices",
-        command: 'feed me boit',
-        description: "Slackboit will present to you a choice for food randomly from his list of choices.",
+        command: 'feed me boit (add|name|type of place|location) (del|name|location) (get|location)',
+        description: "Slackboit will present to you a choice for food randomly from his list of choices. Please follow the comman above exactly, or else...",
         function: James.fatBoit,
     },
     {
