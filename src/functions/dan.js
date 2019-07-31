@@ -83,14 +83,26 @@ class Dan {
     }
 
     static uWu__Boit(bot, storedUser, text, channel) {
-        const acknowledge = ['kawaiiboit', 'kawaiiboit act 2', 'kawaiiboit act 3']
-        let level = 1
-        let lowered = text.toLowerCase()
-        if(lowered.startsWith(acknowledge[1])) level = 2
-        else if(lowered.startsWith(acknowledge[2])) level = 3
+        const acknowledge = ['kawaiiboit', 'kawaiiboit act 1', 'kawaiiboit act 2', 'kawaiiboit act 3']
+        let level = 0
+        let lowered = text.toLowerCase().trim()
+        if(lowered.startsWith(acknowledge[1])) level = 1
+        else if(lowered.startsWith(acknowledge[2])) level = 2
+        else if(lowered.startsWith(acknowledge[3])) level = 3
+
+
+        if(level == 0) {
+            let diceRoll = Math.floor(Math.random() * 100)
+            if(diceRoll <= 33) {
+                level = 1
+            }else if(diceRoll > 33 && diceRoll <= 66) {
+                level = 2
+            }else if(diceRoll > 66) {
+                level = 3
+            }
+        }
 
         if(lowered.startsWith(acknowledge[0])) {
-            let level = 1
             let heh = ['(✿◠‿◠)', '≧◡≦', '(●´ω｀●)', '(◕‿◕✿)', '（＊＾Ｕ＾）人（≧Ｖ≦＊）/', '●‿●', '┏(＾0＾)┛┗(＾0＾) ┓', '(⊙‿⊙✿)', '٩◔‿◔۶',
                          '●ᴥ●', '(o´ω｀o)', 'xD', '＼(●~▽~●)', '◤(¬‿¬)◥', '(`･ω･´)', '<(`o`<)', 'ッ', '(︶ω︶)', '（ミ￣ー￣ミ）', '(`･ω･´)', '◕‿◕', '^.^', '(^Ｏ^)',
                         '◃┆◉◡◉┆▷', '╰(◡‿◡✿╰)', '⊙﹏⊙', 'q(❂‿❂)p', '◕‿◕', ':3', ':smirk_cat:', ':joy_cat:', ':smile_cat:', ':smiley_cat:']
@@ -214,7 +226,7 @@ class Dan {
     }
 
     static partyBoit(bot, storedUser, text, channel){
-        const acknowledge = "リマインダー : Happy 420 @everyone"
+        const acknowledge = "リマインダー : Happy 420"
         if (text.includes(acknowledge)){
             const icon_url = IDoThings.getImageURL('slackboit_monocle.png')
             return bot.postMessage(channel, ':snoop:', {icon_url})

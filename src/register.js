@@ -115,9 +115,9 @@ const Register = [
     },
     //WRONG AREA DANIEL KUN
     {
-        acknowledge: 'リマインダー : Happy 420 @everyone',
+        acknowledge: 'リマインダー : Happy 420',
         name: "Slackboit parties with us",
-        command: 'リマインダー : Happy 420 @everyone',
+        command: 'リマインダー : Happy 420',
         description: "Slackboit parties with us",
         function: Dan.partyBoit,
     },
