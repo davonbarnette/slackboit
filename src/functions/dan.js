@@ -91,32 +91,33 @@ class Dan {
         else if(lowered.startsWith(acknowledge[3])) level = 3
 
 
-        if(level == 0) {
-            let diceRoll = Math.floor(Math.random() * 100)
-            if(diceRoll <= 33) {
-                level = 1
-            }else if(diceRoll > 33 && diceRoll <= 66) {
-                level = 2
-            }else if(diceRoll > 66) {
-                level = 3
-            }
-        }
+
 
         if(lowered.startsWith(acknowledge[0])) {
             let heh = ['(✿◠‿◠)', '≧◡≦', '(●´ω｀●)', '(◕‿◕✿)', '（＊＾Ｕ＾）人（≧Ｖ≦＊）/', '●‿●', '┏(＾0＾)┛┗(＾0＾) ┓', '(⊙‿⊙✿)', '٩◔‿◔۶',
                          '●ᴥ●', '(o´ω｀o)', 'xD', '＼(●~▽~●)', '◤(¬‿¬)◥', '(`･ω･´)', '<(`o`<)', 'ッ', '(︶ω︶)', '（ミ￣ー￣ミ）', '(`･ω･´)', '◕‿◕', '^.^', '(^Ｏ^)',
                         '◃┆◉◡◉┆▷', '╰(◡‿◡✿╰)', '⊙﹏⊙', 'q(❂‿❂)p', '◕‿◕', ':3', ':smirk_cat:', ':joy_cat:', ':smile_cat:', ':smiley_cat:']
             let uWuString = ''
-            if(lowered.startsWith(acknowledge[1])) {
-                level = 2
+            if (level === 0) {
+                text = lowered.substring(acknowledge[0].length + 1)
+                uWuString = IDoThings.pickRandomElement(heh) + ' '
+                let diceRoll = Math.floor(Math.random() * 100)
+                if (diceRoll <= 33) {
+                    level = 1
+                } else if (diceRoll > 33 && diceRoll <= 66) {
+                    level = 2
+                } else if (diceRoll > 66) {
+                    level = 3
+                }
+            }else if(level === 1) {
                 text = lowered.substring(acknowledge[1].length + 1)
                 uWuString = IDoThings.pickRandomElement(heh) + ' '
-            }else if(lowered.startsWith(acknowledge[2])) {
-                level = 3
+            }else if(level === 2) {
                 text = lowered.substring(acknowledge[2].length + 1)
                 uWuString = IDoThings.pickRandomElement(heh) + ' '
-            }else {
-                text = lowered.substring(acknowledge[0].length + 1)
+            }else if(level === 3) {
+                text = lowered.substring(acknowledge[3].length + 1)
+                uWuString = IDoThings.pickRandomElement(heh) + ' '
             }
 
             for(let i = 0; i < text.length; i++) {
