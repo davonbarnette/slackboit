@@ -57,23 +57,23 @@ class Logan {
     static rollBoit(bot, storedUser, text, channel, submittedAt, subtype, previous_message)
     {
         const acknowledge = 'rollboit';
-        
+
         let output = "starting up";
 
         let lowered = text.toLowerCase();
-        if (lowered.startsWith(acknowledge + " d")) 
+        if (lowered.startsWith(acknowledge + " d"))
         {
             //read in slack message
             //check parameter
-            
-            //if integer, proceed; 
+
+            //if integer, proceed;
             //if 0, provide "universe explodes" message;
-            //if 1, provide "wtf bruh" message; 
+            //if 1, provide "wtf bruh" message;
             //if non-integer, return "how tf u gonna make me roll a {parameter} sided die bro smh my head" message;
-            
+
             //perform math function to return dice result based on sides value provided
             //if 1, return natty 1 message
-            //if 69, return "nice"; 
+            //if 69, return "nice";
             //if 420, return "smonkboit.jpg";
             //if 666, return "pentagram" message;
             //if diceSides, return "natty diceSides" message
@@ -87,7 +87,7 @@ class Logan {
             else
             {
                 let introduction = "slackboit rolls the " + diceSides + "-sided die...\n";
-                
+
                 if(diceSides == 0 || diceSides == 1)
                 {
                     if (diceSides == 0)
@@ -99,11 +99,11 @@ class Logan {
                         output = introduction + "The Möbius strip clatters upon the table. How unexpected, a natty 1!";
                     }
                 }
-                
+
                 else
                 {
                     let diceResult = Math.floor(Math.random() * diceSides) + 1;
-                    
+
                     if(diceResult == 69)
                     {
                         output = introduction + diceResult + ". nice.";
@@ -132,11 +132,11 @@ class Logan {
                     }
                 }
             }
-            
-            
+
+
             let rollBoit = IDoThings.spongebobMemeify(output);
-            
-            const icon_url = IDoThings.getImageURL('slackboit_matrix.png');
+
+            const icon_url = IDoThings.getImageURL('rollboit.jpg');
 
             return bot.postMessage(channel, rollBoit, {icon_url});
         }
