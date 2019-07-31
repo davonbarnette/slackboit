@@ -57,7 +57,7 @@ class James {
     }
 
     /* This is my version Bitches, also if you would like to add in a REAL food choice of some food establishment near the Atlanta area, you are welcome to.*/
-    static fatBoit(bot, storedUser, text, channel){
+    /* static fatBoit(bot, storedUser, text, channel){
         const hangry = 'feed me boit';
         let lCase = text.toLowerCase();
         if (lCase.startsWith(hangry)) {
@@ -98,12 +98,34 @@ class James {
                     "Farm Burger",
                 ];
 
-            /* Add a nice logo for me bb!*/
             const icon_url = IDoThings.getImageURL('slackboit_chef.png');
             const choice = IDoThings.pickRandomElement(foodChoices);
             return bot.postMessage(channel,`Today I think you should try, ${choice}`, {icon_url});
         }
-    }
+    }*/
+
+        // Don't you touch this 
+        static tourettesBoit(bot, storedUser, text, channel){
+            let x = [1,2,3,4,5];
+            let sheet = [
+                "beep",
+                "boop",
+                "bop",
+                "wee woo",
+                "splap",
+                "skrrttt",
+                "yert",
+                "zoink",
+                "doink",
+                "bloop",
+            ];
+            const sheets = IDoThings.pickRandomElement(sheet);
+            //const icon_url = IDoThings.getImageURL('');
+            let y = IDoThings.pickRandomElement(x);
+            if (y === 1){
+                return bot.postMessage(channel, IDoThings.spongebobMemeify(`${sheets}`));
+            }
+        }
 
         /*Dis my test version, biatches*/
         static async fatBoit(bot, storedUser, text, channel){

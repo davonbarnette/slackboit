@@ -178,6 +178,13 @@ const Register = [
         description: "Ask boit where something is and he will let you know.",
         function: James.whereFoodBoit,
     },
+    {
+        acknowledge: ` `,
+        name: "Tourettes Syndrome",
+        command: "Nothing",
+        description:  "It just happens",
+        function: James.tourettesBoit,
+    },
 
     // *** Logan *** //
     { 
