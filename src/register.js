@@ -27,6 +27,20 @@ const Register = [
         function: Yeetus.crimeAlert,
     },
     {
+        acknowledge: 'chainboit',
+        name: 'SlackboitUnchained',
+        command: 'chainboit [COMMAND]::[COMMAND]::[N COMMANDS]::[PHRASE] (chainboit imsorryslackboit::kawaiiboit::say this YEET)',
+        description: 'Chain [N] number of slackboit commands in a row to create the ultimate aids. There is no limit to his power...',
+        function: Yeetus.rechainTheBoit,
+    },
+    {
+        acknowledge: 'rechain the boit',
+        name: 'SlackboitRechained',
+        command: 'rechain the boit [TIME IN SECONDS]',
+        description: 'SlackboitUnchained becomes chained once more... smdh. Passing in no time defaults to 60 seconds.',
+        function: Yeetus.rechainTheBoit,
+    },
+    {
         acknowledge: 'slackboit updeetus the yeetus',
         name: 'Updeetus the Yeetus',
         command: 'slackboit updeetus the yeetus',

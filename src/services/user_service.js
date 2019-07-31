@@ -2,6 +2,7 @@ const ORMService = require('../database/orm');
 const MODEL_NAMES = require('../database/models/model_names');
 const Logger = require('../utils/logger');
 const Store = require('../store');
+const USERS_BY_ID = require('../utils/users');
 
 class UserService {
     static async updateUserRegistry(bot){
@@ -23,6 +24,7 @@ class UserService {
                 else await ORMService.updateInstanceOfModel(user, values, onErr);
             }
         }
+        usersById[USERS_BY_ID.SLACKBOIT] = {id:USERS_BY_ID.SLACKBOIT};
         Store.usersById = usersById;
         return Store.usersById;
     }

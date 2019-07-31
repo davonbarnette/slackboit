@@ -35,7 +35,7 @@ const USERS_BY_ID = require('../utils/users');
 
 class Meghoon {
 
-    static exampleFunction(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
+    static exampleFunction(bot, storedUser, text, channel, postMessage){
         const acknowledge = 'slackboit';
         const message = 'example message';
         if (text.startsWith(acknowledge)) {
@@ -49,12 +49,12 @@ class Meghoon {
             let params = {};
 
             //Post the message to the chat
-            bot.postMessage(channel, message, params);
+            postMessage(channel, message, params);
 
             // return 'stop' //Uncomment this line if you want to make sure no functions run after this one
         }
     }
-    static ketoizeMe(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
+    static ketoizeMe(bot, storedUser, text, channel, postMessage){
         const acknowledge = 'feed me';
         if (text.startsWith(acknowledge) && storedUser.id === USERS_BY_ID.MEGHOIT) {
             let choices = [
@@ -65,7 +65,7 @@ class Meghoon {
             ];
             let choice = IDoThings.pickRandomElement(choices);
             let messoige = IDoThings.spongebobMemeify(choice);
-            bot.postMessage(channel, messoige);
+            postMessage(channel, messoige);
 
             return 'stop'
         }
