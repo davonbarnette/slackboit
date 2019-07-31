@@ -107,9 +107,8 @@ class Yeetus {
 
     static async rechainTheBoit(bot, storedUser, text, channel){
         const acknowledge = 'rechain the boit';
-        if (text.startsWith(acknowledge) && !Store.slackboitUnchained.isRechained()){
+        if (text.startsWith(acknowledge)){
             let time = parseInt(text.substr(acknowledge.length));
-            console.log('time', time);
             if (isNaN(time)) time = 60;
             Store.slackboitUnchained.rechain(time);
             return bot.postMessage(channel, IDoThings.spongebobMemeify(`y'all dudes need jesus for ${time} seconds`));
