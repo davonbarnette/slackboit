@@ -104,7 +104,7 @@ class James {
         }
     }*/
 
-        // Don't you touch this 
+        /* Don't you touch this 
         static tourettesBoit(bot, storedUser, text, channel){
             let x = [1,2,3,4,5];
             let sheet = [
@@ -125,7 +125,7 @@ class James {
             if (y === 1){
                 return bot.postMessage(channel, IDoThings.spongebobMemeify(`${sheets}`));
             }
-        }
+        }*/
 
         /*Dis my test version, biatches*/
         static async fatBoit(bot, storedUser, text, channel){
