@@ -107,7 +107,7 @@ class Yeetus {
 
     static async rechainTheBoit(bot, storedUser, text, channel){
         const acknowledge = 'rechain the boit';
-        if (text.startsWith(acknowledge)){
+        if (text.startsWith(acknowledge) && !Store.slackboitUnchained.isRechained()){
             let time = parseInt(text.substr(acknowledge.length));
             console.log('time', time);
             if (isNaN(time)) time = 60;
