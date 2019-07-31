@@ -166,7 +166,13 @@ const Register = [
     },
 
     // *** Logan *** //
-    // Logan.exampleFunction,
+    { 
+        acknowledge: 'rollboit d',
+        name: "dice slinger 3000",
+        command: 'rollboit d[number]',
+        description: "Choose your dice and roll it.",
+        function: Logan.rollBoit,
+    },
 
     // *** Meghoon *** //
     {
