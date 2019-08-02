@@ -107,7 +107,7 @@ it under the Slackboit help desk, or if you just insert the function itself, the
 | ------------- |-------------  | -----        |-------  |
 | function          | Yes           | Your function. You must pass the *function* (correct: `Yeetus.spongebobMeme`) not the *call of the function* (wrong: `Yeetus.spongebobMeme()`). | `function`|
 | command          | Yes           | This is so people know what to type to execute your command. | `string`|
-| acknowledge          | No           | Current, we don't do anything with this, but it's best practice just to put your acknowledge strings in here.| `string` or array of `string`s|
+| acknowledge          | No           | Currently, we don't do anything with this, but it's best practice just to put your acknowledge strings in here.| `string` or array of `string`s|
 | name          | No           | This is mostly for the Slackboit help desk, so people can identify what your function is.| `string` |
 | description          | No           | A description of your function. | `string`|
 
@@ -130,11 +130,11 @@ let post = {
 };
 ```
 
-| Field         | Required      | Description  | Default |
-| ------------- |-------------  | -----        |-------  |
-| message          | Yes           | The message you want to send to Slack. If no message is passed, your function will not do anything.| `null`|
-| params          | No           | These are Slack specific parameters. Navigate to [Slack Message Parameters](https://api.slack.com/methods/chat.postMessage) for a list of potential parameters.| `{}` |
-| stop          | No           | Setting this to false will allow Slackboit to run through functions after yours.| `true`|
-| spongebobify          | No           | Whether or not your function will spongebobify the entire output. In general, you won't have to mess with this because all functions should be spongebobified by default, but if you want to turn of spongebobifying so you can spongebobify it yourself, then disable this.| `true`|
-| channel          | No           | By default, your post will be posted to the channel in which the slackMessage originated from. If you want to set a custom channel (must be the id of the channel), then you can do so here.| `<Current Channel>`|
+| Field         | Required      | Description  | Type | Default |
+| ------------- |-------------  | -----        |-------  | ----- |
+| message          | Yes           | The message you want to send to Slack. If no message is passed, your function will not do anything.| `string` | `null`|
+| params          | No           | These are Slack specific parameters. Navigate to [Slack Message Parameters](https://api.slack.com/methods/chat.postMessage) for a list of potential parameters.| `object` | `{}` |
+| stop          | No           | Setting this to false will allow Slackboit to run through functions after yours.| `boolean` |`true`|
+| spongebobify          | No           | Whether or not your function will spongebobify the entire output. In general, you won't have to mess with this because all functions should be spongebobified by default, but if you want to turn of spongebobifying so you can spongebobify it yourself, then disable this.| `boolean` | `true`|
+| channel          | No           | By default, your post will be posted to the channel in which the slackMessage originated from. If you want to set a custom channel (must be the id of the channel), then you can do so here.| `string` | `<Current Channel>`|
 
