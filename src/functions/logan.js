@@ -10,7 +10,7 @@ class Logan {
 
         let post = {
             message: null,
-            params: {icon_url: IDoThings.getImageURL('rollboit.png')},
+            params: {icon_url: IDoThings.getImageURL('rollboit.jpg')},
         };
 
         const acknowledge = 'rollboit';
