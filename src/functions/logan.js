@@ -54,8 +54,15 @@ class Logan {
         }
     }
 
-    static rollBoit(bot, storedUser, text, channel, submittedAt, subtype, previous_message)
+    static rollBoit(bot, user, slackMessage)
     {
+        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url: IDoThings.getImageURL('rollboit.png')},
+        };
+
         const acknowledge = 'rollboit';
 
         let output = "starting up";
@@ -134,11 +141,8 @@ class Logan {
             }
 
 
-            let rollBoit = IDoThings.spongebobMemeify(output);
-
-            const icon_url = IDoThings.getImageURL('rollboit.jpg');
-
-            return bot.postMessage(channel, rollBoit, {icon_url});
+            post.message = output;
+            return post;
         }
     }
 }

@@ -54,20 +54,24 @@ class Meghoon {
             // return 'stop' //Uncomment this line if you want to make sure no functions run after this one
         }
     }
-    static ketoizeMe(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
+    static ketoizeMe(bot, user, slackMessage){
+        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url: IDoThings.getImageURL('rollboit.png')},
+        };
+
         const acknowledge = 'feed me';
-        if (text.startsWith(acknowledge) && storedUser.id === USERS_BY_ID.MEGHOIT) {
+        if (text.startsWith(acknowledge) && user.id === USERS_BY_ID.MEGHOIT) {
             let choices = [
                 "Meat",
                 "Pizza",
                 "Keto Shaketh",
                 "Put in your own fucking entries meghoit"
             ];
-            let choice = IDoThings.pickRandomElement(choices);
-            let messoige = IDoThings.spongebobMemeify(choice);
-            bot.postMessage(channel, messoige);
-
-            return 'stop'
+            post.message = IDoThings.pickRandomElement(choices);
+            return post;
         }
     }
 }
