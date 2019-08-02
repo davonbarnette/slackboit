@@ -12,6 +12,7 @@ we had to go through a slight re-architecture of code. Changes listed below:
 5. You no longer have to return `"stop"` to stop subsequent functions from running - this is now located in the `post` object.
 6. Each function is now passed `bot`, `user`, and `slackMessage` *only*. The `slackMessage` argument contains all of the stuff you're used to (`text`, `channel`, etc.). We use object destructuring to get the data from the `slackMessage`. Check the example function for more details.
 7. Speaking of, we removed the `exampleFunction` and the directions from your file (no more wall of text on your file, yeet) to this documentation page.
+8. You'll see that I've already gone ahead and changed your functions to correctly use the new architecture. If you currently have code you haven't committed, you will most likely have `Merge Conflicts`. Please let me know if this is the case.
 
 ## Setup your GitHub repository
 
