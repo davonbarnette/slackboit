@@ -41,7 +41,7 @@ class Andy {
 
         let post = {
             message: null,
-            params: {icon_url: IDoThings.getImageURL('slackboit_monocle.png')},
+            params: {},
         };
 
         const acknowledge = 'lennyboit';

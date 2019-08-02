@@ -12,7 +12,7 @@ class Yeetus {
 
         let post = {
             message: null,
-            params: {icon_url:IDoThings.getImageURL('slackboit_fuck.jpg')},
+            params: {icon_url: IDoThings.getImageURL('slackboit_original.png')},
             // stop:true,
         };
 
@@ -28,7 +28,7 @@ class Yeetus {
         const { text, channel, event_ts, subtype, previous_message } = slackMessage;
         let post = {
             message: null,
-            params: {icon_url:IDoThings.getImageURL('slackboit_fuck.jpg')},
+            params: {},
         };
 
         if (subtype === 'message_deleted' && previous_message) {
@@ -64,7 +64,7 @@ class Yeetus {
 
         let post = {
             message: null,
-            params: null,
+            params: {icon_url: IDoThings.getImageURL('slackboit_final_laser.jpeg')},
         };
 
         const kill = 'slackboit お前はもう死んでいる';
@@ -101,7 +101,7 @@ class Yeetus {
 
         let post = {
             message: null,
-            params: {icon_url:IDoThings.getImageURL(Settings.COIN_MARKET_CAP.ICON_NAME)},
+            params: {},
         };
 
         const acknowledge = 'lmgtfy ';

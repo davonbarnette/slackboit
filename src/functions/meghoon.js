@@ -10,7 +10,7 @@ class Meghoon {
 
         let post = {
             message: null,
-            params: {icon_url: IDoThings.getImageURL('rollboit.png')},
+            params: {},
         };
 
         const acknowledge = 'feed me';
