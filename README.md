@@ -2,6 +2,15 @@
 
 A for-the-bois application that runs on Slack.
 
+## Update: Slackboit Version 2.0 - August 2, 2019
+In order to get Slackboit to work on the web, and to have a more robust way of dealing with chaining functions,
+we had to go through a slight re-architecture of code. Changes listed below:
+1. We no longer use `bot.postMessage`, and now *return* a `post` object. You are still able to use `bot` but please do not use it to post your message. Please refer to the documentation below about the Post Object.
+2. All functions are now spongebobified by default. Options for this are located in the `post` object.
+3. All functions will automatically post to the channel in which the slack message originated (no more having to pass in `channel` when posting a message). Options for this are located in the `post` object.
+4. You no longer have to return `"stop"` to stop subsequent functions from running - this is now located in the `post` object.
+5. Each function is now passed `bot`, `user`, and `slackMessage`. The `slackMessage` argument contains all of the stuff you're used to (`text`, `channel`, etc.).
+
 ## Setup your GitHub repository
 
 1. Download and install [GitHub Desktop](https://desktop.github.com/), a client to manage git repositories.
@@ -15,11 +24,11 @@ A for-the-bois application that runs on Slack.
 You should now have a working repository.
 
 ## Create A New Function
-### Step 1: Create your function in your file.
-
 Before we create your function, you need to know a little bit about how Slackboit works. Whenever you send a message in Slack, Slackboit receives that message
 and sequentially runs through an array of functions. You can find these functions in `src/register.js`. Slackboit runs through _each_ of these functions, whether or not
 your specific criteria are met. There is a way to make sure that no functions run after yours, but we'll get into that later.
+
+### Step 1: Create your function in your file.
 
 Your functions will **always** receive a `slackMessage` (take a look at the example_objects/message.js to see what properties a slackMessage contains), a `bot`, and a `user` object - pretty much abstracting you away from having to know how the
 application as a whole works. You'll see that when we actually create our new function.
@@ -103,14 +112,6 @@ it under the Slackboit help desk, or if you just insert the function itself, the
 The `post` object you see in your function is mainly for configuration. It tells Slackboit what to do with your function. Below are the
 fields that are currently available.
 
-| Field         | Required      | Description  | Default |
-| ------------- |-------------  | -----        |-------  |
-| message          | Yes           | The message you want to send to Slack. If no message is passed, your function will not do anything.| `null`|
-| params          | No           | These are Slack specific parameters. Navigate to [Slack Message Parameters](https://api.slack.com/methods/chat.postMessage) for a list of potential parameters.| `{}` |
-| stop          | No           | Setting this to false will allow Slackboit to run through functions after yours.| `true`|
-| spongebobify          | No           | Whether or not your function will spongebobify the entire output. In general, you won't have to mess with this because all functions should be spongebobified by default, but if you want to turn of spongebobifying so you can spongebobify it yourself, then disable this.| `true`|
-| channel          | No           | By default, your post will be posted to the channel in which the slackMessage originated from. If you want to set a custom channel (must be the id of the channel), then you can do so here.| `<Current Channel>`|
-
 #### Example post object
 ```
 let post = {
@@ -125,3 +126,12 @@ let post = {
     //channel: false, // [Default: <Current Channel>] If you want to send your message to a custom channel
 };
 ```
+
+| Field         | Required      | Description  | Default |
+| ------------- |-------------  | -----        |-------  |
+| message          | Yes           | The message you want to send to Slack. If no message is passed, your function will not do anything.| `null`|
+| params          | No           | These are Slack specific parameters. Navigate to [Slack Message Parameters](https://api.slack.com/methods/chat.postMessage) for a list of potential parameters.| `{}` |
+| stop          | No           | Setting this to false will allow Slackboit to run through functions after yours.| `true`|
+| spongebobify          | No           | Whether or not your function will spongebobify the entire output. In general, you won't have to mess with this because all functions should be spongebobified by default, but if you want to turn of spongebobifying so you can spongebobify it yourself, then disable this.| `true`|
+| channel          | No           | By default, your post will be posted to the channel in which the slackMessage originated from. If you want to set a custom channel (must be the id of the channel), then you can do so here.| `<Current Channel>`|
+
