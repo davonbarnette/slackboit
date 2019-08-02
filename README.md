@@ -27,11 +27,13 @@ application as a whole works. You'll see that when we actually create our new fu
 1. In your IDE, navigate to and open your specific function file. Since I'm Davon, I'll go into `src/functions/yeetus.js`.
 2. Copy the example function below into your file (`src/functions/<YOUR_NAME>.js`) nested *within* the class.
     ```
-   /* Incoming arguments to your example function:
+   /* 
+    * Incoming arguments to your example function:
     * 1. bot: The slack bot API abstraction. https://github.com/mishk0/slack-bot-api for more details. After a recent update, you really don't need this any longer, but I kept it here just for more usability in the future.
     * 2. user: The entire user object. Check /example_objects/slack_user.js for more details.
     * 3. slackMessage: The entire slack message object. Check /example_objects/message.js for more details.
     */
+   
     static exampleFunction(bot, user, slackMessage){
         // This is called object destructuring. slackMessage is an object, and we are pulling the properties below (text, channel, etc.) out of it.
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
