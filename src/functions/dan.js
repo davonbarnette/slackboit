@@ -14,6 +14,7 @@ class Dan {
         if (lowered.includes(acknowledge)){
             post.message = "thanks dad"
             return post.message
+            return post;
         }
     }
 

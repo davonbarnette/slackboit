@@ -33,6 +33,7 @@ class Andy {
         let lowered = text.toLowerCase();
         if (lowered.includes(acknowledge)) {
             post.message = 'technically';
+            return post;
         }
     }
 
