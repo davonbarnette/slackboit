@@ -85,7 +85,7 @@ application as a whole works. You'll see that when we actually create our new fu
 6. Create a conditional to check whether you want to send a message or not. In the example function, I've added a `text.startsWith()`, but you can do anything, e.g. `text.endsWith()`, `text.includes()`, etc.
 7. Add any logic you need to execute in order to get your desired functionality.
 8. Change the message by modifying the `post.message` field. Most of the time, you'll do this in the custom logic by: `post.message = "your new message"`.
-9. Return the `post` object so that Slackboit knows what to do with it. This is the most important part. You *must* return the `post` object.
+9. Return the `post` object so that Slackboit knows what to do with it. This is the most important part. You *must* return the `post` object (e.g. `return post;`).
 
 ### Step 2: Register your function.
 In `register.js`, register your function. Remember we talked about the array of functions that Slackboit runs through -
