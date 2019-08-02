@@ -15,7 +15,7 @@ A for-the-bois application that runs on Slack.
 You should now have a working repository.
 
 ## Create A New Function
-### Step 2: Create your function.
+### Step 1: Create your function in your file.
 
 Before we create your function, you need to know a little bit about how Slackboit works. Whenever you send a message in Slack, Slackboit receives that message
 and sequentially runs through an array of functions. You can find these functions in `src/register.js`. Slackboit runs through _each_ of these functions, whether or not
@@ -31,7 +31,7 @@ application as a whole works. You'll see that when we actually create our new fu
     * 1. bot: The slack bot API abstraction. https://github.com/mishk0/slack-bot-api for more details. After a recent update, you really don't need this any longer, but I kept it here just for more usability in the future.
     * 2. user: The entire user object. Check /example_objects/slack_user.js for more details.
     * 3. slackMessage: The entire slack message object. Check /example_objects/message.js for more details.
-   */
+    */
     static exampleFunction(bot, user, slackMessage){
         // This is called object destructuring. slackMessage is an object, and we are pulling the properties below (text, channel, etc.) out of it.
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
@@ -69,15 +69,33 @@ application as a whole works. You'll see that when we actually create our new fu
 3. Change the name of your function to anything of your choosing (e.g. `exampleFunction(...)` > `deletusTheYeetus(...)`).
 4. Pre-configure your post by altering the `post` object. There are directions in the example function. For more clarification refer to the `Post Object` section below.
 5. Change the `const acknowledge = 'slackboit'` to the word or phrase you want to acknowledge.
-6. Create a conditional to check whether you want to send a message or not. Below I've added a `text.startsWith()`, but you can do anything, e.g. `text.endsWith()`, `text.includes()`, etc.
+6. Create a conditional to check whether you want to send a message or not. In the example function, I've added a `text.startsWith()`, but you can do anything, e.g. `text.endsWith()`, `text.includes()`, etc.
 7. Add any logic you need to execute in order to get your desired functionality.
 8. Change the message by modifying the `post.message` field. Most of the time, you'll do this in the custom logic by: `post.message = "your new message"`.
 9. Return the `post` object so that Slackboit knows what to do with it. This is the most important part. You *must* return the `post` object.
 
-### Step 3: Register your function.
+### Step 2: Register your function.
 In `register.js`, register your function. Remember we talked about the array of functions that Slackboit runs through -
 this is the one. Follow the same pattern the other entries have (command, function, description), and it will register
 it under the Slackboit help desk, or if you just insert the function itself, then that also works. Read the top of the file for more details.
+
+#### Example Register object
+```
+{
+    acknowledge: 'slackboit',
+    name: 'The Original Meme',
+    command: 'slackboit [PHRASE]',
+    description: 'Spongeboit',
+    function: Yeetus.spongebobMeme,
+}
+```
+| Field         | Required      | Description  | Type |
+| ------------- |-------------  | -----        |-------  |
+| function          | Yes           | Your function. You must pass the *function* (correct: `Yeetus.spongebobMeme`) not the *call of the function* (wrong: `Yeetus.spongebobMeme()`). | `function`|
+| command          | Yes           | This is so people know what to type to execute your command. | `string`|
+| acknowledge          | No           | Current, we don't do anything with this, but it's best practice just to put your acknowledge strings in here.| `string` or array of `string`s|
+| name          | No           | This is mostly for the Slackboit help desk, so people can identify what your function is.| `string` |
+| description          | No           | A description of your function. | `string`|
 
 ## The Post Object
 The `post` object you see in your function is mainly for configuration. It tells Slackboit what to do with your function. Below are the
