@@ -1,6 +1,6 @@
-node_modules
+**/**/node_modules
 *.env
-src/.DS_Store
+backend/.DS_Store
 .DS_Store
-src/assets/.DS_Store
-src/assets/imgs/.DS_Store
+backend/assets/.DS_Store
+backend/assets/imgs/.DS_Store

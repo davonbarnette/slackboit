@@ -1,7 +1,7 @@
-const ORMService = require('../database/orm');
-const MODEL_NAMES = require('../database/models/model_names');
+const ORMService = require('../database2/orm');
+const MODEL_NAMES = require('../database2/models/model_names');
 const Logger = require('../utils/logger');
-const Database = require('../database/sequelize');
+const Database = require('../database2/sequelize');
 
 class ToBeFairService {
     static async createToBeFairEntry(userId){

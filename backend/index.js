@@ -9,7 +9,7 @@ const http = require('http');
 const Express = require('./express/express');
 const Register = require('./register');
 // Need to keep this here to instantiate the Database class before the rest of the application starts
-const Database = require('./database/sequelize');
+const Database = require('./database2/sequelize');
 const SETTINGS = require('./settings');
 const Routes = require('./express/routes');
 
