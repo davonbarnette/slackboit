@@ -1,17 +1,34 @@
 const IDoThings = require('../utils/idothings');
 
 class Dan {
-    static goodBoit(bot, storedUser, text, channel){
+    static goodBoit(bot, user, slackMessage){
+        const {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {},
+        };
+
         const acknowledge = "good boit"
         let lowered = text.toLowerCase()
-        if (lowered.includes(acknowledge))
-            return bot.postMessage(channel, IDoThings.spongebobMemeify("thanks dad"), {})
+        if (lowered.includes(acknowledge)){
+            post.message = "thanks dad"
+            return post.message
+            return post;
+        }
     }
 
-    static greetingBoit(bot, storedUser, text, channel){
+    static greetingBoit(bot, user, slackMessage){
+        const {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {},
+        };
+
         const acknowledge = ["good morning", "morno", "hello"];
         let lowered = text.toLowerCase()
-        let userId = storedUser.id
+        let userId = user.id
         let boitRespond = false
         for(let phrase of acknowledge )
         {
@@ -28,11 +45,19 @@ class Dan {
                 message = "greetings"
             }
             message += " " + IDoThings.convertToAids(userId)
-            return bot.postMessage(channel, IDoThings.spongebobMemeify(message), {})
+            post.message = message;
+            return post;
         }
     }
 
-    static ahoit(boit, storedUser, textoit, channel) {
+    static ahoit(boit, user, slackMessage) {
+        const {text:textoit, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url:IDoThings.getImageURL('slackboit_final_piraoit.png')},
+        };
+
         const acknoit = "ahoy slackboit"
         let loit = textoit.toLowerCase()
         if (loit.includes(acknoit)) {
@@ -44,13 +69,19 @@ class Dan {
                 "yo ho yo ho",
                 "avast, ye land lubber"
             ]
-            const icon_url = IDoThings.getImageURL('slackboit_final_piraoit.png')
-            const message = IDoThings.spongebobMemeify(IDoThings.pickRandomElement(arroit))
-            return boit.postMessage(channel, message, {icon_url})
+            post.message = IDoThings.pickRandomElement(arroit)
+            return post
         }
     }
 
-    static eightBallBoit(bot, storedUser, text, channel) {
+    static eightBallBoit(bot, user, slackMessage) {
+        const {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url:IDoThings.getImageURL('slackboit_final_eightboit.png')},
+        };
+
         const acknowledge = "slackboit,"
         let lowered = text.toLowerCase()
         if (lowered.startsWith(acknowledge) && lowered.endsWith("?")) {
@@ -76,13 +107,19 @@ class Dan {
                 "Outlook not so good",
                 "Very doubtful"
             ]
-            const icon_url = IDoThings.getImageURL('slackboit_final_eightboit.png')
-            const message = IDoThings.spongebobMemeify(IDoThings.pickRandomElement(phrases))
-            return bot.postMessage(channel, message, {icon_url})
+            post.message = IDoThings.pickRandomElement(phrases)
+            return post
         }
     }
 
-    static uWu__Boit(bot, storedUser, text, channel) {
+    static uWu__Boit(bot, user, slackMessage) {
+        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url:IDoThings.getImageURL('narutoboit.png')},
+        };
+
         const acknowledge = ['kawaiiboit', 'kawaiiboit act 1', 'kawaiiboit act 2', 'kawaiiboit act 3']
         let level = 0
         let lowered = text.toLowerCase().trim()
@@ -221,16 +258,23 @@ class Dan {
             if(level == 2 || level == 3) {
                 uWuString += ' ' + IDoThings.pickRandomElement(heh)
             }
-            const icon_url = IDoThings.getImageURL('narutoboit.png')
-            return bot.postMessage(channel, IDoThings.spongebobMemeify(uWuString), {icon_url})
+            post.message = uWuString
+            return post
         }
     }
 
-    static partyBoit(bot, storedUser, text, channel){
+    static partyBoit(bot, user, slackMessage){
+        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url:IDoThings.getImageURL('slackboit_monocle.png')},
+        };
+
         const acknowledge = "リマインダー : Happy 420"
         if (text.includes(acknowledge)){
-            const icon_url = IDoThings.getImageURL('slackboit_monocle.png')
-            return bot.postMessage(channel, ':snoop:', {icon_url})
+            post.message = ':snoop:'
+            return post
         }
     }
 }

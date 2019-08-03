@@ -11,6 +11,10 @@ class IDoThings {
             else return char.toUpperCase();
         }).join('');
     }
+    static deletusAcknowledge(text, acknowledge){
+        if (!text || !acknowledge) return text;
+        return text.substr(acknowledge.length);
+    }
 
     static getImageURL(assetName){
         const {HOST, STATIC_ASSET_PATH} = Settings;

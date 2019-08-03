@@ -4,6 +4,7 @@ const Logger = require('./utils/logger');
 const UserService = require('./services/user_service');
 const USERS_BY_ID = require('./utils/users');
 const SlackboitUnchained = require('./utils/slackboit_unchained');
+const IDoThings = require('./utils/idothings');
 
 class Slackboit {
     constructor(register){
@@ -21,35 +22,20 @@ class Slackboit {
         return UserService.updateUserRegistry(this.bot);
     }
 
-    async onMessage(data){
-        Logger.info('Incoming Message from Slack > ', data);
+    async onMessage(event){
+        Logger.info('Incoming Message Event from Slack > ', event);
         if (!Store.usersById) return null;
 
         // prop "user" is actually an id, so we access Store.usersById to get the storedUser object
-        let {type, username, text, channel, user:userId, subtype, previous_message, event_ts: submittedAt, bot_id} = data;
+        let {type, text, channel, user:userId, bot_id} = event;
         if (type === 'message') {
             if (Store.disabledUntil > new Date().getTime()) return null;
             let storedUser = Store.usersById[userId];
 
-            if (text.startsWith('chainboit ')) {
-                let split = text.substr(10).split('::');
-                let commands = split.slice(0, split.length - 1);
-                let firstText = split[split.length - 1];
-                Store.slackboitUnchained.initialize(commands);
-                if (Store.slackboitUnchained.isRechained()) return null;
-                Store.slackboitUnchained.rechain(5);
-
-                await this.slackboitUnchainedOnlineForever(storedUser, firstText, channel, submittedAt, subtype, previous_message)
-            }
-
-            if (bot_id === USERS_BY_ID.SLACKBOIT) {
-                storedUser = Store.usersById[bot_id];
-                await this.slackboitUnchainedOnlineForever(storedUser, text, channel, submittedAt, subtype, previous_message)
-                return null; // Prevent Slackboit recursion
-            }
+            if (bot_id === USERS_BY_ID.SLACKBOIT) return null; // Prevent Slackboit recursion
 
             if (text === 'calling slackboit helpdesk') this.sendHelpDesk(channel);
-            else await this.iterateRegister(storedUser, text, channel, submittedAt, subtype, previous_message)
+            else await this.iterateRegister(storedUser, event, this.handlePost.bind(this));
         }
     }
 
@@ -59,15 +45,24 @@ class Slackboit {
         await this.iterateRegister(storedUser, command, channel, submittedAt, subtype, previous_message);
     }
 
-    async iterateRegister(storedUser, text, channel, submittedAt, subtype, previous_message){
+    handlePost(post, data){
+        let {message, params, stop, spongebobify, channel} = post;
+        if (spongebobify !== false) message = IDoThings.spongebobMemeify(message);
+        this.bot.postMessage(channel || data.channel, message, params);
+        if (stop) return 'stop';
+    }
+
+    async iterateRegister(user, data, handlePost){
         for (let i = 0; i < this.register.length; i++) {
             const item = this.register[i];
-            let res;
-            if (item.hasOwnProperty('function'))
-                res = await item.function(this.bot, storedUser, text, channel, submittedAt, subtype, previous_message);
-            else res = await item(this.bot, storedUser, text, channel, submittedAt, subtype, previous_message);
-
-            if (res === 'stop') return;
+            let exec = item;
+            if (item.hasOwnProperty('function')) exec = item.function;
+            let post = await exec(this.bot, user, data);
+            if (post) {
+                let handled = handlePost(post, data);
+                if (handled === 'stop') return;
+            }
+            else if (post === null) return null;
         }
     }
 

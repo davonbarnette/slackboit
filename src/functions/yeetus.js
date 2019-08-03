@@ -7,77 +7,122 @@ const UserService = require('../services/user_service');
 
 class Yeetus {
 
-    static spongebobMeme(bot, storedUser, text, channel){
+    static spongebobMeme(bot, user, slackMessage){
+        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url: IDoThings.getImageURL('slackboit_original.png')},
+            // stop:true,
+        };
+
         const acknowledge = 'slackboit ';
         let lowered = text.toLowerCase();
         if (lowered.startsWith(acknowledge)) {
-            let meme = IDoThings.spongebobMemeify(lowered, acknowledge);
-            return bot.postMessage(channel, meme);
+            post.message = IDoThings.spongebobMemeify(lowered, acknowledge);
+            return post;
         }
     }
 
-    static crimeAlert(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
+    static crimeAlert(bot, user, slackMessage){
+        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+        let post = {
+            message: null,
+            params: {},
+        };
+
         if (subtype === 'message_deleted' && previous_message) {
             let submittedAt = new Date().getTime();
-            if (Store.disabledUntil > submittedAt) return 'stop'; // Prevent Slackboit from messaging if he's killed
+            if (Store.disabledUntil > submittedAt) return null; // Prevent Slackboit from messaging if he's killed
 
             // We can't use storedUser here because the user doesn't come in the data object, but rather the
             // previous_message object
             const {text, user} = previous_message;
-            let message = `🚓🚓\n${Store.usersById[user].profile.display_name}'s message was spookily deleted\n "${text}"\n🚓🚓`;
-            bot.postMessage(channel, message);
-            return 'stop';
+            post.message = `🚓🚓\n${Store.usersById[user].profile.display_name}'s message was spookily deleted\n "${text}"\n🚓🚓`;
+            return post;
         }
     }
 
-    static imSorryJon(bot, storedUser, text, channel){
+    static imSorryJon(bot, user, slackMessage){
+        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url:IDoThings.getImageURL('slackboit_fuck.jpg')},
+        };
+
         const acknowledge = 'imsorryslackboit ';
         let lowered = text.toLowerCase();
         if (lowered.startsWith(acknowledge)) {
-            let meme = IDoThings.spongebobMemeify(lowered, acknowledge);
-            const icon_url = IDoThings.getImageURL('slackboit_fuck.jpg');
-            return bot.postMessage(channel, zalgo(meme, 'mini'), {icon_url});
+            post.message = zalgo(IDoThings.spongebobMemeify(lowered, acknowledge), 'mini');
+            return post;
         }
     }
 
-    static omaeWaMouShindeiru(bot, storedUser, text, channel){
+    static omaeWaMouShindeiru(bot, user, slackMessage){
+        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url: IDoThings.getImageURL('slackboit_final_laser.jpeg')},
+        };
+
         const kill = 'slackboit お前はもう死んでいる';
         let lowered = text.toLowerCase();
 
         if (lowered === kill){
-            bot.postMessage(channel, 'なに', {});
+            post.message = 'なに';
             Store.disabledUntil = new Date().getTime() + 60 * 1000;
-            return 'stop';
+            return post;
         }
     }
 
-    static async refreshCrypto(bot, storedUser, text, channel){
+    static async refreshCrypto(bot, user, slackMessage){
+        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url:IDoThings.getImageURL(Settings.COIN_MARKET_CAP.ICON_NAME)},
+        };
+
         const acknowledge = 'slackboit gimme tendies';
         if (acknowledge === text && new Date().getTime() > Store.resetCryptoTime){
             let res = await CryptoManager.refreshCryptoListings();
             if (res) {
-                const icon_url = IDoThings.getImageURL(Settings.COIN_MARKET_CAP.ICON_NAME);
-                const message = IDoThings.spongebobMemeify('tendies given');
-                bot.postMessage(channel, message, {icon_url});
+                post.message = 'tendies given';
                 Store.resetCryptoTime = new Date().getTime() + 6000;
-                return 'stop';
+                return post;
             }
         }
     }
 
-    static async lmgtfyBitch(bot, storedUser, text, channel){
+    static async lmgtfyBitch(bot, user, slackMessage){
+        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+        let post = {
+            message: null,
+            params: {},
+        };
+
         const acknowledge = 'lmgtfy ';
         let lowered = text.toLowerCase();
         if (lowered.startsWith(acknowledge)) {
-            let meme = IDoThings.spongebobMemeify(lowered, acknowledge);
+            let meme = IDoThings.deletusAcknowledge(lowered, acknowledge);
             let encodedMemeQuery = encodeURIComponent(meme);
-            let lmgtfy = IDoThings.spongebobMemeify('https://lmgtfy.com/?q=');
-            let memeUrl = `${lmgtfy}${encodedMemeQuery}`;
-            return bot.postMessage(channel, memeUrl);
+            let lmgtfy = `https://lmgtfy.com/?q=${encodedMemeQuery}`;
+            post.message = lmgtfy;
+            return post;
         }
     }
 
-    static getCrypto(bot, storedUser, text, channel){
+    static getCrypto(bot, user, slackMessage){
+        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url:IDoThings.getImageURL(Settings.COIN_MARKET_CAP.ICON_NAME)},
+        };
+
         const acknowledge = 'slackboit what is ';
 
         if (text.startsWith(acknowledge)){
@@ -89,7 +134,7 @@ class Yeetus {
 
             let separator = ' \n';
 
-            let pretty = '' +
+            post.message = '' +
                 `*Rank:* #${cmc_rank}${separator}` +
                 `*Price:* $${IDoThings.numberWithCommas(price)}${separator}` +
                 `*Volume 24h:* ${IDoThings.numberWithCommas(volume_24h)}${separator}` +
@@ -99,33 +144,42 @@ class Yeetus {
                 `*Market Cap:* $${IDoThings.numberWithCommas(market_cap)}${separator}` +
                 `*Last Updated:* ${last_updated}`;
 
-            const icon_url = IDoThings.getImageURL(Settings.COIN_MARKET_CAP.ICON_NAME);
-            bot.postMessage(channel, IDoThings.spongebobMemeify(pretty), {icon_url});
-            return 'stop';
+            return post;
         }
     }
 
-    static async rechainTheBoit(bot, storedUser, text, channel){
+    static async rechainTheBoit(bot, user, slackMessage){
+        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+        let post = {
+            message: null,
+            params: {},
+        };
+
         const acknowledge = 'rechain the boit';
         if (text.startsWith(acknowledge)){
             let time = parseInt(text.substr(acknowledge.length));
             if (isNaN(time)) time = 60;
             Store.slackboitUnchained.rechain(time);
-            return bot.postMessage(channel, IDoThings.spongebobMemeify(`y'all dudes need jesus for ${time} seconds`));
-
+            post.message = `y'all dudes need jesus for ${time} seconds`;
+            return post;
         }
     }
 
-    static async updeetusThatYeetus(bot, storedUser, text, channel){
+    static async updeetusThatYeetus(bot, user, slackMessage){
+        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+        let post = {
+            message: null,
+            params: {},
+        };
+
         const acknowledge = 'slackboit updeetus the yeetus';
         if (text.startsWith(acknowledge)){
             const users = await UserService.updateUserRegistry(bot);
-            if (users){
-                bot.postMessage(channel, IDoThings.spongebobMemeify('the yeetus has been updeetused'));
-                return 'stop'
-            }
-            else bot.postMessage(channel, IDoThings.spongebobMemeify('could not updeetus the yeetus :('));
-            return 'stop'
+            if (users) post.message = 'the yeetus has been updeetused';
+            else post.message =  'could not updeetus the yeetus :(';
+            return post;
         }
     }
 }
