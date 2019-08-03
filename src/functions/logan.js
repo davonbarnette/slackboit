@@ -143,9 +143,9 @@ class Logan {
             //stitch converted words back into standName variable
             
             //https://dictionaryapi.com/products/api-collegiate-thesaurus api documentation
-            for (i = 0; i < standNameArray.Length; i++)
+            for (let i = 0; i < standNameArray.length; i++)
             {
-                let getURL = `https://dictionaryapi.com/api/v3/references/thesaurus/json/${standNameArray[i]}?key=${SETTINGS.THESAURUS_API_TOKEN}`
+                let getURL = `https://dictionaryapi.com/api/v3/references/thesaurus/json/${standNameArray[i]}?key=${SETTINGS.THESAURUS_API_TOKEN}`;
                 
                 let jsonReturn;
 
