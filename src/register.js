@@ -188,6 +188,14 @@ const Register = [
         function: Logan.rollBoit,
     },
 
+    { 
+        acknowledge: 'standboit ',
+        name: "stand generator",
+        command: 'standboit [input string]',
+        description: "generate stand name & stats using input string",
+        function: Logan.standBoit,
+    },
+
     // *** Meghoon *** //
     {
         acknowledge: 'feed me',

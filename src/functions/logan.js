@@ -54,6 +54,107 @@ class Logan {
         }
     }
 
+    static standBoit(bot, storedUser, text, channel, submittedAt, subtype, previous_message){
+        const acknowledge = 'standboit ';
+        const axios = require("axios");
+        
+        let lowered = text.toLowerCase();
+        
+        if (lowered.startsWith(acknowledge)) {
+
+            /*
+            let standUser = "logab";
+            let standName = "Unwrinkled Bandit";
+
+            let statList = ["A", "B", "C", "D", "E"];
+
+            let standPower = statList[Math.floor(Math.random() * statList.length)];
+            let standSpeed = statList[Math.floor(Math.random() * statList.length)];
+            let standRange = statList[Math.floor(Math.random() * statList.length)];
+            let standDurability = statList[Math.floor(Math.random() * statList.length)];
+            let standPrecision = statList[Math.floor(Math.random() * statList.length)];
+            let standPotential = statList[Math.floor(Math.random() * statList.length)];
+
+            let output = 	"stand user: 「 " + standUser + " 」\n" +
+            "stand name: 「 " + standName + " 」\n" + 
+            "\n" +
+            "power: " + standPower + " '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "durability: " + standDurability + "\n" +
+            "speed: " + standSpeed + " '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "precision: " + standPrecision + "\n" +
+            "range: " + standRange + "  '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. "  + "potential: " + standPotential;
+              
+            alert(output);
+            */
+
+            let standUser = IDoThings.convertToAids(storedUser); //convert name to aids form
+            let standNameArray = lowered.split(" "); //split input string into array
+            let standName = "";
+
+            //api call; create for loop to pass each individual item in standName
+            //each word will return an array of synonyms
+            //if array length is 0, use original word
+            //if array length > 0, return a random result and replace original word
+            //stitch converted words back into standName variable
+            
+            //https://dictionaryapi.com/products/api-collegiate-thesaurus api documentation
+            for (i = 0; i < standNameArray.Length; i++)
+            {
+                let getURL = "https://dictionaryapi.com/api/v3/references/thesaurus/json/" + standNameArray[i] + "?key=dcab142a-5b33-489b-bae7-9cee724c10a2";
+                
+                const getSynonyms = () => 
+                {
+                    try 
+                    {
+                        jsonReturn = axios.get(getURL);
+                    } 
+                    
+                    catch (error) 
+                    {
+                        standName = "error big sad";
+                    }
+                }
+
+                jsonReturn = JSON.parse(json);
+
+                //need to actually get the real synonyms
+                let synonymsArray = ["uh", "umm", "yikes"];
+                
+                if (synonymsArray.length != 0)
+                {
+                    standName = standName + IDoThings.pickRandomElement(synonymsArray) + " ";
+                }
+                else
+                {
+                    standName = standName + standNameArray[i] + " ";
+                }
+
+            }
+
+            
+            standName = trim(standName);
+            let statList = ["A", "B", "C", "D", "E"];
+
+            let standPower = IDoThings.pickRandomElement(statList);
+            let standSpeed = IDoThings.pickRandomElement(statList);
+            let standRange = IDoThings.pickRandomElement(statList);
+            let standDurability = IDoThings.pickRandomElement(statList);
+            let standPrecision = IDoThings.pickRandomElement(statList);
+            let standPotential = IDoThings.pickRandomElement(statList);
+            
+            let output = 	"stand user: 「 " + standUser + " 」\n" +
+                            "stand name: 「 " + standName + " 」\n" + 
+                            "\n" +
+                            "power: [" + standPower + "] '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "durability: [" + standDurability + "]\n" +
+                            "speed: [" + standSpeed + "] '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "precision: [" + standPrecision + "]\n" +
+                            "range: [" + standRange + "]  '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. "  + "potential: [" + standPotential + "]";
+            
+            output = IDoThings.spongebobMemeify(output);
+
+            const icon_url = IDoThings.getImageURL('rollboit.jpg');
+
+            return bot.postMessage(channel, standBoitOutput, {icon_url});
+        }
+    }
+
     static rollBoit(bot, storedUser, text, channel, submittedAt, subtype, previous_message)
     {
         const acknowledge = 'rollboit';
