@@ -61,31 +61,27 @@ class Logan {
                 {
                     let diceResult = Math.floor(Math.random() * diceSides) + 1;
 
-                    if(diceResult == 69)
+                    if(diceSides == 69)
                     {
                         output = introduction + diceResult + ". nice.";
                     }
-                    else if(diceResult == 420)
+                    else if(diceSides == 420)
                     {
                         output = introduction + "As Burtle bellows forth a thick cloud of smoke, you can barely see a " + diceResult + " upon the dice's top surface.";
                     }
-                    else if(diceResult == 666)
+                    else if(diceSides == 666)
                     {
                         output = introduction + "Amidst the sudden acrid smell of sulfur and brimstone, a blazing pentagram forms upon the table's surface and swallows the dice whole.\n" +
                                      "Moments later, a clawed red hand hand emerges from the flames and slams the dice back upon the table.\n" +
                                      "Now slathered in the blood of the innocent and exuding an aura of palpable menace, the dice comes to a rest. " + diceResult + ".";
                     }
-                    else if (diceResult == 1)
+                    if (diceResult == 1)
                     {
-                        output = introduction + diceResult + ", a critical failure...";
+                        output = introduction + diceResult + " a critical failure...";
                     }
                     else if (diceResult == diceSides)
                     {
-                        output = introduction + diceResult + ", a critical success!";
-                    }
-                    else
-                    {
-                        output = introduction + diceResult + ".";
+                        output = introduction + diceResult + " a critical success!";
                     }
                 }
             }
@@ -96,13 +92,13 @@ class Logan {
     }
     
     
-    static standBoit(bot, user, slackMessage)
+    static async standBoit(bot, user, slackMessage)
     {
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
 
         let post = {
             message: null,
-            params: {icon_url: IDoThings.getImageURL('rollboit.jpg')},
+            params: {icon_url: IDoThings.getImageURL('standboit.jpg')},
         };
         
         const acknowledge = 'standboit ';
@@ -134,7 +130,8 @@ class Logan {
             alert(output);
             */
 
-            let standUser = IDoThings.convertToAids(storedUser); //convert name to aids form
+            let standUser = IDoThings.convertToAids(user.id); //convert name to aids form
+            lowered = IDoThings.deletusAcknowledge(text, acknowledge);
             let standNameArray = lowered.split(" "); //split input string into array
             let standName = "";
 
@@ -149,24 +146,44 @@ class Logan {
             {
                 let getURL = "https://dictionaryapi.com/api/v3/references/thesaurus/json/" + standNameArray[i] + "?key=dcab142a-5b33-489b-bae7-9cee724c10a2";
                 
-                const getSynonyms = () => 
-                {
-                    try 
+                let jsonReturn;
+
+                try 
                     {
-                        jsonReturn = axios.get(getURL);
-                    } 
-                    
-                    catch (error) 
-                    {
-                        standName = "error big sad";
+                        let response = await axios.get(getURL);
+
+                        if (response) 
+                        {
+                            jsonReturn = JSON.parse(response.data);
+                        } 
                     }
+                catch (error) 
+                    {
+                        //do nothing but catch the error and proceed
+                    }
+                let synonymsArray = [];
+                
+                if(jsonReturn)
+                {
+                    jsonReturn.forEach((object, index)=>
+                    {
+                        
+                        object.meta.syns.forEach((synsArray)=>
+                        {
+                            synsArray.forEach((synonym)=>
+                            {
+                                synonymsArray.push(synonym);
+
+                            })
+
+                        })
+
+                    })
                 }
 
-                jsonReturn = JSON.parse(json);
 
-                //need to actually get the real synonyms
-                let synonymsArray = ["uh", "umm", "yikes"];
-                
+
+                //need to actually get the real synonyms    
                 if (synonymsArray.length != 0)
                 {
                     standName = standName + IDoThings.pickRandomElement(synonymsArray) + " ";
@@ -196,11 +213,9 @@ class Logan {
                             "speed: [" + standSpeed + "] '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "precision: [" + standPrecision + "]\n" +
                             "range: [" + standRange + "]  '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. "  + "potential: [" + standPotential + "]";
             
-            output = IDoThings.spongebobMemeify(output);
+            post.message = output;
 
-            const icon_url = IDoThings.getImageURL('rollboit.jpg');
-
-            return bot.postMessage(channel, standBoitOutput, {icon_url});
+            return post;
         }
     }
 
