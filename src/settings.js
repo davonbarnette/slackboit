@@ -16,6 +16,7 @@ const Settings =  {
         PASSWORD:process.env.DB_PASSWORD,
         CUSTOM_DEBUG:process.env.DB_CUSTOM_DEBUG === 'true',
     },
+    THESAURUS_API_TOKEN:process.env.THESAURUS_API_TOKEN,
     DEBUG:process.env.DEBUG,
     HOST:process.env.HOST,
     STATIC_ASSET_PATH: 'static/imgs',
