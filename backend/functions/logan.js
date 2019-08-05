@@ -76,6 +76,11 @@ class Logan {
                                      "Moments later, a clawed red hand hand emerges from the flames and slams the dice back upon the table.\n" +
                                      "Now slathered in the blood of the innocent and exuding an aura of palpable menace, the dice comes to a rest. " + diceResult + ".";
                     }
+                    else
+                    {
+                        output = introduction + diceResult;
+                    }
+
                     if (diceResult == 1)
                     {
                         output = introduction + diceResult + " a critical failure...";
@@ -84,6 +89,7 @@ class Logan {
                     {
                         output = introduction + diceResult + " a critical success!";
                     }
+
                 }
             }
 
@@ -155,7 +161,7 @@ class Logan {
 
                         if (response) 
                         {
-                            jsonReturn = JSON.parse(response.data);
+                            jsonReturn = response.data;
                         } 
                     }
                 catch (error) 
@@ -182,10 +188,8 @@ class Logan {
                     })
                 }
 
-
-
                 //need to actually get the real synonyms    
-                if (synonymsArray.length != 0)
+                if (synonymsArray.length !== 0)
                 {
                     standName = standName + IDoThings.pickRandomElement(synonymsArray) + " ";
                 }
@@ -197,7 +201,7 @@ class Logan {
             }
 
             
-            standName = trim(standName);
+            standName = standName.trim();
             let statList = ["A", "B", "C", "D", "E"];
 
             let standPower = IDoThings.pickRandomElement(statList);
