@@ -4,7 +4,7 @@
   "main": "backend/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=dev node backend/index.js"
+    "start": "NODE_ENV=development node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +16,7 @@
     "express": "^4.16.4",
     "moment": "^2.24.0",
     "pg": "^7.11.0",
-    "sequelize": "^5.10.1",
+    "sequelize": "^5.12.3",
     "sequelize-cli": "^5.5.0",
     "slackbots": "^1.2.0",
     "to-zalgo": "^1.0.1"

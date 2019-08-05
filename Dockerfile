@@ -1,7 +1,10 @@
 FROM node:8
-WORKDIR /usr/app
-COPY ./package.json .
+WORKDIR /usr/app/backend
+COPY ./backend/package.json .
 RUN npm install --quiet
-COPY . .
+COPY ./backend .
+RUN ["chmod", "+x", "run.sh"]
 
-CMD ["node", "src/index.js"]
+ENV NODE_ENV=production
+
+CMD ["./run.sh"]

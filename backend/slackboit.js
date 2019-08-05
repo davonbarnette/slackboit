@@ -3,7 +3,6 @@ const Store = require('./store');
 const Logger = require('./utils/logger');
 const UserService = require('./services/user_service');
 const USERS_BY_ID = require('./utils/users');
-const SlackboitUnchained = require('./utils/slackboit_unchained');
 const IDoThings = require('./utils/idothings');
 
 class Slackboit {
@@ -37,12 +36,6 @@ class Slackboit {
             if (text === 'calling slackboit helpdesk') this.sendHelpDesk(channel);
             else await this.iterateRegister(storedUser, event, this.handlePost.bind(this));
         }
-    }
-
-    async slackboitUnchainedOnlineForever(storedUser, text, channel, submittedAt, subtype, previous_message){
-        let command = Store.slackboitUnchained.getCurrentCommand(text);
-        Store.slackboitUnchained.increment();
-        await this.iterateRegister(storedUser, command, channel, submittedAt, subtype, previous_message);
     }
 
     handlePost(post, data){
