@@ -1,9 +1,10 @@
 const Store = require('../store');
 const IDoThings = require('../utils/idothings');
+const axios = require("axios");
+const SETTINGS = require('../settings');
 
 class Logan {
-    //Post a new example function below this line:
-
+    
     static rollBoit(bot, user, slackMessage)
     {
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
@@ -12,7 +13,7 @@ class Logan {
             message: null,
             params: {icon_url: IDoThings.getImageURL('rollboit.jpg')},
         };
-
+        
         const acknowledge = 'rollboit';
 
         let output = "starting up";
@@ -61,40 +62,165 @@ class Logan {
                 {
                     let diceResult = Math.floor(Math.random() * diceSides) + 1;
 
-                    if(diceResult == 69)
+                    if(diceSides == 69)
                     {
                         output = introduction + diceResult + ". nice.";
                     }
-                    else if(diceResult == 420)
+                    else if(diceSides == 420)
                     {
                         output = introduction + "As Burtle bellows forth a thick cloud of smoke, you can barely see a " + diceResult + " upon the dice's top surface.";
                     }
-                    else if(diceResult == 666)
+                    else if(diceSides == 666)
                     {
                         output = introduction + "Amidst the sudden acrid smell of sulfur and brimstone, a blazing pentagram forms upon the table's surface and swallows the dice whole.\n" +
                                      "Moments later, a clawed red hand hand emerges from the flames and slams the dice back upon the table.\n" +
                                      "Now slathered in the blood of the innocent and exuding an aura of palpable menace, the dice comes to a rest. " + diceResult + ".";
                     }
-                    else if (diceResult == 1)
+                    if (diceResult == 1)
                     {
-                        output = introduction + diceResult + ", a critical failure...";
+                        output = introduction + diceResult + " a critical failure...";
                     }
                     else if (diceResult == diceSides)
                     {
-                        output = introduction + diceResult + ", a critical success!";
-                    }
-                    else
-                    {
-                        output = introduction + diceResult + ".";
+                        output = introduction + diceResult + " a critical success!";
                     }
                 }
             }
-
 
             post.message = output;
             return post;
         }
     }
+    
+    
+    static async standBoit(bot, user, slackMessage)
+    {
+        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url: IDoThings.getImageURL('standboit.jpg')},
+        };
+        
+        const acknowledge = 'standboit ';
+        
+        let lowered = text.toLowerCase();
+        
+        if (lowered.startsWith(acknowledge)) {
+
+            /*
+            let standUser = "logab";
+            let standName = "Unwrinkled Bandit";
+
+            let statList = ["A", "B", "C", "D", "E"];
+
+            let standPower = statList[Math.floor(Math.random() * statList.length)];
+            let standSpeed = statList[Math.floor(Math.random() * statList.length)];
+            let standRange = statList[Math.floor(Math.random() * statList.length)];
+            let standDurability = statList[Math.floor(Math.random() * statList.length)];
+            let standPrecision = statList[Math.floor(Math.random() * statList.length)];
+            let standPotential = statList[Math.floor(Math.random() * statList.length)];
+
+            let output = 	"stand user: 「 " + standUser + " 」\n" +
+            "stand name: 「 " + standName + " 」\n" + 
+            "\n" +
+            "power: " + standPower + " '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "durability: " + standDurability + "\n" +
+            "speed: " + standSpeed + " '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "precision: " + standPrecision + "\n" +
+            "range: " + standRange + "  '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. "  + "potential: " + standPotential;
+              
+            alert(output);
+            */
+
+            let standUser = IDoThings.convertToAids(user.id); //convert name to aids form
+            lowered = IDoThings.deletusAcknowledge(text, acknowledge);
+            let standNameArray = lowered.split(" "); //split input string into array
+            let standName = "";
+
+            //api call; create for loop to pass each individual item in standName
+            //each word will return an array of synonyms
+            //if array length is 0, use original word
+            //if array length > 0, return a random result and replace original word
+            //stitch converted words back into standName variable
+            
+            //https://dictionaryapi.com/products/api-collegiate-thesaurus api documentation
+            for (let i = 0; i < standNameArray.length; i++)
+            {
+                let getURL = `https://dictionaryapi.com/api/v3/references/thesaurus/json/${standNameArray[i]}?key=${SETTINGS.THESAURUS_API_TOKEN}`;
+                
+                let jsonReturn;
+
+                try 
+                    {
+                        let response = await axios.get(getURL);
+
+                        if (response) 
+                        {
+                            jsonReturn = JSON.parse(response.data);
+                        } 
+                    }
+                catch (error) 
+                    {
+                        //do nothing but catch the error and proceed
+                    }
+                let synonymsArray = [];
+                
+                if(jsonReturn)
+                {
+                    jsonReturn.forEach((object, index)=>
+                    {
+                        
+                        object.meta.syns.forEach((synsArray)=>
+                        {
+                            synsArray.forEach((synonym)=>
+                            {
+                                synonymsArray.push(synonym);
+
+                            })
+
+                        })
+
+                    })
+                }
+
+
+
+                //need to actually get the real synonyms    
+                if (synonymsArray.length != 0)
+                {
+                    standName = standName + IDoThings.pickRandomElement(synonymsArray) + " ";
+                }
+                else
+                {
+                    standName = standName + standNameArray[i] + " ";
+                }
+
+            }
+
+            
+            standName = trim(standName);
+            let statList = ["A", "B", "C", "D", "E"];
+
+            let standPower = IDoThings.pickRandomElement(statList);
+            let standSpeed = IDoThings.pickRandomElement(statList);
+            let standRange = IDoThings.pickRandomElement(statList);
+            let standDurability = IDoThings.pickRandomElement(statList);
+            let standPrecision = IDoThings.pickRandomElement(statList);
+            let standPotential = IDoThings.pickRandomElement(statList);
+            
+            let output = 	"stand user: 「 " + standUser + " 」\n" +
+                            "stand name: 「 " + standName + " 」\n" + 
+                            "\n" +
+                            "power: [" + standPower + "] '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "durability: [" + standDurability + "]\n" +
+                            "speed: [" + standSpeed + "] '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "precision: [" + standPrecision + "]\n" +
+                            "range: [" + standRange + "]  '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. "  + "potential: [" + standPotential + "]";
+            
+            post.message = output;
+
+            return post;
+        }
+    }
+
+    
 }
 
 module.exports = Logan;
