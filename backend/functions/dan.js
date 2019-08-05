@@ -13,7 +13,6 @@ class Dan {
         let lowered = text.toLowerCase()
         if (lowered.includes(acknowledge)){
             post.message = "thanks dad"
-            return post.message
             return post;
         }
     }
