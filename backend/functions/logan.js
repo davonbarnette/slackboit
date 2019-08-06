@@ -156,7 +156,7 @@ class Logan {
                 let getURL = `https://dictionaryapi.com/api/v3/references/thesaurus/json/${standNameArray[i]}?key=${SETTINGS.THESAURUS_API_TOKEN}`;
                 
                 let jsonReturn;
-                /*
+                
                 try 
                     {
                         let response = await axios.get(getURL);
@@ -168,18 +168,9 @@ class Logan {
                     }
                 catch (error) 
                     {
-                        post.message = "standboit   A N G E R Y";
-                        return post;
+                        
                     }
-                */
 
-                let response = await axios.get(getURL);
-
-                if (response) 
-                {
-                    jsonReturn = response.data;
-                } 
-                
                 let synonymsArray = [];
                 
                 if(jsonReturn)
@@ -205,7 +196,7 @@ class Logan {
                 {
                     standName = standName + IDoThings.pickRandomElement(synonymsArray) + " ";
                 }
-                else
+                else if (!jsonreturn)
                 {
                     standName = standName + "{" + standNameArray[i] + "} ";
                 }
