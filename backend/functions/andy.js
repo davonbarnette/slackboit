@@ -1,7 +1,7 @@
 const Store = require("../store");
 const IDoThings = require("../utils/idothings");
 const ToBeFairService = require("../services/tbf_service");
-const axios = require('axios');
+const axios = require("axios");
 
 class Andy {
   //Post a new example function below this line:
@@ -95,11 +95,11 @@ class Andy {
 
     const acknowledge = "asciiboit ";
 
-    let lowered = text.toLowerCase();
+    let lowered = text;
 
     if (lowered.startsWith(acknowledge)) {
       lowered = IDoThings.deletusAcknowledge(text, acknowledge);
-      let encodeBoit = encodeURIComponent(text);
+      let encodeBoit = encodeURIComponent(lowered);
       let asciiURL = `http://artii.herokuapp.com/make?text=${encodeBoit}`;
       let asciiReturn = "u suck";
 
