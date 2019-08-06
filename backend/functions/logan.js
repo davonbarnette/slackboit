@@ -157,20 +157,21 @@ class Logan {
                 
                 let jsonReturn;
 
-                try 
-                    {
+                //try 
+                    //{
                         let response = await axios.get(getURL);
 
                         if (response) 
                         {
                             jsonReturn = response.data;
                         } 
-                    }
-                catch (error) 
-                    {
-                        post.message = "standboit   A N G E R Y";
-                        return post;
-                    }
+                    //}
+                //catch (error) 
+                    //{
+                        //post.message = "standboit   A N G E R Y";
+                        //return post;
+                        //doesn't actually return anything hmmmm
+                    //}
                 let synonymsArray = [];
                 
                 if(jsonReturn)
@@ -217,9 +218,9 @@ class Logan {
             let output = 	"stand user: 「 " + standUser + " 」\n" +
                             "stand name: 「 " + standName + " 」\n" + 
                             "\n" +
-                            "power: [" + standPower + "] '``'-.,_,.- ゴゴゴゴ _,.-'``'-.,. " + "durability: [" + standDurability + "]\n" +
-                            "speed: [" + standSpeed + "] '``'-.,_,.- ゴゴゴゴ _,.-'``'-.,_ " + "precision: [" + standPrecision + "]\n" +
-                            "range: [" + standRange + "]  '``'-.,_,.- ゴゴゴゴ _,.-'``'-.,_ "  + "potential: [" + standPotential + "]";
+                            "power: [" + standPower + "] -.,_,.-'` ゴゴゴゴ ,.-'`'-. " + "durability: [" + standDurability + "]\n" +
+                            "speed: [" + standSpeed + "] -.,_,.-'` ゴゴゴゴ ,.-'`'-. " + "precision: [" + standPrecision + "]\n" +
+                            "range: [" + standRange + "]  -.,_,.-'` ゴゴゴゴ ,.-'`'-. "  + "potential: [" + standPotential + "]";
             
             post.message = output;
 
