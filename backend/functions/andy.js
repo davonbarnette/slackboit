@@ -98,7 +98,7 @@ class Andy {
 
     if (lowered.startsWith(acknowledge)) {
       lowered = IDoThings.deletusAcknowledge(text, acknowledge);
-      let encodeBoit = encodeURIComponent(lowered);
+      let encodeBoit = encodeURIComponent(text);
       let asciiURL = `http://artii.herokuapp.com/make?text=${encodeBoit}`;
       let asciiReturn = "u suck";
 

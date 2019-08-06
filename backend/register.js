@@ -1,10 +1,10 @@
-const Yeetus = require('./functions/yeetus');
-const Dan = require('./functions/dan');
-const Andy = require('./functions/andy');
-const Burtle = require('./functions/burtle');
-const James = require('./functions/james');
-const Logan = require('./functions/logan');
-const Meghoit = require('./functions/meghoon');
+const Yeetus = require("./functions/yeetus");
+const Dan = require("./functions/dan");
+const Andy = require("./functions/andy");
+const Burtle = require("./functions/burtle");
+const James = require("./functions/james");
+const Logan = require("./functions/logan");
+const Meghoit = require("./functions/meghoon");
 /*
  * This file is where you'll register all of your functions. At the very least, there are 3 things you need to have in
  * your object: description, command, and function. The rest are optional, but that may change in the future. You can also
@@ -17,207 +17,225 @@ const Meghoit = require('./functions/meghoon');
  */
 
 const Register = [
+  // *** Davon *** //
+  {
+    acknowledge: "slackboit ",
+    name: "Crime Alert",
+    command: "Deleting a message",
+    description:
+      "Slackboit helps fight crime. If you or a loved one had their message deleted, he will tell you.",
+    function: Yeetus.crimeAlert
+  },
+  {
+    acknowledge: "rechain the boit",
+    name: "SlackboitRechained",
+    command: "rechain the boit [TIME IN SECONDS]",
+    description:
+      "SlackboitUnchained becomes chained once more... smdh. Passing in no time defaults to 60 seconds.",
+    function: Yeetus.rechainTheBoit
+  },
+  {
+    acknowledge: "slackboit updeetus the yeetus",
+    name: "Updeetus the Yeetus",
+    command: "slackboit updeetus the yeetus",
+    description: "Slackboit updates all the boints in the chat",
+    function: Yeetus.updeetusThatYeetus
+  },
+  {
+    acknowledge: "slackboit gimme tendies",
+    name: "Refresh Crypto Listings (Top 100)",
+    command: "slackboit gimme tendies",
+    description:
+      "Rate limited on our Tendies API, so use this to refresh the top 100 tendie list",
+    function: Yeetus.refreshCrypto
+  },
+  {
+    acknowledge: "slackboit what is ",
+    name: "Get Crypto",
+    command: "slackboit what is [CRYPTO SYMBOL]",
+    description: "Money at full autismo",
+    function: Yeetus.getCrypto
+  },
+  {
+    acknowledge: "slackboit お前はもう死んでいる",
+    name: "Kill the bnoit",
+    command: "slackboit お前はもう死んでいる",
+    description: "Kill the boit for 60 seconds",
+    function: Yeetus.omaeWaMouShindeiru
+  },
+  {
+    acknowledge: "slackboit ",
+    name: "The Original Meme",
+    command: "slackboit [PHRASE]",
+    description: "Spongeboit",
+    function: Yeetus.spongebobMeme
+  },
+  {
+    acknowledge: "imsorryslackboit ",
+    name: "I'm Sorry Jon",
+    command: "imsorryslackboit [PHRASE]",
+    description: "Slackboit from the void",
+    function: Yeetus.imSorryJon
+  },
+  {
+    acknowledge: "lmgtfy ",
+    name: "Googley Woogley",
+    command: "lmgtfy [PHRASE]",
+    description: "Slackboit shows you how to google",
+    function: Yeetus.lmgtfyBitch
+  },
 
-    // *** Davon *** //
-    {
-        acknowledge: 'slackboit ',
-        name: 'Crime Alert',
-        command: 'Deleting a message',
-        description: 'Slackboit helps fight crime. If you or a loved one had their message deleted, he will tell you.',
-        function: Yeetus.crimeAlert,
-    },
-    {
-        acknowledge: 'rechain the boit',
-        name: 'SlackboitRechained',
-        command: 'rechain the boit [TIME IN SECONDS]',
-        description: 'SlackboitUnchained becomes chained once more... smdh. Passing in no time defaults to 60 seconds.',
-        function: Yeetus.rechainTheBoit,
-    },
-    {
-        acknowledge: 'slackboit updeetus the yeetus',
-        name: 'Updeetus the Yeetus',
-        command: 'slackboit updeetus the yeetus',
-        description: 'Slackboit updates all the boints in the chat',
-        function: Yeetus.updeetusThatYeetus,
-    },
-    {
-        acknowledge: 'slackboit gimme tendies',
-        name: "Refresh Crypto Listings (Top 100)",
-        command: 'slackboit gimme tendies',
-        description: "Rate limited on our Tendies API, so use this to refresh the top 100 tendie list",
-        function: Yeetus.refreshCrypto,
-    },
-    {
-        acknowledge: 'slackboit what is ',
-        name: "Get Crypto",
-        command: 'slackboit what is [CRYPTO SYMBOL]',
-        description: 'Money at full autismo',
-        function: Yeetus.getCrypto,
-    },
-    {
-        acknowledge: 'slackboit お前はもう死んでいる',
-        name: "Kill the bnoit",
-        command: 'slackboit お前はもう死んでいる',
-        description: "Kill the boit for 60 seconds",
-        function: Yeetus.omaeWaMouShindeiru,
-    },
-    {
-        acknowledge: 'slackboit ',
-        name: 'The Original Meme',
-        command: 'slackboit [PHRASE]',
-        description: 'Spongeboit',
-        function: Yeetus.spongebobMeme,
-    },
-    {
-        acknowledge: 'imsorryslackboit ',
-        name: "I'm Sorry Jon",
-        command: 'imsorryslackboit [PHRASE]',
-        description: 'Slackboit from the void',
-        function: Yeetus.imSorryJon,
-    },
-    {
-        acknowledge: 'lmgtfy ',
-        name: "Googley Woogley",
-        command: 'lmgtfy [PHRASE]',
-        description: 'Slackboit shows you how to google',
-        function: Yeetus.lmgtfyBitch,
-    },
+  // *** Dan *** //
+  {
+    acknowledge: "ahoy slackboit",
+    name: "Piroit",
+    command: "ahoy slackboit",
+    description: "Random... pirata phrases?",
+    function: Dan.ahoit
+  },
+  {
+    acknowledge: "slackboit,",
+    name: "Eight Ball Boit",
+    command: "slackboit, [QUESTION]?",
+    description: "Slackboit gives his opinion and tells the future.",
+    function: Dan.eightBallBoit
+  },
+  {
+    acknowledge: "good boit",
+    name: "Good Boit",
+    command: "good boit",
+    description: "Thanks daddy",
+    function: Dan.goodBoit
+  },
+  {
+    acknowledge: ["good morning", "morno", "hello"],
+    name: "Greetings",
+    command: ["good morning", "morno", "hello"],
+    description: "Welcome",
+    function: Dan.greetingBoit
+  },
+  {
+    acknowledge: ["kawaiiboit", "kawaiiboit act 2", "kawaiiboit act 3"],
+    name: "hewwo :3",
+    command: [
+      "kawaiiboit [PHRASE]",
+      "kawaiiboit act 2 [PHRASE]",
+      "kawaiiboit act 3 [PHRASE]"
+    ],
+    description: "Forgive me master...",
+    function: Dan.uWu__Boit
+  },
+  //WRONG AREA DANIEL KUN
+  {
+    acknowledge: "リマインダー : Happy 420",
+    name: "Slackboit parties with us",
+    command: "リマインダー : Happy 420",
+    description: "Slackboit parties with us",
+    function: Dan.partyBoit
+  },
+  //WRONG AREA DANIEL KUN
+  {
+    acknowledge: "gifboit",
+    name: "Slackboit, a gif please",
+    command: "gifboit [WORD OR PHRASE]",
+    description:
+      "Slackboit hands you the perfect gif based on your search terms. If you specify nothing, good luck",
+    function: Dan.giffyBoiteru
+  },
+  // *** Andy *** //
+  {
+    acknowledge: ["to be fair"],
+    name: "To Be Fair Counter",
+    command: ["to be fair"],
+    description: "Slackboit counts the amount of To Be Fairs ever said",
+    function: Andy.tobefair
+  },
+  {
+    acknowledge: ["technically"],
+    name: "Technically Matrix Boit",
+    command: ["technically"],
+    description:
+      "Slackboit repeats whenever someone says technically with matrix icon",
+    function: Andy.technically
+  },
 
+  {
+    acknowledge: ["lennyboit"],
+    name: "lenny face",
+    command: "lennyboit",
+    description: "Slackboit lennyfaces us",
+    function: Andy.lennyboit
+  },
 
-    // *** Dan *** //
-    {
-        acknowledge: 'ahoy slackboit',
-        name: "Piroit",
-        command: 'ahoy slackboit',
-        description: "Random... pirata phrases?",
-        function: Dan.ahoit,
-    },
-    {
-        acknowledge: 'slackboit,',
-        name: "Eight Ball Boit",
-        command: 'slackboit, [QUESTION]?',
-        description: "Slackboit gives his opinion and tells the future.",
-        function: Dan.eightBallBoit,
-    },
-    {
-        acknowledge: 'good boit',
-        name: "Good Boit",
-        command: 'good boit',
-        description: "Thanks daddy",
-        function: Dan.goodBoit,
-    },
-    {
-        acknowledge: ["good morning", "morno", "hello"],
-        name: "Greetings",
-        command: ["good morning", "morno", "hello"],
-        description: "Welcome",
-        function: Dan.greetingBoit,
-    },
-    {
-        acknowledge: ['kawaiiboit', 'kawaiiboit act 2', 'kawaiiboit act 3'],
-        name: "hewwo :3",
-        command: ['kawaiiboit [PHRASE]', 'kawaiiboit act 2 [PHRASE]', 'kawaiiboit act 3 [PHRASE]'],
-        description: "Forgive me master...",
-        function: Dan.uWu__Boit,
-    },
-    //WRONG AREA DANIEL KUN
-    {
-        acknowledge: 'リマインダー : Happy 420',
-        name: "Slackboit parties with us",
-        command: 'リマインダー : Happy 420',
-        description: "Slackboit parties with us",
-        function: Dan.partyBoit,
-    },
-    //WRONG AREA DANIEL KUN
-    {
-        acknowledge: 'gifboit',
-        name: "Slackboit, a gif please",
-        command: 'gifboit [WORD OR PHRASE]',
-        description: "Slackboit hands you the perfect gif based on your search terms. If you specify nothing, good luck",
-        function: Dan.giffyBoiteru,
-    },
-    // *** Andy *** //
-    {
-        acknowledge: ["to be fair"],
-        name: "To Be Fair Counter",
-        command: ["to be fair"],
-        description: "Slackboit counts the amount of To Be Fairs ever said",
-        function: Andy.tobefair,
-    },
-    {
-        acknowledge: ["technically"],
-        name: "Technically Matrix Boit",
-        command: ["technically"],
-        description: "Slackboit repeats whenever someone says technically with matrix icon",
-        function: Andy.technically,
-    },
+  {
+    acknowledge: "asciiboit",
+    name: "Ascii Text Boit",
+    command: "asciiboit",
+    description:
+      "Slackboit will turn your ugly sinful text into beautiful christian ASCII",
+    function: Andy.asciiBoit
+  },
 
-    {
-        acknowledge: ['lennyboit'],
-        name: "lenny face",
-        command: 'lennyboit',
-        description: "Slackboit lennyfaces us",
-        function: Andy.lennyboit,
-    },
+  // *** Burtle *** //
+  {
+    acknowledge: "smonk or dronk?",
+    name: "boited up",
+    command: "smonk or dronk?",
+    description: "Slackboit will tell you how to get fucked up",
+    function: Burtle.sobrietyBoit
+  },
 
+  // *** James *** //
+  {
+    acknowledge: "feed me boit",
+    name: "Food Choices",
+    command:
+      "feed me boit OR feed me boit [location] - Database functions // add|[name]|[type of place]|[location] OR del|[name]|[location]",
+    description:
+      "Slackboit will present to you a choice for food randomly from his list of choices. Please follow the comman above exactly, or else...",
+    function: James.fatBoit
+  },
+  {
+    acknowledge: "mapboit ",
+    name: "Where the boit is this?",
+    command: "mapboit [food choice]",
+    description: "Ask boit where something is and he will let you know.",
+    function: James.whereFoodBoit
+  },
+  {
+    acknowledge: "urbanboit ",
+    name: "UrbanBoit",
+    command: "urbanboit [word]",
+    description:
+      "Looking for the real definition of a word? Urbanboit can assist with that.",
+    function: James.urbanBoit
+  },
 
-    // *** Burtle *** //
-    {
-        acknowledge: 'smonk or dronk?',
-        name: "boited up",
-        command: 'smonk or dronk?',
-        description: "Slackboit will tell you how to get fucked up",
-        function: Burtle.sobrietyBoit,
-    },
+  // *** Logan *** //
+  {
+    acknowledge: "rollboit d",
+    name: "dice slinger 3000",
+    command: "rollboit d[number]",
+    description: "Choose your dice and roll it.",
+    function: Logan.rollBoit
+  },
 
-    // *** James *** //
-    {
-        acknowledge: 'feed me boit',
-        name: "Food Choices",
-        command: 'feed me boit OR feed me boit [location] - Database functions // add|[name]|[type of place]|[location] OR del|[name]|[location]',
-        description: "Slackboit will present to you a choice for food randomly from his list of choices. Please follow the comman above exactly, or else...",
-        function: James.fatBoit,
-    },
-    {
-        acknowledge: 'mapboit ',
-        name: "Where the boit is this?",
-        command: 'mapboit [food choice]',
-        description: "Ask boit where something is and he will let you know.",
-        function: James.whereFoodBoit,
-    },
-    {
-        acknowledge: 'urbanboit ',
-        name: "UrbanBoit",
-        command: 'urbanboit [word]',
-        description: "Looking for the real definition of a word? Urbanboit can assist with that.",
-        function: James.urbanBoit,
-    },
+  {
+    acknowledge: "standboit ",
+    name: "stand generator",
+    command: "standboit [input string]",
+    description: "generate stand name & stats using input string",
+    function: Logan.standBoit
+  },
 
-    // *** Logan *** //
-    {
-        acknowledge: 'rollboit d',
-        name: "dice slinger 3000",
-        command: 'rollboit d[number]',
-        description: "Choose your dice and roll it.",
-        function: Logan.rollBoit,
-    },
-
-    {
-        acknowledge: 'standboit ',
-        name: "stand generator",
-        command: 'standboit [input string]',
-        description: "generate stand name & stats using input string",
-        function: Logan.standBoit,
-    },
-
-    // *** Meghoon *** //
-    {
-        acknowledge: 'feed me',
-        name: 'Feed Meghoon',
-        command: 'feed me',
-        description: 'Can only be triggered by the meghoit herself',
-        function: Meghoit.ketoizeMe,
-    },
+  // *** Meghoon *** //
+  {
+    acknowledge: "feed me",
+    name: "Feed Meghoon",
+    command: "feed me",
+    description: "Can only be triggered by the meghoit herself",
+    function: Meghoit.ketoizeMe
+  }
 ];
 
 module.exports = Register;
