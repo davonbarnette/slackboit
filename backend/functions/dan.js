@@ -1,3 +1,4 @@
+const axios = require('axios');
 const IDoThings = require('../utils/idothings');
 
 class Dan {
@@ -147,7 +148,6 @@ class Dan {
                 }
             }else if(level === 1) {
                 text = lowered.substring(acknowledge[1].length + 1)
-                uWuString = IDoThings.pickRandomElement(heh) + ' '
             }else if(level === 2) {
                 text = lowered.substring(acknowledge[2].length + 1)
                 uWuString = IDoThings.pickRandomElement(heh) + ' '
@@ -275,6 +275,891 @@ class Dan {
             post.message = ':snoop:'
             return post
         }
+    }
+
+    static async giffyBoiteru(bot, user, slackMassage) {
+        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
+        /*
+        BEGONE THOT
+                                 BEGONE THOT
+                                BEGONE THOT
+                               BEGONE THOT
+                              BEGONE THOT
+                             BEGONE THOT
+                            BEGONE THOT
+                           BEGONE THOT
+                          BEGONE THOT
+                         BEGONE THOT
+                        BEGONE THOT
+                       BEGONE THOT
+                      BEGONE THOT
+                     BEGONE THOT
+                    BEGONE THOT
+                   BEGONE THOT
+                  BEGONE THOT
+                 BEGONE THOT
+                BEGONE THOT
+               BEGONE THOT
+              BEGONE THOT
+             BEGONE THOT
+            BEGONE THOT
+           BEGONE THOT
+          BEGONE THOT
+         BEGONE THOT
+        BEGONE THOT
+       BEGONE THOT
+      BEGONE THOT
+     BEGONE THOT
+    BEGONE THOT
+   BEGONE THOT
+  BEGONE THOT
+ BEGONE THOT
+BEGONE THOT
+ BEGONE THOT
+  BEGONE THOT
+   BEGONE THOT
+    BEGONE THOT
+     BEGONE THOT
+    B EGONE THOT
+   B  EGONE THOT
+  B   EGONE THOT
+ B    EGONE THOT
+B     EGONE THOT
+B    E GONE THOT
+B   E  GONE THOT
+B  E   GONE THOT
+B E    GONE THOT
+BE     GONE THOT
+BE    G ONE THOT
+BE   G  ONE THOT
+BE  G   ONE THOT
+BE G    ONE THOT
+BEG     ONE THOT
+BEG    O NE THOT
+BEG   O  NE THOT
+BEG  O   NE THOT
+BEG O    NE THOT
+BEGO     NE THOT
+BEGO    N E THOT
+BEGO   N  E THOT
+BEGO  N   E THOT
+BEGO N    E THOT
+BEGON     E THOT
+BEGON    E  THOT
+BEGON   E   THOT
+BEGON  E    THOT
+BEGON E     THOT
+BEGONE      THOT
+BEGONE      THOT
+BEGONE      THOT
+BEGONE      THOT
+BEGONE      THOT
+BEGONE      THOT
+BEGONE     T HOT
+BEGONE    T  HOT
+BEGONE   T   HOT
+BEGONE  T    HOT
+BEGONE T     HOT
+BEGONE T    H OT
+BEGONE T   H  OT
+BEGONE T  H   OT
+BEGONE T H    OT
+BEGONE TH     OT
+BEGONE TH    O T
+BEGONE TH   O  T
+BEGONE TH  O   T
+BEGONE TH O    T
+BEGONE THO     T
+BEGONE THO    T
+BEGONE THO   T
+BEGONE THO  T
+BEGONE THO T
+BEGONE THOT
+BEGONE THOT
+TBEGONE THO
+OTBEGONE TH
+HOTBEGONE T
+THOTBEGONE
+ THOTBEGONE
+E THOTBEGON
+NE THOTBEGO
+ONE THOTBEG
+GONE THOTBE
+EGONE THOTB
+BEGONE THOT
+TBEGONE THO
+OTBEGONE TH
+HOTBEGONE T
+THOTBEGONE
+ THOTBEGONE
+E THOTBEGON
+NE THOTBEGO
+ONE THOTBEG
+GONE THOTBE
+EGONE THOTB
+BEGONE THOT
+TBEGONE THO
+OTBEGONE TH
+HOTBEGONE T
+THOTBEGONE
+ THOTBEGONE
+E THOTBEGON
+NE THOTBEGO
+ONE THOTBEG
+GONE THOTBE
+EGONE THOTB
+BEGONE THOT
+BEGONE THOT
+ BEGONE THOT
+  BEGONE THOT
+   BEGONE THOT
+    BEGONE THOT
+     BEGONE THOT
+      BEGONE THOT
+       BEGONE THOT
+        BEGONE THOT
+         BEGONE THOT
+          BEGONE THOT
+         BEGONE   THOT
+        BEGONE     THOT
+       BEGONE       THOT
+      BEGONE         THOT
+     BEGONE           THOT
+    BEGONE             THOT
+   BEGONE               THOT
+  BEGONE                 THOT
+ BEGONE                   THOT
+BEGONE                     THOT
+ BEGONE                   THOT
+  BEGONE                 THOT
+   BEGONE               THOT
+    BEGONE             THOT
+     BEGONE           THOT
+      BEGONE         THOT
+       BEGONE       THOT
+        BEGONE     THOT
+         BEGONE   THOT
+          BEGONE THOT
+           BEGON THOT
+            BEGO THOT
+             BEG THOT
+              BE THOT
+               B THOT
+                THOTE
+               THOTNE
+              THOTONE
+             THOTGONE
+            THOTEGONE
+           THOTBEGONE
+          THOT  BEGONE
+         THOT    BEGONE
+        THOT      BEGONE
+       THOT        BEGONE
+      THOT          BEGONE
+     THOT            BEGONE
+    THOT              BEGONE
+   THOT                BEGONE
+  THOT                  BEGONE
+ THOT                    BEGONE
+  THOT                  BEGONE
+   THOT                BEGONE
+    THOT              BEGONE
+     THOT            BEGONE
+      THOT          BEGONE
+       THOT        BEGONE
+        THOT      BEGONE
+         THOT    BEGONE
+          THOT  BEGONE
+           THOTBEGONE
+            THOBEGONE
+             THBEGONE
+              TBEGONE
+               BEGONE
+               BEGONE
+              BEGONET
+             BEGONEOT
+            BEGONEHOT
+           BEGONETHOT
+          BEGONE THOT
+         BEGONE   THOT
+        BEGONE     THOT
+       BEGONE       THOT
+      BEGONE         THOT
+     BEGONE           THOT
+    BEGONE             THOT
+   BEGONE               THOT
+  BEGONE                 THOT
+ BEGONE                   THOT
+BEGONE                     THOT
+ BEGONE                   THOT
+  BEGONE                 THOT
+   BEGONE               THOT
+    BEGONE             THOT
+     BEGONE           THOT
+      BEGONE         THOT
+       BEGONE       THOT
+        BEGONE     THOT
+         BEGONE   THOT
+          BEGONE THOT
+           BEGON THOT
+            BEGO THOT
+             BEG THOT
+              BE THOT
+               B THOT
+                THOTE
+               THOTNE
+              THOTONE
+             THOTGONE
+            THOTEGONE
+           THOTBEGONE
+          THOT  BEGONE
+         THOT    BEGONE
+        THOT      BEGONE
+       THOT        BEGONE
+      THOT          BEGONE
+     THOT            BEGONE
+    THOT              BEGONE
+   THOT                BEGONE
+  THOT                  BEGONE
+ THOT                    BEGONE
+  THOT                  BEGONE
+   THOT                BEGONE
+    THOT              BEGONE
+     THOT            BEGONE
+      THOT          BEGONE
+       THOT        BEGONE
+        THOT      BEGONE
+         THOT    BEGONE
+          THOT  BEGONE
+           THOTBEGONE
+            THOBEGONE
+             THBEGONE
+              TBEGONE
+               BEGONE
+               BEGONE
+              BEGONET
+             BEGONEOT
+            BEGONEHOT
+           BEGONETHOT
+          BEGONE THOT
+         BEGONE   THOT
+        BEGONE     THOT
+       BEGONE       THOT
+      BEGONE         THOT
+     BEGONE           THOT
+    BEGONE             THOT
+   BEGONE               THOT
+  BEGONE                 THOT
+ BEGONE                   THOT
+BEGONE                     THOT
+ BEGONE                   THOT
+  BEGONE                 THOT
+   BEGONE               THOT
+    BEGONE             THOT
+     BEGONE           THOT
+      BEGONE         THOT
+       BEGONE       THOT
+        BEGONE     THOT
+         BEGONE   THOT
+          BEGONE THOT
+           BEGON THOT
+            BEGO THOT
+             BEG THOT
+              BE THOT
+               B THOT
+                THOTE
+               THOTNE
+              THOTONE
+             THOTGONE
+            THOTEGONE
+           THOTBEGONE
+          THOT  BEGONE
+         THOT    BEGONE
+        THOT      BEGONE
+       THOT        BEGONE
+      THOT          BEGONE
+     THOT            BEGONE
+    THOT              BEGONE
+   THOT                BEGONE
+  THOT                  BEGONE
+ THOT                    BEGONE
+  THOT                  BEGONE
+   THOT                BEGONE
+    THOT              BEGONE
+     THOT            BEGONE
+      THOT          BEGONE
+       THOT        BEGONE
+        THOT      BEGONE
+         THOT    BEGONE
+          THOT  BEGONE
+           THOTBEGONE
+            THOBEGONE
+             THBEGONE
+              TBEGONE
+               BEGONE
+               BEGONE
+              BEGONET
+             BEGONEOT
+            BEGONEHOT
+           BEGONETHOT
+          BEGONE THOT
+         BEGONE   THOT
+        BEGONE     THOT
+       BEGONE       THOT
+      BEGONE         THOT
+     BEGONE           THOT
+    BEGONE             THOT
+   BEGONE               THOT
+  BEGONE                 THOT
+ BEGONE                   THOT
+BEGONE                     THOT
+ BEGONE                   THOT
+  BEGONE                 THOT
+   BEGONE               THOT
+    BEGONE             THOT
+     BEGONE           THOT
+      BEGONE         THOT
+       BEGONE       THOT
+        BEGONE     THOT
+         BEGONE   THOT
+          BEGONE THOT
+           BEGON THOT
+            BEGO THOT
+             BEG THOT
+              BE THOTBEGONE THOT
+                                 BEGONE THOT
+                                BEGONE THOT
+                               BEGONE THOT
+                              BEGONE THOT
+                             BEGONE THOT
+                            BEGONE THOT
+                           BEGONE THOT
+                          BEGONE THOT
+                         BEGONE THOT
+                        BEGONE THOT
+                       BEGONE THOT
+                      BEGONE THOT
+                     BEGONE THOT
+                    BEGONE THOT
+                   BEGONE THOT
+                  BEGONE THOT
+                 BEGONE THOT
+                BEGONE THOT
+               BEGONE THOT
+              BEGONE THOT
+             BEGONE THOT
+            BEGONE THOT
+           BEGONE THOT
+          BEGONE THOT
+         BEGONE THOT
+        BEGONE THOT
+       BEGONE THOT
+      BEGONE THOT
+     BEGONE THOT
+    BEGONE THOT
+   BEGONE THOT
+  BEGONE THOT
+ BEGONE THOT
+BEGONE THOT
+ BEGONE THOT
+  BEGONE THOT
+   BEGONE THOT
+    BEGONE THOT
+     BEGONE THOT
+    B EGONE THOT
+   B  EGONE THOT
+  B   EGONE THOT
+ B    EGONE THOT
+B     EGONE THOT
+B    E GONE THOT
+B   E  GONE THOT
+B  E   GONE THOT
+B E    GONE THOT
+BE     GONE THOT
+BE    G ONE THOT
+BE   G  ONE THOT
+BE  G   ONE THOT
+BE G    ONE THOT
+BEG     ONE THOT
+BEG    O NE THOT
+BEG   O  NE THOT
+BEG  O   NE THOT
+BEG O    NE THOT
+BEGO     NE THOT
+BEGO    N E THOT
+BEGO   N  E THOT
+BEGO  N   E THOT
+BEGO N    E THOT
+BEGON     E THOT
+BEGON    E  THOT
+BEGON   E   THOT
+BEGON  E    THOT
+BEGON E     THOT
+BEGONE      THOT
+BEGONE      THOT
+BEGONE      THOT
+BEGONE      THOT
+BEGONE      THOT
+BEGONE      THOT
+BEGONE     T HOT
+BEGONE    T  HOT
+BEGONE   T   HOT
+BEGONE  T    HOT
+BEGONE T     HOT
+BEGONE T    H OT
+BEGONE T   H  OT
+BEGONE T  H   OT
+BEGONE T H    OT
+BEGONE TH     OT
+BEGONE TH    O T
+BEGONE TH   O  T
+BEGONE TH  O   T
+BEGONE TH O    T
+BEGONE THO     T
+BEGONE THO    T
+BEGONE THO   T
+BEGONE THO  T
+BEGONE THO T
+BEGONE THOT
+BEGONE THOT
+TBEGONE THO
+OTBEGONE TH
+HOTBEGONE T
+THOTBEGONE
+ THOTBEGONE
+E THOTBEGON
+NE THOTBEGO
+ONE THOTBEG
+GONE THOTBE
+EGONE THOTB
+BEGONE THOT
+TBEGONE THO
+OTBEGONE TH
+HOTBEGONE T
+THOTBEGONE
+ THOTBEGONE
+E THOTBEGON
+NE THOTBEGO
+ONE THOTBEG
+GONE THOTBE
+EGONE THOTB
+BEGONE THOT
+TBEGONE THO
+OTBEGONE TH
+HOTBEGONE T
+THOTBEGONE
+ THOTBEGONE
+E THOTBEGON
+NE THOTBEGO
+ONE THOTBEG
+GONE THOTBE
+EGONE THOTB
+BEGONE THOT
+BEGONE THOT
+ BEGONE THOT
+  BEGONE THOT
+   BEGONE THOT
+    BEGONE THOT
+     BEGONE THOT
+      BEGONE THOT
+       BEGONE THOT
+        BEGONE THOT
+         BEGONE THOT
+          BEGONE THOT
+         BEGONE   THOT
+        BEGONE     THOT
+       BEGONE       THOT
+      BEGONE         THOT
+     BEGONE           THOT
+    BEGONE             THOT
+   BEGONE               THOT
+  BEGONE                 THOT
+ BEGONE                   THOT
+BEGONE                     THOT
+ BEGONE                   THOT
+  BEGONE                 THOT
+   BEGONE               THOT
+    BEGONE             THOT
+     BEGONE           THOT
+      BEGONE         THOT
+       BEGONE       THOT
+        BEGONE     THOT
+         BEGONE   THOT
+          BEGONE THOT
+           BEGON THOT
+            BEGO THOT
+             BEG THOT
+              BE THOT
+               B THOT
+                THOTE
+               THOTNE
+              THOTONE
+             THOTGONE
+            THOTEGONE
+           THOTBEGONE
+          THOT  BEGONE
+         THOT    BEGONE
+        THOT      BEGONE
+       THOT        BEGONE
+      THOT          BEGONE
+     THOT            BEGONE
+    THOT              BEGONE
+   THOT                BEGONE
+  THOT                  BEGONE
+ THOT                    BEGONE
+  THOT                  BEGONE
+   THOT                BEGONE
+    THOT              BEGONE
+     THOT            BEGONE
+      THOT          BEGONE
+       THOT        BEGONE
+        THOT      BEGONE
+         THOT    BEGONE
+          THOT  BEGONE
+           THOTBEGONE
+            THOBEGONE
+             THBEGONE
+              TBEGONE
+               BEGONE
+               BEGONE
+              BEGONET
+             BEGONEOT
+            BEGONEHOT
+           BEGONETHOT
+          BEGONE THOT
+         BEGONE   THOT
+        BEGONE     THOT
+       BEGONE       THOT
+      BEGONE         THOT
+     BEGONE           THOT
+    BEGONE             THOT
+   BEGONE               THOT
+  BEGONE                 THOT
+ BEGONE                   THOT
+BEGONE                     THOT
+ BEGONE                   THOT
+  BEGONE                 THOT
+   BEGONE               THOT
+    BEGONE             THOT
+     BEGONE           THOT
+      BEGONE         THOT
+       BEGONE       THOT
+        BEGONE     THOT
+         BEGONE   THOT
+          BEGONE THOT
+           BEGON THOT
+            BEGO THOT
+             BEG THOT
+              BE THOT
+               B THOT
+                THOTE
+               THOTNE
+              THOTONE
+             THOTGONE
+            THOTEGONE
+           THOTBEGONE
+          THOT  BEGONE
+         THOT    BEGONE
+        THOT      BEGONE
+       THOT        BEGONE
+      THOT          BEGONE
+     THOT            BEGONE
+    THOT              BEGONE
+   THOT                BEGONE
+  THOT                  BEGONE
+ THOT                    BEGONE
+  THOT                  BEGONE
+   THOT                BEGONE
+    THOT              BEGONE
+     THOT            BEGONE
+      THOT          BEGONE
+       THOT        BEGONE
+        THOT      BEGONE
+         THOT    BEGONE
+          THOT  BEGONE
+           THOTBEGONE
+            THOBEGONE
+             THBEGONE
+              TBEGONE
+               BEGONE
+               BEGONE
+              BEGONET
+             BEGONEOT
+            BEGONEHOT
+           BEGONETHOT
+          BEGONE THOT
+         BEGONE   THOT
+        BEGONE     THOT
+       BEGONE       THOT
+      BEGONE         THOT
+     BEGONE           THOT
+    BEGONE             THOT
+   BEGONE               THOT
+  BEGONE                 THOT
+ BEGONE                   THOT
+BEGONE                     THOT
+ BEGONE                   THOT
+  BEGONE                 THOT
+   BEGONE               THOT
+    BEGONE             THOT
+     BEGONE           THOT
+      BEGONE         THOT
+       BEGONE       THOT
+        BEGONE     THOT
+         BEGONE   THOT
+          BEGONE THOT
+           BEGON THOT
+            BEGO THOT
+             BEG THOT
+              BE THOT
+               B THOT
+                THOTE
+               THOTNE
+              THOTONE
+             THOTGONE
+            THOTEGONE
+           THOTBEGONE
+          THOT  BEGONE
+         THOT    BEGONE
+        THOT      BEGONE
+       THOT        BEGONE
+      THOT          BEGONE
+     THOT            BEGONE
+    THOT              BEGONE
+   THOT                BEGONE
+  THOT                  BEGONE
+ THOT                    BEGONE
+  THOT                  BEGONE
+   THOT                BEGONE
+    THOT              BEGONE
+     THOT            BEGONE
+      THOT          BEGONE
+       THOT        BEGONE
+        THOT      BEGONE
+         THOT    BEGONE
+          THOT  BEGONE
+           THOTBEGONE
+            THOBEGONE
+             THBEGONE
+              TBEGONE
+               BEGONE
+               BEGONE
+              BEGONET
+             BEGONEOT
+            BEGONEHOT
+           BEGONETHOT
+          BEGONE THOT
+         BEGONE   THOT
+        BEGONE     THOT
+       BEGONE       THOT
+      BEGONE         THOT
+     BEGONE           THOT
+    BEGONE             THOT
+   BEGONE               THOT
+  BEGONE                 THOT
+ BEGONE                   THOT
+BEGONE                     THOT
+ BEGONE                   THOT
+  BEGONE                 THOT
+   BEGONE               THOT
+    BEGONE             THOT
+     BEGONE           THOT
+      BEGONE         THOT
+       BEGONE       THOT
+        BEGONE     THOT
+         BEGONE   THOT
+          BEGONE THOT
+           BEGON THOT
+            BEGO THOT
+             BEG THOT
+              BE THOT
+               B THOT
+                THOTE
+               THOTNE
+              THOTONE
+             THOTGONE
+            THOTEGONE
+           THOTBEGONE
+          THOT  BEGONE
+         THOT    BEGONE
+        THOT      BEGONE
+       THOT        BEGONE
+      THOT          BEGONE
+     THOT            BEGONE
+    THOT              BEGONE
+   THOT                BEGONE
+  THOT                  BEGONE
+ THOT                    BEGONE
+  THOT                  BEGONE
+   THOT                BEGONE
+    THOT              BEGONE
+     THOT            BEGONE
+      THOT          BEGONE
+       THOT        BEGONE
+        THOT      BEGONE
+         THOT    BEGONE
+          THOT  BEGONE
+           THOTBEGONE
+            THOBEGONE
+             THBEGONE
+              TBEGONE
+               BEGONE
+               BEGONE
+              BEGONET
+             BEGONEOT
+            BEGONEHOT
+           BEGONETHOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+         BEGONE THOT
+        BEGONE THOT
+       BEGONE THOT
+      BEGONE THOT
+     BEGONE THOT
+    BEGONE THOT
+   BEGONE THOT
+  BEGONE THOT
+ BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+ BEGONE THOT
+  BEGONE THOT
+   BEGONE THOT
+    BEGONE THOT
+     BEGONE THOT
+      BEGONE THOT
+       BEGONE THOT
+        BEGONE THOT
+         BEGONE THOT
+               B THOT
+                THOTE
+               THOTNE
+              THOTONE
+             THOTGONE
+            THOTEGONE
+           THOTBEGONE
+          THOT  BEGONE
+         THOT    BEGONE
+        THOT      BEGONE
+       THOT        BEGONE
+      THOT          BEGONE
+     THOT            BEGONE
+    THOT              BEGONE
+   THOT                BEGONE
+  THOT                  BEGONE
+ THOT                    BEGONE
+  THOT                  BEGONE
+   THOT                BEGONE
+    THOT              BEGONE
+     THOT            BEGONE
+      THOT          BEGONE
+       THOT        BEGONE
+        THOT      BEGONE
+         THOT    BEGONE
+          THOT  BEGONE
+           THOTBEGONE
+            THOBEGONE
+             THBEGONE
+              TBEGONE
+               BEGONE
+               BEGONE
+              BEGONET
+             BEGONEOT
+            BEGONEHOT
+           BEGONETHOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+          BEGONE THOT
+         BEGONE THOT
+        BEGONE THOT
+       BEGONE THOT
+      BEGONE THOT
+     BEGONE THOT
+    BEGONE THOT
+   BEGONE THOT
+  BEGONE THOT
+ BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+BEGONE THOT
+*/
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                let lowered = text.toLowerCase()
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                let acknowledge = 'gifboit'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                if (lowered.includes(acknowledge)) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                text = lowered.substring(acknowledge.length + 1)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                let api_key = 'bj0wxDW7G1GEZldQxdU5LuGxCXKGHQQV'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                let url = 'api.giphy.com/v1/gifs/search'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                let gifUrl = 'https://gph.is/1IGK4qV'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                let gif = await axios.get(url, {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    params: {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        'api_key': api_key,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        'q': text
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                })
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                if(gif) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    if(gif.data.meta.status == 200) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        gifUrl = IDoThings.pickRandomElement(gif.data.data).bitly_gif_url
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                let post = {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    message: null,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    params: {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                icon_url:IDoThings.getImageURL('slackboit_final_eightboit.png'),
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                attachments: [{"title": text, "image_url": gifUrl}]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            },
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    spongebobify: false
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                return post
     }
 }
 
