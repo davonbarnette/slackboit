@@ -1,6 +1,7 @@
 const Store = require('../store');
 const IDoThings = require('../utils/idothings');
 const EatMeDaddyService = require('../services/eat_me_daddy_service');
+const axios = require('axios');
 
 class James {
     //Post a new example function below this line:
@@ -52,29 +53,6 @@ class James {
             return bot.postMessage(channel,`Today I think you should try, ${choice}`, {icon_url});
         }
     }*/
-
-        /* Don't you touch this 
-        static tourettesBoit(bot, storedUser, text, channel){
-            let x = [1,2,3,4,5];
-            let sheet = [
-                "beep",
-                "boop",
-                "bop",
-                "wee woo",
-                "splap",
-                "skrrttt",
-                "yert",
-                "zoink",
-                "doink",
-                "bloop",
-            ];
-            const sheets = IDoThings.pickRandomElement(sheet);
-            //const icon_url = IDoThings.getImageURL('');
-            let y = IDoThings.pickRandomElement(x);
-            if (y === 1){
-                return bot.postMessage(channel, IDoThings.spongebobMemeify(`${sheets}`));
-            }
-        }*/
 
         /*Dis my test version, biatches*/
     static async fatBoit(bot, user, slackMessage) {
@@ -171,6 +149,69 @@ class James {
                 return post;
             }
     }
+
+    static async urbanBoit(bot, user, slackMessage) {
+        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {},
+        };
+
+        const acknowledge = 'urbanboit ';
+        let lCase = text.toLowerCase();
+        if (lCase.startsWith(acknowledge)) {
+            let searchWord = acknowledge.substr(9);
+            let apiResults = await axios.get(`https://api.urbandictionary.com/v0/define?term={${searchWord}}`);
+            if (apiResults) {
+                let apiObject = apiResults.data.list;
+                let randomDef = IDoThings.pickRandomElement(apiObject);
+                let definition = randomDef.definition;
+                let author = randomDef.author;
+                let example = randomDef.example;
+                post.message = `searching for: ${searchWord}<br>
+                definition: ${definition}<br>
+                example: ${example}<br>
+                author: ${author}`;
+                return post;
+
+            }
+            else {
+                post.message = "eRrOr";
+                return post;
+            }
+        }
+    }
+
+    /*static async smdhBoit(bot, user, slackMessage) {
+        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null, 
+            params: {icon_url: IDoThings.getImageURL(``)},
+        };
+
+        const smdhText = `smdh`;
+        let lCase = text.toLowerCase();
+        if (lCase.includes(smdhText)) {
+            let s = await db.call(sList);
+            let m = await db.call(mList);
+            let d = await db.call(dList);
+            let h = await db.call(hList);
+            let smdhArray = [s,m,d,h];
+            for (i = 0; i < 4; i++) {
+                if (smdhArray[i]) {
+                    let smdhRandom[i] = IDoThings.pickRandomElement(smdhArray[i]);
+                    message = `${smdhRandom[i]}`
+                }
+                else {
+                    message = "ErRoR";
+                }
+                post.message = message;
+                return post
+            }
+        }
+    }*/
     
     /*Are you ready to rumble?
     static rumbleBoit(bot, storedUser, text, channel){

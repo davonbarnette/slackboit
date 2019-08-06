@@ -185,6 +185,13 @@ const Register = [
         description: "Ask boit where something is and he will let you know.",
         function: James.whereFoodBoit,
     },
+    {
+        acknowledge: 'urbanboit ',
+        name: "UrbanBoit",
+        command: 'urbanboit [word]',
+        description: "Looking for the real definition of a word? Urbanboit can assist with that.",
+        function: James.urbanBoit,
+    },
 
     // *** Logan *** //
     {
