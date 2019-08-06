@@ -168,25 +168,18 @@ class James {
         let lCase = text.toLowerCase();
         if (lCase.startsWith(acknowledge)) {
             searchWord = IDoThings.deletusAcknowledge(text, acknowledge);
-            let encodeWord = encodeURIComponent(searchWord);
-            let apiResults = await axios.get(`https://api.urbandictionary.com/v0/define?term={${encodeWord}}`);
-            if (apiResults) {
-                let apiObject = apiResults.data.list;
-                //let randomDef = IDoThings.pickRandomElement(apiObject);
-                let definition = apiObject[0].definition;
-                let author = apiObject[0].author;
-                let example = apiObject[0].example;
-                post.message = `searching for: ${searchWord}
-                definition: ${definition}
-                example: ${example}
-                author: ${author}`;
-                return post;
-
-            }
-            else {
-                post.message = "eRrOr";
-                return post;
-            }
+            let apiResults = await axios.get(`https://api.urbandictionary.com/v0/define?term={${searchWord}}`);
+            let apiObject = apiResults.data.list;
+            //let randomDef = IDoThings.pickRandomElement(apiObject);
+            let definition = apiObject[1].definition;
+            let author = apiObject[1].author;
+            let example = apiObject[1].example;
+            post.message = `searching for: ${searchWord}
+            definition: ${definition}
+            example: ${example}
+            author: ${author}`;
+            return post;
+            
         }
     }
 
