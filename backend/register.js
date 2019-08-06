@@ -162,7 +162,13 @@ const Register = [
 
 
     // *** Burtle *** //
-    // Burtle.exampleFunction,
+    {
+        acknowledge: 'smonk or dronk?',
+        name: "boited up",
+        command: 'smonk or dronk?',
+        description: "Slackboit will tell you how to get fucked up",
+        function: Burtle.sobrietyBoit,
+    },
 
     // *** James *** //
     {
