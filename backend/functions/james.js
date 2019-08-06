@@ -158,17 +158,24 @@ class James {
             params: {},
         };
 
+        //urbanboit [word]
+        //takes the new word, strips off the acknowledge
+        //uses the word and appends to the url
+        //awaits the results, then uses those results to pick a random definition
+        //posts the random definition by multiple sections
+
         const acknowledge = 'urbanboit ';
         let lCase = text.toLowerCase();
         if (lCase.startsWith(acknowledge)) {
             searchWord = IDoThings.deletusAcknowledge(acknowledge);
-            let apiResults = await axios.get(`https://api.urbandictionary.com/v0/define?term={${searchWord}}`);
+            let encodeWord = encodeURIComponent(searchWord);
+            let apiResults = await axios.get(`https://api.urbandictionary.com/v0/define?term={${encodeWord}}`);
             if (apiResults) {
                 let apiObject = apiResults.data.list;
-                let randomDef = IDoThings.pickRandomElement(apiObject);
-                let definition = randomDef.definition;
-                let author = randomDef.author;
-                let example = randomDef.example;
+                //let randomDef = IDoThings.pickRandomElement(apiObject);
+                let definition = apiObject[0].definition;
+                let author = apiObject[0].author;
+                let example = apiObject[0].example;
                 post.message = `searching for: ${searchWord}
                 definition: ${definition}
                 example: ${example}
