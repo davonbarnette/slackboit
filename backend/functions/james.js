@@ -161,7 +161,7 @@ class James {
         const acknowledge = 'urbanboit ';
         let lCase = text.toLowerCase();
         if (lCase.startsWith(acknowledge)) {
-            let searchWord = acknowledge.substr(9);
+            searchWord = IDoThings.deletusAcknowledge(acknowledge);
             let apiResults = await axios.get(`https://api.urbandictionary.com/v0/define?term={${searchWord}}`);
             if (apiResults) {
                 let apiObject = apiResults.data.list;
@@ -169,9 +169,9 @@ class James {
                 let definition = randomDef.definition;
                 let author = randomDef.author;
                 let example = randomDef.example;
-                post.message = `searching for: ${searchWord}<br>
-                definition: ${definition}<br>
-                example: ${example}<br>
+                post.message = `searching for: ${searchWord}
+                definition: ${definition}
+                example: ${example}
                 author: ${author}`;
                 return post;
 
