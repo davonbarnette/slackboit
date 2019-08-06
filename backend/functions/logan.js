@@ -103,7 +103,8 @@ class Logan {
     {
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
 
-        let post = {
+        let post = 
+        {
             message: null,
             params: {icon_url: IDoThings.getImageURL('standboit.jpg')},
         };
@@ -112,7 +113,8 @@ class Logan {
         
         let lowered = text.toLowerCase();
         
-        if (lowered.startsWith(acknowledge)) {
+        if (lowered.startsWith(acknowledge)) 
+        {
 
             /*
             let standUser = "logab";
@@ -167,6 +169,7 @@ class Logan {
                 catch (error) 
                     {
                         post.message = "standboit   A N G E R Y";
+                        return post;
                     }
                 let synonymsArray = [];
                 
@@ -214,9 +217,9 @@ class Logan {
             let output = 	"stand user: 「 " + standUser + " 」\n" +
                             "stand name: 「 " + standName + " 」\n" + 
                             "\n" +
-                            "power: [" + standPower + "] '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "durability: [" + standDurability + "]\n" +
-                            "speed: [" + standSpeed + "] '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "precision: [" + standPrecision + "]\n" +
-                            "range: [" + standRange + "]  '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. "  + "potential: [" + standPotential + "]";
+                            "power: [" + standPower + "] '``'-.,_,.- ゴゴゴゴ _,.-'``'-.,. " + "durability: [" + standDurability + "]\n" +
+                            "speed: [" + standSpeed + "] '``'-.,_,.- ゴゴゴゴ _,.-'``'-.,_ " + "precision: [" + standPrecision + "]\n" +
+                            "range: [" + standRange + "]  '``'-.,_,.- ゴゴゴゴ _,.-'``'-.,_ "  + "potential: [" + standPotential + "]";
             
             post.message = output;
 
