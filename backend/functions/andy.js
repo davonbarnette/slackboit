@@ -1,86 +1,122 @@
-const Store = require('../store');
-const IDoThings = require('../utils/idothings');
-const ToBeFairService = require('../services/tbf_service');
+const Store = require("../store");
+const IDoThings = require("../utils/idothings");
+const ToBeFairService = require("../services/tbf_service");
 
 class Andy {
-    //Post a new example function below this line:
+  //Post a new example function below this line:
 
-    static async tobefair(bot, user, slackMessage) {
-        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+  static async tobefair(bot, user, slackMessage) {
+    const { text, channel, event_ts, subtype, previous_message } = slackMessage;
 
-        let post = {
-            message: null,
-            params: {icon_url:IDoThings.getImageURL('slackboit_monocle.png')},
-        };
+    let post = {
+      message: null,
+      params: { icon_url: IDoThings.getImageURL("slackboit_monocle.png") }
+    };
 
-        const acknowledge = 'to be fair';
-        let lowered = text.toLowerCase();
-        if (lowered.includes(acknowledge)) {
-            let tbfCount = await ToBeFairService.createToBeFairEntry(user.id);
-            post.message = `${user.profile.display_name}'s to be fair number: ` + tbfCount;
-            return post;
-        }
+    const acknowledge = "to be fair";
+    let lowered = text.toLowerCase();
+    if (lowered.includes(acknowledge)) {
+      let tbfCount = await ToBeFairService.createToBeFairEntry(user.id);
+      post.message =
+        `${user.profile.display_name}'s to be fair number: ` + tbfCount;
+      return post;
     }
+  }
 
-    static technically(bot, user, slackMessage) {
-        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+  static technically(bot, user, slackMessage) {
+    const { text, channel, event_ts, subtype, previous_message } = slackMessage;
 
-        let post = {
-            message: null,
-            params: {icon_url:IDoThings.getImageURL('slackboit_matrix.png')},
-        };
-        const acknowledge = 'technically';
-        let lowered = text.toLowerCase();
-        if (lowered.includes(acknowledge)) {
-            post.message = 'technically';
-            return post;
-        }
+    let post = {
+      message: null,
+      params: { icon_url: IDoThings.getImageURL("slackboit_matrix.png") }
+    };
+    const acknowledge = "technically";
+    let lowered = text.toLowerCase();
+    if (lowered.includes(acknowledge)) {
+      post.message = "technically";
+      return post;
     }
+  }
 
-    static lennyboit(bot, user, slackMessage) {
-        const {text, channel, event_ts, subtype, previous_message} = slackMessage;
+  static lennyboit(bot, user, slackMessage) {
+    const { text, channel, event_ts, subtype, previous_message } = slackMessage;
 
-        let post = {
-            message: null,
-            params: {},
-        };
+    let post = {
+      message: null,
+      params: {}
+    };
 
-        const acknowledge = 'lennyboit';
-        let lowered = text.toLowerCase();
+    const acknowledge = "lennyboit";
+    let lowered = text.toLowerCase();
 
-        if (lowered.startsWith(acknowledge)) {
+    if (lowered.startsWith(acknowledge)) {
+      if (lowered.endsWith("og")) {
+        post.message = "( ͡° ͜ʖ ͡°)";
+        return post;
+      } else {
+        let lennyfaces = [
+          "( ͡° ͜ʖ ͡°)",
+          "( ͠° ͟ʖ ͡°)",
+          "( ͡~ ͜ʖ ͡°)",
+          "( ͡o ͜ʖ ͡o)",
+          "( ಠ ͜ʖಠ)",
+          "(▀̿Ĺ̯▀̿ ̿)",
+          "( ✧≖ ͜ʖ≖)",
+          "(ง ͠° ͟ل͜ ͡°)ง",
+          "[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]",
+          "( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)",
+          "(✿❦ ͜ʖ ❦)",
+          "//( ͡°͡° ͜ʖ ͡°͡°)//",
+          "╚═( ͡° ͜ʖ ͡°)═╝",
+          "︵‿︵(´ ͡༎ຶ ͜ʖ ͡༎ຶ `)︵‿︵",
+          "( ͡ ͡° ͡°  ʖ ͡° ͡°)",
+          "( ͡°❥ ͡°)",
+          "̿̿ ̿̿ ̿̿ ̵͇̿̿̿з= ( ▀ ͜͞ʖ▀) =ε/̵͇̿̿/’̿’̿ ̿ ̿̿ ̿̿ ̿̿",
+          "( ͡◉◞ ͜ʖ◟ ͡◉)",
+          "(∩ ͡° ͜ʖ ͡°)⊃━炎炎炎炎炎炎炎炎炎"
+        ];
 
-            if (lowered.endsWith("og")) {
-                post.message = "( ͡° ͜ʖ ͡°)";
-                return post;
-            } else {
-                let lennyfaces = [
-                    '( ͡° ͜ʖ ͡°)',
-                    '( ͠° ͟ʖ ͡°)',
-                    '( ͡~ ͜ʖ ͡°)',
-                    '( ͡o ͜ʖ ͡o)',
-                    '( ಠ ͜ʖಠ)',
-                    '(▀̿Ĺ̯▀̿ ̿)',
-                    '( ✧≖ ͜ʖ≖)',
-                    '(ง ͠° ͟ل͜ ͡°)ง',
-                    '[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]',
-                    '( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)',
-                    '(✿❦ ͜ʖ ❦)',
-                    '/\/( ͡°͡° ͜ʖ ͡°͡°)\//',
-                    '╚═( ͡° ͜ʖ ͡°)═╝',
-                    '︵‿︵(´ ͡༎ຶ ͜ʖ ͡༎ຶ `)︵‿︵',
-                    '( ͡ ͡° ͡°  ʖ ͡° ͡°)',
-                    '( ͡°❥ ͡°)',
-                    '̿̿ ̿̿ ̿̿ ̿\̵͇̿̿\з= ( ▀ ͜͞ʖ▀) =ε/̵͇̿̿/’̿’̿ ̿ ̿̿ ̿̿ ̿̿',
-                    '( ͡◉◞ ͜ʖ◟ ͡◉)',
-                    '(∩ ͡° ͜ʖ ͡°)⊃━炎炎炎炎炎炎炎炎炎',
-                ];
-
-                post.message = IDoThings.pickRandomElement(lennyfaces);
-                return post;
-            }
-        }
+        post.message = IDoThings.pickRandomElement(lennyfaces);
+        return post;
+      }
     }
+  }
+
+  static async asciiBoit(bot, user, slackMessage) {
+    let { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+    let post = {
+      message: null,
+      params: {
+        icon_url: IDoThings.getImageURL("slackboit_original.png")
+      }
+    };
+
+    const acknowledge = "asciiboit ";
+
+    let lowered = text.toLowerCase();
+
+    if (lowered.startsWith(acknowledge)) {
+      lowered = IDoThings.deletusAcknowledge(text, acknowledge);
+      let encodeBoit = encodeURIComponent(lowered);
+      let asciiURL = `http://artii.herokuapp.com/make?text=${encodeBoit}`;
+      let asciiReturn = "u suck";
+
+      try {
+        let response = await axios.get(asciiURL);
+        if (response) {
+          asciiReturn = response.data;
+        }
+      } catch (error) {
+        //   post.message = "No u";
+        // return post;
+      }
+
+      let output = "```" + asciiReturn + "```";
+      post.message = output;
+      return post;
+    }
+  }
 }
 
 module.exports = Andy;
