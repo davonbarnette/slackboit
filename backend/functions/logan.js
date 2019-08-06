@@ -190,16 +190,16 @@ class Logan {
 
                     })
                 }
-
+                else
+                {
+                    standName = standName + "{" + standNameArray[i] + "} ";
+                }
+                
                 //need to actually get the real synonyms    
                 if (synonymsArray.length !== 0)
                 {
                     standName = standName + IDoThings.pickRandomElement(synonymsArray) + " ";
-                }
-                else if (!jsonreturn)
-                {
-                    standName = standName + "{" + standNameArray[i] + "} ";
-                }
+                } 
 
             }
 
