@@ -6,54 +6,6 @@ const axios = require('axios');
 class James {
     //Post a new example function below this line:
 
-    /* This is my version Bitches, also if you would like to add in a REAL food choice of some food establishment near the Atlanta area, you are welcome to.*/
-    /* static fatBoit(bot, storedUser, text, channel){
-        const hangry = 'feed me boit';
-        let lCase = text.toLowerCase();
-        if (lCase.startsWith(hangry)) {
-            let foodChoices =
-                [
-                    "Victory",
-                    "Taco Bell",
-                    "Del Taco",
-                    "Zaxby's",
-                    "Da Vincis",
-                    "Bell Street Burrito",
-                    "Five Guys",
-                    "Superica",
-                    "bartaco",
-                    "Pub Subs",
-                    "KFC",
-                    "The Vortex",
-                    "Chipotle",
-                    "Wagaya",
-                    "Ton Ton",
-                    "Co",
-                    "Waffle House",
-                    "Chick Fil a",
-                    "Stevi B's",
-                    "9292",
-                    "D92",
-                    "Babs",
-                    "Bojangles",
-                    "Moe's",
-                    "Cookout",
-                    "IHOP",
-                    "Jimmy Johns",
-                    "Whole Foods Hot Bar",
-                    "Tazikis",
-                    "Salata",
-                    "Sushi",
-                    "Krog Street",
-                    "Farm Burger",
-                ];
-
-            const icon_url = IDoThings.getImageURL('slackboit_chef.png');
-            const choice = IDoThings.pickRandomElement(foodChoices);
-            return bot.postMessage(channel,`Today I think you should try, ${choice}`, {icon_url});
-        }
-    }*/
-
         /*Dis my test version, biatches*/
     static async fatBoit(bot, user, slackMessage) {
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
@@ -212,21 +164,52 @@ class James {
             }
         }
     }*/
-    
-    /*Are you ready to rumble?
-    static rumbleBoit(bot, storedUser, text, channel){
-        const readyToRumble = 'Battle Royale ';
-        let lCase = text.toLowerCase;
-        if (lCase.startsWith(readyToRumble)){
-            let break = readyToRumble.substr(13);
-            let breakdown = break.split(" vs ");
-            let oppoOne = breakdown[0];
-            let oppoTwo = breakdown[1];
-            let oppoList = ['logan','dan','andy','burtle','davon','james',];
-            for (i = 0; oppoOne === oppoList[i]; i++){
-                return bot.postMessage(channel, IDoThings.introductions(oppoList[i]));
-            }
-            
+
+    /* This is my version Bitches, also if you would like to add in a REAL food choice of some food establishment near the Atlanta area, you are welcome to.*/
+    /* static fatBoit(bot, storedUser, text, channel){
+        const hangry = 'feed me boit';
+        let lCase = text.toLowerCase();
+        if (lCase.startsWith(hangry)) {
+            let foodChoices =
+                [
+                    "Victory",
+                    "Taco Bell",
+                    "Del Taco",
+                    "Zaxby's",
+                    "Da Vincis",
+                    "Bell Street Burrito",
+                    "Five Guys",
+                    "Superica",
+                    "bartaco",
+                    "Pub Subs",
+                    "KFC",
+                    "The Vortex",
+                    "Chipotle",
+                    "Wagaya",
+                    "Ton Ton",
+                    "Co",
+                    "Waffle House",
+                    "Chick Fil a",
+                    "Stevi B's",
+                    "9292",
+                    "D92",
+                    "Babs",
+                    "Bojangles",
+                    "Moe's",
+                    "Cookout",
+                    "IHOP",
+                    "Jimmy Johns",
+                    "Whole Foods Hot Bar",
+                    "Tazikis",
+                    "Salata",
+                    "Sushi",
+                    "Krog Street",
+                    "Farm Burger",
+                ];
+
+            const icon_url = IDoThings.getImageURL('slackboit_chef.png');
+            const choice = IDoThings.pickRandomElement(foodChoices);
+            return bot.postMessage(channel,`Today I think you should try, ${choice}`, {icon_url});
         }
     }*/
 }
