@@ -157,21 +157,20 @@ class Logan {
                 
                 let jsonReturn;
 
-                //try 
-                    //{
+                try 
+                    {
                         let response = await axios.get(getURL);
 
                         if (response) 
                         {
                             jsonReturn = response.data;
                         } 
-                    //}
-                //catch (error) 
-                    //{
-                        //post.message = "standboit   A N G E R Y";
-                        //return post;
-                        //doesn't actually return anything hmmmm
-                    //}
+                    }
+                catch (error) 
+                    {
+                        post.message = "standboit   A N G E R Y";
+                        return post;
+                    }
                 let synonymsArray = [];
                 
                 if(jsonReturn)
