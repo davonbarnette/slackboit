@@ -128,6 +128,14 @@ const Register = [
         description: "Slackboit parties with us",
         function: Dan.partyBoit,
     },
+    //WRONG AREA DANIEL KUN
+    {
+        acknowledge: 'gifboit',
+        name: "Slackboit, a gif please",
+        command: 'gifboit [WORD OR PHRASE]',
+        description: "Slackboit hands you the perfect gif based on your search terms. If you specify nothing, good luck",
+        function: Dan.giffyBoiteru,
+    },
     // *** Andy *** //
     {
         acknowledge: ["to be fair"],
@@ -179,7 +187,7 @@ const Register = [
     },
 
     // *** Logan *** //
-    { 
+    {
         acknowledge: 'rollboit d',
         name: "dice slinger 3000",
         command: 'rollboit d[number]',
@@ -187,7 +195,7 @@ const Register = [
         function: Logan.rollBoit,
     },
 
-    { 
+    {
         acknowledge: 'standboit ',
         name: "stand generator",
         command: 'standboit [input string]',
