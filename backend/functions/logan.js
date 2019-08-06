@@ -142,7 +142,7 @@ class Logan {
             let standUser = IDoThings.convertToAids(user.id); //convert name to aids form
             lowered = IDoThings.deletusAcknowledge(text, acknowledge);
             let standNameArray = lowered.split(" "); //split input string into array
-            let standName = "uh idk man";
+            let standName = "";
 
             //api call; create for loop to pass each individual item in standName
             //each word will return an array of synonyms
@@ -199,7 +199,7 @@ class Logan {
                 }
                 else
                 {
-                    standName = standName + standNameArray[i] + " ";
+                    standName = standName + "{" + standNameArray[i] + "} ";
                 }
 
             }
