@@ -168,7 +168,27 @@ class Logan {
                     }
                 catch (error) 
                     {
+                        //maybe the catch can display the failed post?
+                        standName = lowered.trim();
+                        let statList = ["A", "B", "C", "D", "E"];
+
+                        let standPower = IDoThings.pickRandomElement(statList);
+                        let standSpeed = IDoThings.pickRandomElement(statList);
+                        let standRange = IDoThings.pickRandomElement(statList);
+                        let standDurability = IDoThings.pickRandomElement(statList);
+                        let standPrecision = IDoThings.pickRandomElement(statList);
+                        let standPotential = IDoThings.pickRandomElement(statList);
                         
+                        let output = 	"stand user: 「 " + standUser + " 」\n" +
+                                        "stand name: 「 " + standName + " 」\n" + 
+                                        "\n" +
+                                        "power: [" + standPower + "] -.,_,.-'` ゴゴゴゴ ,.-'`'-. " + "durability: [" + standDurability + "]\n" +
+                                        "speed: [" + standSpeed + "] -.,_,.-'` ゴゴゴゴ ,.-'`'-. " + "precision: [" + standPrecision + "]\n" +
+                                        "range: [" + standRange + "]  -.,_,.-'` ゴゴゴゴ ,.-'`'-. "  + "potential: [" + standPotential + "]";
+            
+                        post.message = output;
+
+                        return post;
                     }
 
                 let synonymsArray = [];
