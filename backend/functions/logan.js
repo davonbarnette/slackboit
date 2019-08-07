@@ -177,13 +177,13 @@ class Logan {
                     
                     if(jsonReturn)
                     {
-                        if(object.hasOwnProperty("meta"))
-                        {
-                            synonymFound = true;
-                        }
-                        
                         jsonReturn.forEach((object, index)=>
                         {
+                            if(object.hasOwnProperty("meta"))
+                            {
+                                synonymFound = true;
+                            }
+                            
                             object.meta.syns.forEach((synsArray)=>
                             {
                                 synsArray.forEach((synonym)=>
@@ -213,26 +213,63 @@ class Logan {
 
             
             standName = standName.trim();
-            let statList = ["A", "B", "C", "D", "E"];
 
-            let standPower = IDoThings.pickRandomElement(statList);
-            let standSpeed = IDoThings.pickRandomElement(statList);
-            let standRange = IDoThings.pickRandomElement(statList);
-            let standDurability = IDoThings.pickRandomElement(statList);
-            let standPrecision = IDoThings.pickRandomElement(statList);
-            let standPotential = IDoThings.pickRandomElement(statList);
+            let standObject = 
+            {
+                master: standUser,
+                name: standName,
+                power: this.standAttributeGenerator(),
+                durability: this.standAttributeGenerator(),
+                speed: this.standAttributeGenerator(),
+                precision: this.standAttributeGenerator(),
+                range: this.standAttributeGenerator(),
+                potential: this.standAttributeGenerator()
+            }
             
-            let output = 	"stand user: 「 " + standUser + " 」\n" +
-                            "stand name: 「 " + standName + " 」\n" + 
+            let output = 	"stand user: 「 " + standObject.master + " 」\n" +
+                            "stand name: 「 " + standObject.name + " 」\n" + 
                             "\n" +
-                            "power: [" + standPower + "] '``'-.,_,.ゴゴゴゴ '``'-.,_,. durability: [" + standDurability + "]\n" +
-                            "speed: [" + standSpeed + "] '``'-.,_,.ゴゴゴゴ '``'-.,_,. precision: [" + standPrecision + "]\n" +
-                            "range: [" + standRange + "]  '``'-.,_,.ゴゴゴゴ '``'-.,_,. potential: [" + standPotential + "]";
+                            "power: [" + standObject.power + "] '``'-.,_,.ゴゴゴゴ '``'-.,_,. durability: [" + standObject.durability + "]\n" +
+                            "speed: [" + standObject.speed + "] '``'-.,_,.ゴゴゴゴ '``'-.,_,. precision: [" + standObject.precision + "]\n" +
+                            "range: [" + standObject.range + "]  '``'-.,_,.ゴゴゴゴ '``'-.,_,. potential: [" + standObject.potential + "]";
             
             post.message = output;
 
             return post;
         }
+    }
+
+    static standAttributeGenerator ()
+    {
+        let randomNumber = Math.floor(Math.random() * 100);
+        let attributeGrade = "";
+        switch (true)
+        {
+            case (randomNumber < 3): 
+                attributeGrade = "S"; //3% 
+                break;
+            case (randomNumber < 15): 
+                attributeGrade = "A"; //12%
+                break;
+            case (randomNumber < 35): 
+                attributeGrade = "B"; //20%
+                break;
+            case (randomNumber < 65): 
+                attributeGrade = "C"; //30%
+                break;
+            case (randomNumber < 85): 
+                attributeGrade = "D"; //20%
+                break;
+            case (randomNumber < 99): 
+                attributeGrade = "E"; //14%
+                break;
+            case (randomNumber <= 100): 
+                attributeGrade = "F"; //1%
+                break;
+        }
+
+        return attributeGrade;
+
     }
 
     
