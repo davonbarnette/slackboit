@@ -4,6 +4,7 @@ const Logger = require('./utils/logger');
 const UserService = require('./services/user_service');
 const USERS_BY_ID = require('./utils/users');
 const IDoThings = require('./utils/idothings');
+const SETTINGS = require('./settings');
 
 class Slackboit {
     constructor(register){
@@ -12,17 +13,21 @@ class Slackboit {
     }
 
     startEmUp(){
-        this.bot = new SlackBot({token: process.env.SLACK_TOKEN, name: 'Slackboit'});
-        this.bot.on('open', this.onOpen.bind(this));
-        this.bot.on('message', this.onMessage.bind(this));
+        const {SLACK_TOKEN:token} = SETTINGS;
+        if (token){
+            this.bot = new SlackBot({token, name: 'Slackboit'});
+            this.bot.on('open', this.onOpen.bind(this));
+            this.bot.on('message', this.onMessage.bind(this));
+        }
     }
 
     async onOpen(){
+        Logger.info('[Slackboit] Slackboit connection opened');
         return UserService.updateUserRegistry(this.bot);
     }
 
     async onMessage(event){
-        Logger.info('Incoming Message Event from Slack > ', event);
+        Logger.info('[Slackboit] Incoming Message Event from Slack > ', event);
         if (!Store.usersById) return null;
 
         // prop "user" is actually an id, so we access Store.usersById to get the storedUser object

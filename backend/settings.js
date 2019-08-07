@@ -22,6 +22,7 @@ const Settings =  {
     STATIC_ASSET_PATH: 'static/imgs',
     RELATIVE_ASSET_DIR: path.resolve(__dirname, 'assets'),
     SERVER_PORT:process.env.SERVER_PORT,
+    SLACK_TOKEN:process.env.SLACK_TOKEN,
 };
 
 module.exports = Settings;

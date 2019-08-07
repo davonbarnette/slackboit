@@ -1,5 +1,5 @@
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
     const dotenv = require('dotenv');
     dotenv.config({path:__dirname + '/env/dev.env'});
 }
@@ -19,11 +19,13 @@ class ApplicationClass {
     init(){
         const {SERVER_PORT} = SETTINGS;
 
+        const Slackboit = require('./slackboit');
+        this.slackboit = new Slackboit(Register);
+
         this.express = new Express(Routes);
         this.server = http.createServer(this.express.app);
         this.server.listen(SERVER_PORT, () => console.log('[Server] Listening on port > ', SERVER_PORT));
-        const Slackboit = require('./slackboit');
-        this.slackboit = new Slackboit(Register);
+
     }
 }
 

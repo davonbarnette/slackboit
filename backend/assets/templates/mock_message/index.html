@@ -1,0 +1,34 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Mocketh Thine Message</title>
+    <meta name="description" content="Slackboit">
+    <meta name="author" content="Slackboiteth">
+    <base href="../static/">
+    <link rel="stylesheet" href="templates/mock_message/css/styles.css">
+
+</head>
+
+<body>
+<div id="app" style="background:url(imgs/slackboit_original.png)">
+    <div class="content">
+        <section class="selects">
+            <label for="function-select">Select Function</label>
+            <select id="function-select" onchange="onChangeSelect('function')"></select>
+            <label for="user-select">Select User</label>
+            <select id="user-select" onchange="onChangeSelect('user')"></select>
+        </section>
+
+        <label for="message-to-send">Message to Send</label>
+        <textarea id="message-to-send"></textarea>
+        <label for="message-returned">Message Returned</label>
+        <div id="message-returned"></div>
+        <button onclick="postMessage()">Post Message</button>
+    </div>
+</div>
+<script src="templates/mock_message/js/scripts.js"></script>
+</body>
+</html>
