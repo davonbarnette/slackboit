@@ -115,29 +115,29 @@ class Logan {
 
         function standAttributeGenerator ()
         {
-            let randomNumber = Math.floor(Math.random() * 100);
+            let randomNumber = Math.floor(Math.random() * 100) + 1;
             let attributeGrade = "";
             switch (true)
             {
-                case (randomNumber < 2): 
+                case (randomNumber < 3): //3%
                     attributeGrade = "S";
                     break;
-                case (randomNumber < 15): 
+                case (randomNumber < 15): //12%
                     attributeGrade = "A";
                     break;
-                case (randomNumber < 35): 
+                case (randomNumber < 35): //20%
                     attributeGrade = "B";
                     break;
-                case (randomNumber < 65): 
+                case (randomNumber < 65): //30%
                     attributeGrade = "C";
                     break;
-                case (randomNumber < 85): 
+                case (randomNumber < 85): //20%
                     attributeGrade = "D";
                     break;
-                case (randomNumber < 97): 
+                case (randomNumber < 98): //12%
                     attributeGrade = "E";
                     break;
-                case (randomNumber <= 100): 
+                case (randomNumber <= 100): //3%
                     attributeGrade = "F";
                     break;
             }
@@ -181,10 +181,11 @@ class Logan {
                     
                     if(jsonReturn)
                     {
+                        //maybe the synonymFound assignment needs to happen here- assuming that it can't get this far
+                        //prevent the rest from happening afterwards to prevent error
                         jsonReturn.forEach((object, index)=>
                         {
                             //condition met under ideal scenario, but isn't preventing error
-                            //maybe try bringing in the object.meta.syns within the if (may have already tried tho)
                             if(object.hasOwnProperty("meta"))
                             {
                                 synonymFound = true;
@@ -213,7 +214,7 @@ class Logan {
                 }
                 else
                 {
-                    standName = standName + standNameArray[i].substring(1);
+                    standName = standName + standNameArray[i].substring(1) + " ";
                 }   
             }
 
