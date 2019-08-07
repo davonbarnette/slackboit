@@ -138,3 +138,38 @@ let post = {
 | spongebobify          | No           | Whether or not your function will spongebobify the entire output. In general, you won't have to mess with this because all functions should be spongebobified by default, but if you want to turn of spongebobifying so you can spongebobify it yourself, then disable this.| `boolean` | `true`|
 | channel          | No           | By default, your post will be posted to the channel in which the slackMessage originated from. If you want to set a custom channel (must be the id of the channel), then you can do so here.| `string` | `<Current Channel>`|
 
+## Setting up the test environment
+
+The test environment for Slackboit lets you masquerade as a Slack user, sending requests to a local version of Slackboit.
+When you run the test environment, it will put a webpage on `localhost:8000` for you to send messages to Slackboit. It's
+important to note that you **will not** be able to use `bot`, nor will you be able to execute any functions that require a
+database call. This section will require you to use the Command Prompt (Windows), or Terminal (macOS), but it shouldn't
+be too hard as long as you follow the instructions below to the dot.
+
+Prerequisites:
+    1. Make sure you have Node.js installed on your computer. If you don't, or don't know what that is, navigate to https://nodejs.org/en/, and download
+    the LTS version (Stable) for Windows or Mac.
+
+To start:
+
+1. Open up the Command Prompt or Terminal and navigate to the **backend** folder of this repository.
+    - **Command Prompt (Windows)**
+        1. Press the 'Windows' key and type in `cmd`. Hit `Enter`. This should open a new Command Prompt window.
+        2. You will want to change your active folder to the **backend** folder of this repository. To do so, in the
+        Command Prompt, type `cd "<path/to/slackboit/backend>"`. In my case if the Slackboit code lived under **Documents > Development > slackboit > backend**,
+        I would type `cd "C:\\Users\davonbarnette\Documents\Development\slackboit\backend"`.
+    - **Terminal (macOS)**
+        1. Press the 'CMD + Enter' key and type in `terminal`. Hit `Enter`. This should open a new Terminal window.
+        2. You will want to change your active folder to the **backend** folder of this repository. To do so, in the
+        Command Prompt, type `cd "<path/to/slackboit/backend>"`. In my case if the Slackboit code lived under **Documents > Development > slackboit > backend**,
+        I would type `cd "/Users/davonbarnette/Documents/Development/slackboit/backend"`.        
+2. Type in `npm install` and hit `Enter`. You should see it doing a bunch of hacker looking stuff. If no errors pop up, move on to the next step.
+3. Change your Environment Variables. WARNING: THIS IS SUPER IMPORTANT TO NOT MESS UP. MAKE SURE TO FOLLOW THESE DIRECTIONS EXACTLY.
+    1. Look in the backend folder in your IDE or folder browser for a folder **env**. Under that, you will see a file called **example_env.txt**.
+    2. Change the name of this file (**example_env.txt**) to **dev.env**.
+    3. SUPER IMPORTANT: Now go to your GitHub Desktop application, and make sure that there are no pending Changes for the file **dev.env**.
+    If you have confirmed this, move on to the next step.
+    4. Davon will give you keys that you can enter for each of these environment variables. So if Davon gives you `SLACK_TOKEN=38rhef03hfanjs`,
+    paste (or replace) it in your new **dev.env** file.
+4. Type in `npm run start` and hit `Enter`. This will start the test environment.
+5. Now you can go to http://localhost:8000, and see your app booted up! Happy boiting!
