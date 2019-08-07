@@ -168,27 +168,7 @@ class Logan {
                     }
                 catch (error) 
                     {
-                        //maybe the catch can display the failed post?
-                        standName = lowered.trim();
-                        let statList = ["A", "B", "C", "D", "E"];
-
-                        let standPower = IDoThings.pickRandomElement(statList);
-                        let standSpeed = IDoThings.pickRandomElement(statList);
-                        let standRange = IDoThings.pickRandomElement(statList);
-                        let standDurability = IDoThings.pickRandomElement(statList);
-                        let standPrecision = IDoThings.pickRandomElement(statList);
-                        let standPotential = IDoThings.pickRandomElement(statList);
                         
-                        let output = 	"stand user: 「 " + standUser + " 」\n" +
-                                        "stand name: 「 " + standName + " 」\n" + 
-                                        "\n" +
-                                        "power: [" + standPower + "] -.,_,.-'` ゴゴゴゴ ,.-'`'-. " + "durability: [" + standDurability + "]\n" +
-                                        "speed: [" + standSpeed + "] -.,_,.-'` ゴゴゴゴ ,.-'`'-. " + "precision: [" + standPrecision + "]\n" +
-                                        "range: [" + standRange + "]  -.,_,.-'` ゴゴゴゴ ,.-'`'-. "  + "potential: [" + standPotential + "]";
-            
-                        post.message = output;
-
-                        return post;
                     }
 
                 let synonymsArray = [];
@@ -197,22 +177,23 @@ class Logan {
                 {
                     jsonReturn.forEach((object, index)=>
                     {
-                        
-                        object.meta.syns.forEach((synsArray)=>
+                        if(object.hasOwnProperty("meta"))
                         {
-                            synsArray.forEach((synonym)=>
+                            object.meta.syns.forEach((synsArray)=>
                             {
-                                synonymsArray.push(synonym);
+                                synsArray.forEach((synonym)=>
+                                {
+                                    synonymsArray.push(synonym);
+
+                                })
 
                             })
-
-                        })
-
+                        }
+                        else
+                        {
+                            standName = standName + "{" + standNameArray[i] + "} ";
+                        }
                     })
-                }
-                else
-                {
-                    standName = standName + "{" + standNameArray[i] + "} ";
                 }
                 
                 //need to actually get the real synonyms    
@@ -237,9 +218,9 @@ class Logan {
             let output = 	"stand user: 「 " + standUser + " 」\n" +
                             "stand name: 「 " + standName + " 」\n" + 
                             "\n" +
-                            "power: [" + standPower + "] -.,_,.-'` ゴゴゴゴ ,.-'`'-. " + "durability: [" + standDurability + "]\n" +
-                            "speed: [" + standSpeed + "] -.,_,.-'` ゴゴゴゴ ,.-'`'-. " + "precision: [" + standPrecision + "]\n" +
-                            "range: [" + standRange + "]  -.,_,.-'` ゴゴゴゴ ,.-'`'-. "  + "potential: [" + standPotential + "]";
+                            "power: [" + standPower + "] '``'-.,_,. ゴゴゴゴ '``'-.,_,. durability: [" + standDurability + "]\n" +
+                            "speed: [" + standSpeed + "] '``'-.,_,. ゴゴゴゴ '``'-.,_,. precision: [" + standPrecision + "]\n" +
+                            "range: [" + standRange + "]  '``'-.,_,. ゴゴゴゴ '``'-.,_,. potential: [" + standPotential + "]";
             
             post.message = output;
 
