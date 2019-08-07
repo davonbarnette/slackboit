@@ -153,55 +153,62 @@ class Logan {
             //https://dictionaryapi.com/products/api-collegiate-thesaurus api documentation
             for (let i = 0; i < standNameArray.length; i++)
             {
-                let getURL = `https://dictionaryapi.com/api/v3/references/thesaurus/json/${standNameArray[i]}?key=${SETTINGS.THESAURUS_API_TOKEN}`;
-                
-                let jsonReturn;
-                
-                try 
-                    {
-                        let response = await axios.get(getURL);
-
-                        if (response) 
-                        {
-                            jsonReturn = response.data;
-                        } 
-                    }
-                catch (error) 
-                    {
-                        
-                    }
-
-                let synonymsArray = [];
-                
-                if(jsonReturn)
+                if(!standNameArray[i].startsWith("!"))
                 {
-                    jsonReturn.forEach((object, index)=>
-                    {
-                        if(object.hasOwnProperty("meta"))
+                    let getURL = `https://dictionaryapi.com/api/v3/references/thesaurus/json/${standNameArray[i]}?key=${SETTINGS.THESAURUS_API_TOKEN}`;
+                    
+                    let jsonReturn;
+                    
+                    try 
                         {
+                            let response = await axios.get(getURL);
+
+                            if (response) 
+                            {
+                                jsonReturn = response.data;
+                            } 
+                        }
+                    catch (error)
+                    {
+                    }
+
+                    let synonymsArray = [];
+                    let synonymFound = false;
+                    
+                    if(jsonReturn)
+                    {
+                        jsonReturn.forEach((object, index)=>
+                        {
+                            if(object.hasOwnProperty("meta"))
+                            {
+                                synonymFound = true;
+                            }
+                            
                             object.meta.syns.forEach((synsArray)=>
                             {
                                 synsArray.forEach((synonym)=>
                                 {
                                     synonymsArray.push(synonym);
-
                                 })
-
                             })
-                        }
-                        else
-                        {
-                            standName = standName + "{" + standNameArray[i] + "} ";
-                        }
-                    })
-                }
-                
-                //need to actually get the real synonyms    
-                if (synonymsArray.length !== 0)
-                {
-                    standName = standName + IDoThings.pickRandomElement(synonymsArray) + " ";
-                } 
+                        })
+                    }
+                    
+                    if(synonymFound == false)
+                    {
+                        standName = standName + "{" + standNameArray[i] + "} ";
+                    }
 
+                    //need to actually get the real synonyms    
+                    if (synonymsArray.length !== 0)
+                    {
+                        standName = standName + IDoThings.pickRandomElement(synonymsArray) + " ";
+                    } 
+                }
+                else
+                {
+                    standName = standName + "{" + standNameArray[i] + "} ";
+                }   
             }
 
             
