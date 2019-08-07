@@ -177,13 +177,13 @@ class Logan {
                     
                     if(jsonReturn)
                     {
+                        if(object.hasOwnProperty("meta"))
+                        {
+                            synonymFound = true;
+                        }
+                        
                         jsonReturn.forEach((object, index)=>
                         {
-                            if(object.hasOwnProperty("meta"))
-                            {
-                                synonymFound = true;
-                            }
-                            
                             object.meta.syns.forEach((synsArray)=>
                             {
                                 synsArray.forEach((synonym)=>
@@ -207,7 +207,7 @@ class Logan {
                 }
                 else
                 {
-                    standName = standName + "{" + standNameArray[i] + "} ";
+                    standName = standName + standNameArray[i].substring(1);
                 }   
             }
 
@@ -225,9 +225,9 @@ class Logan {
             let output = 	"stand user: 「 " + standUser + " 」\n" +
                             "stand name: 「 " + standName + " 」\n" + 
                             "\n" +
-                            "power: [" + standPower + "] '``'-.,_,. ゴゴゴゴ '``'-.,_,. durability: [" + standDurability + "]\n" +
-                            "speed: [" + standSpeed + "] '``'-.,_,. ゴゴゴゴ '``'-.,_,. precision: [" + standPrecision + "]\n" +
-                            "range: [" + standRange + "]  '``'-.,_,. ゴゴゴゴ '``'-.,_,. potential: [" + standPotential + "]";
+                            "power: [" + standPower + "] '``'-.,_,.ゴゴゴゴ '``'-.,_,. durability: [" + standDurability + "]\n" +
+                            "speed: [" + standSpeed + "] '``'-.,_,.ゴゴゴゴ '``'-.,_,. precision: [" + standPrecision + "]\n" +
+                            "range: [" + standRange + "]  '``'-.,_,.ゴゴゴゴ '``'-.,_,. potential: [" + standPotential + "]";
             
             post.message = output;
 
