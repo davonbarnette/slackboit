@@ -112,43 +112,47 @@ class Logan {
         const acknowledge = 'standboit ';
         
         let lowered = text.toLowerCase();
+
+        function standAttributeGenerator ()
+        {
+            let randomNumber = Math.floor(Math.random() * 100);
+            let attributeGrade = "";
+            switch (true)
+            {
+                case (randomNumber < 2): 
+                    attributeGrade = "S";
+                    break;
+                case (randomNumber < 15): 
+                    attributeGrade = "A";
+                    break;
+                case (randomNumber < 35): 
+                    attributeGrade = "B";
+                    break;
+                case (randomNumber < 65): 
+                    attributeGrade = "C";
+                    break;
+                case (randomNumber < 85): 
+                    attributeGrade = "D";
+                    break;
+                case (randomNumber < 97): 
+                    attributeGrade = "E";
+                    break;
+                case (randomNumber <= 100): 
+                    attributeGrade = "F";
+                    break;
+            }
+
+            return attributeGrade;
+
+        }
         
         if (lowered.startsWith(acknowledge)) 
         {
 
-            /*
-            let standUser = "logab";
-            let standName = "Unwrinkled Bandit";
-
-            let statList = ["A", "B", "C", "D", "E"];
-
-            let standPower = statList[Math.floor(Math.random() * statList.length)];
-            let standSpeed = statList[Math.floor(Math.random() * statList.length)];
-            let standRange = statList[Math.floor(Math.random() * statList.length)];
-            let standDurability = statList[Math.floor(Math.random() * statList.length)];
-            let standPrecision = statList[Math.floor(Math.random() * statList.length)];
-            let standPotential = statList[Math.floor(Math.random() * statList.length)];
-
-            let output = 	"stand user: 「 " + standUser + " 」\n" +
-            "stand name: 「 " + standName + " 」\n" + 
-            "\n" +
-            "power: " + standPower + " '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "durability: " + standDurability + "\n" +
-            "speed: " + standSpeed + " '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. " + "precision: " + standPrecision + "\n" +
-            "range: " + standRange + "  '``'-.,_,.-'``'-.,_,.- ゴゴゴゴ -'``'-.,_,.-'``'-.,_,. "  + "potential: " + standPotential;
-              
-            alert(output);
-            */
-
-            let standUser = IDoThings.convertToAids(user.id); //convert name to aids form
+            let standUser = IDoThings.convertToAids(user.id);
             lowered = IDoThings.deletusAcknowledge(text, acknowledge);
-            let standNameArray = lowered.split(" "); //split input string into array
-            let standName = ""; //no longer contains text
-
-            //api call; create for loop to pass each individual item in standName
-            //each word will return an array of synonyms
-            //if array length is 0, use original word
-            //if array length > 0, return a random result and replace original word
-            //stitch converted words back into standName variable
+            let standNameArray = lowered.split(" ");
+            let standName = ""; 
             
             //https://dictionaryapi.com/products/api-collegiate-thesaurus api documentation
             for (let i = 0; i < standNameArray.length; i++)
@@ -179,6 +183,8 @@ class Logan {
                     {
                         jsonReturn.forEach((object, index)=>
                         {
+                            //condition met under ideal scenario, but isn't preventing error
+                            //maybe try bringing in the object.meta.syns within the if (may have already tried tho)
                             if(object.hasOwnProperty("meta"))
                             {
                                 synonymFound = true;
@@ -194,12 +200,12 @@ class Logan {
                         })
                     }
                     
+                    //not triggering as expected when word fails to retrieve synonym
                     if(synonymFound == false)
                     {
                         standName = standName + "{" + standNameArray[i] + "} ";
                     }
-
-                    //need to actually get the real synonyms    
+   
                     if (synonymsArray.length !== 0)
                     {
                         standName = standName + IDoThings.pickRandomElement(synonymsArray) + " ";
@@ -218,12 +224,12 @@ class Logan {
             {
                 master: standUser,
                 name: standName,
-                power: this.standAttributeGenerator(),
-                durability: this.standAttributeGenerator(),
-                speed: this.standAttributeGenerator(),
-                precision: this.standAttributeGenerator(),
-                range: this.standAttributeGenerator(),
-                potential: this.standAttributeGenerator()
+                power: standAttributeGenerator(),
+                durability: standAttributeGenerator(),
+                speed: standAttributeGenerator(),
+                precision: standAttributeGenerator(),
+                range: standAttributeGenerator(),
+                potential: standAttributeGenerator()
             }
             
             let output = 	"stand user: 「 " + standObject.master + " 」\n" +
@@ -238,41 +244,6 @@ class Logan {
             return post;
         }
     }
-
-    static standAttributeGenerator ()
-    {
-        let randomNumber = Math.floor(Math.random() * 100);
-        let attributeGrade = "";
-        switch (true)
-        {
-            case (randomNumber < 3): 
-                attributeGrade = "S"; //3% 
-                break;
-            case (randomNumber < 15): 
-                attributeGrade = "A"; //12%
-                break;
-            case (randomNumber < 35): 
-                attributeGrade = "B"; //20%
-                break;
-            case (randomNumber < 65): 
-                attributeGrade = "C"; //30%
-                break;
-            case (randomNumber < 85): 
-                attributeGrade = "D"; //20%
-                break;
-            case (randomNumber < 99): 
-                attributeGrade = "E"; //14%
-                break;
-            case (randomNumber <= 100): 
-                attributeGrade = "F"; //1%
-                break;
-        }
-
-        return attributeGrade;
-
-    }
-
-    
 }
 
 module.exports = Logan;
