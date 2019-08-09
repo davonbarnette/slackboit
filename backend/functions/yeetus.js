@@ -211,7 +211,7 @@ class Yeetus {
                         const {url} = preview.images[0].source;
                         let worker = new Tesseract.TesseractWorker();
                         worker.recognize(url)
-                            .catch(err => null)
+                            .catch(err => worker.terminate())
                             .then(result => {
                                 let payload = '';
                                 result.words.forEach(word => {
@@ -219,7 +219,8 @@ class Yeetus {
                                     if (confidence > 60) payload += `${text} `
                                 });
                                 payload = IDoThings.emojifyyyyyy(payload);
-                                bot.postMessage(channel, payload, {attachments: [{title: text, image_url: url}]})
+                                bot.postMessage(channel, payload, {attachments: [{title: text, image_url: url}]});
+                                worker.terminate();
                                 Store.tesseractWorkerRunning = false;
                             });
                         post.message = 'running ocr on that b...';
