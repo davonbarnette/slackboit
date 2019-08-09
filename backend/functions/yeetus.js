@@ -5,7 +5,6 @@ const Settings = require('../settings');
 const zalgo = require('to-zalgo');
 const UserService = require('../services/user_service');
 const Reddit = require('../utils/reddit');
-const emoji = require('node-emoji');
 
 class Yeetus {
 
@@ -196,26 +195,16 @@ class Yeetus {
         const acknowledge = 'roidit ';
 
         if (text.startsWith(acknowledge)){
-            const subreddit = IDoThings.deletusAcknowledge(text, acknowledge);
+            const config = IDoThings.deletusAcknowledge(text, acknowledge);
+            const [subreddit, maxNumEmojis, maxNumChars] = config.split(' ');
+
+            if (!subreddit) return post;
+
             let submissions = await Reddit.api.getSubreddit(subreddit).getHot();
             if (submissions){
                 let randoSubmittion = IDoThings.pickRandomElement(submissions);
                 let { selftext } = randoSubmittion;
-                let split = selftext.split(' ');
-                if (split.length > 25) split = split.slice(0, 25);
-                let aids = '';
-                split.forEach((word, index) => {
-                    let hakumanPercento = Math.round(Math.random() * 100);
-                    if (hakumanPercento > 70) {
-                        aids += `${word} `;
-                        let numEmojis = Math.floor(Math.random() * 5);
-                        for (let i = 0; i < numEmojis; i++) {
-                            aids += `${emoji.random().emoji} `
-                        }
-                    }
-                    else aids += `${word} `;
-                });
-                post.message = aids;
+                post.message = IDoThings.emojifyyyyyy(selftext, maxNumEmojis, maxNumChars);
             }
             else post.message = 'no subroidit found';
             return post;

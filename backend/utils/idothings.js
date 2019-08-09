@@ -1,4 +1,5 @@
 const Settings = require('../settings');
+const emoji = require('node-emoji');
 
 class IDoThings {
 
@@ -27,6 +28,27 @@ class IDoThings {
 
     static numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    static emojifyyyyyy(text, maxNumEmojis = 5, maxNumChars = 200){
+        let split = text.split(' ');
+        if (split.length > maxNumChars) split = split.slice(0, maxNumChars);
+        let aids = '';
+        split.forEach(word => {
+            if (IDoThings.randoNumber(100) > 70) {
+                aids += `${word} `;
+                let numEmojis = IDoThings.randoNumber(maxNumEmojis);
+                for (let i = 0; i < numEmojis; i++) aids += `${emoji.random().emoji} `
+            }
+            else aids += `${word} `;
+        });
+        return aids;
+    }
+
+    static randoNumber(max, min = 0, round = true){
+        let noimber = (Math.random() * max) + min;
+        if (round) return Math.round(noimber);
+        else return noimber;
     }
 
     static convertToAids(username) {
