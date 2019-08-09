@@ -12,6 +12,7 @@ const Store = {
     listingsById:{},
     bot:null,
     tbfCounter:0,
+    tesseractWorkerRunning:false,
 
     slackboitUnchained:new SlackboitUnchained(),
 };

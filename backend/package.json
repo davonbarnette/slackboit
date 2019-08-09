@@ -21,6 +21,7 @@
     "sequelize-cli": "^5.5.0",
     "slackbots": "^1.2.0",
     "snoowrap": "^1.19.0",
+    "tesseract.js": "^2.0.0-alpha.13",
     "to-zalgo": "^1.0.1"
   }
 }

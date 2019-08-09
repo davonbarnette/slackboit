@@ -37,7 +37,7 @@ const Register = [
   {
     acknowledge: "roidit ",
     name: "reddit for the boit",
-    command: "roidit [SUBREDDIT]",
+    command: "roidit [SUBREDDIT] [MAX NUM EMOJIS] [MAX NUM WORDS]",
     description: "Get a rando post from a subreddit and then copypasta that b",
     function: Yeetus.roidit
   },
