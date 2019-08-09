@@ -35,6 +35,13 @@ const Register = [
     function: Yeetus.rechainTheBoit
   },
   {
+    acknowledge: "roidit ",
+    name: "reddit for the boit",
+    command: "roidit [SUBREDDIT]",
+    description: "Get a rando post from a subreddit and then copypasta that b",
+    function: Yeetus.roidit
+  },
+  {
     acknowledge: "slackboit updeetus the yeetus",
     name: "Updeetus the Yeetus",
     command: "slackboit updeetus the yeetus",

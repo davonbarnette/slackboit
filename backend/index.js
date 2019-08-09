@@ -16,8 +16,9 @@ class ApplicationClass {
         this.init();
     }
 
-    init(){
+    async init(){
         const {SERVER_PORT} = SETTINGS;
+
 
         const Slackboit = require('./slackboit');
         this.slackboit = new Slackboit(Register);

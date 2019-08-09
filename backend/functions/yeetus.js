@@ -4,6 +4,8 @@ const CryptoManager = require('../utils/crypto');
 const Settings = require('../settings');
 const zalgo = require('to-zalgo');
 const UserService = require('../services/user_service');
+const Reddit = require('../utils/reddit');
+const emoji = require('node-emoji');
 
 class Yeetus {
 
@@ -179,6 +181,43 @@ class Yeetus {
             const users = await UserService.updateUserRegistry(bot);
             if (users) post.message = 'the yeetus has been updeetused';
             else post.message =  'could not updeetus the yeetus :(';
+            return post;
+        }
+    }
+
+    static async roidit(bot, user, slackMessage){
+        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+        let post = {
+            message: null,
+            params: {},
+        };
+
+        const acknowledge = 'roidit ';
+
+        if (text.startsWith(acknowledge)){
+            const subreddit = IDoThings.deletusAcknowledge(text, acknowledge);
+            let submissions = await Reddit.api.getSubreddit(subreddit).getHot();
+            if (submissions){
+                let randoSubmittion = IDoThings.pickRandomElement(submissions);
+                let { selftext } = randoSubmittion;
+                let split = selftext.split(' ');
+                if (split.length > 25) split = split.slice(0, 25);
+                let aids = '';
+                split.forEach((word, index) => {
+                    let hakumanPercento = Math.round(Math.random() * 100);
+                    if (hakumanPercento > 70) {
+                        aids += `${word} `;
+                        let numEmojis = Math.floor(Math.random() * 5);
+                        for (let i = 0; i < numEmojis; i++) {
+                            aids += `${emoji.random().emoji} `
+                        }
+                    }
+                    else aids += `${word} `;
+                });
+                post.message = aids;
+            }
+            else post.message = 'no subroidit found';
             return post;
         }
     }

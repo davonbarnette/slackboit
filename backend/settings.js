@@ -16,6 +16,12 @@ const Settings =  {
         PASSWORD:process.env.DB_PASSWORD,
         CUSTOM_DEBUG:process.env.DB_CUSTOM_DEBUG === 'true',
     },
+    REDDIT: {
+        CLIENT_SECRET:process.env.REDDIT_CLIENT_SECRET,
+        CLIENT_ID:process.env.REDDIT_CLIENT_ID,
+        ACCESS_TOKEN_URL: 'https://www.reddit.com/api/v1/access_token',
+        USER_AGENT:process.env.REDDIT_USER_AGENT,
+    },
     THESAURUS_API_TOKEN:process.env.THESAURUS_API_TOKEN,
     DEBUG:process.env.DEBUG,
     HOST:process.env.HOST,
