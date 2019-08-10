@@ -1,6 +1,7 @@
 const Store = require('../store');
 const IDoThings = require('../utils/idothings');
 const EatMeDaddyService = require('../services/eat_me_daddy_service');
+const LetterService = require('../services/letter_service');
 const axios = require('axios');
 
 class James {
@@ -135,7 +136,7 @@ class James {
         }
     }
 
-    /*static async smdhBoit(bot, user, slackMessage) {
+    static async smdhBoit(bot, user, slackMessage) {
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
 
         let post = {
@@ -146,24 +147,49 @@ class James {
         const smdhText = `smdh`;
         let lCase = text.toLowerCase();
         if (lCase.includes(smdhText)) {
-            let s = await db.call(sList);
-            let m = await db.call(mList);
-            let d = await db.call(dList);
-            let h = await db.call(hList);
-            let smdhArray = [s,m,d,h];
-            for (i = 0; i < 4; i++) {
-                if (smdhArray[i]) {
-                    let smdhRandom[i] = IDoThings.pickRandomElement(smdhArray[i]);
-                    message = `${smdhRandom[i]}`
+            let smdhArray = [];
+            for (i = 0; i < smdhText.length; i++) {
+                    let x = smdhText.charAt(i);
+                    let search = await LetterService.getAllWordsForLetter(x);
+                    smdhArray.push(search);
                 }
-                else {
-                    message = "ErRoR";
+            function shuffle(array){
+                let x = array.length, tempVal, curIndex;
+                while (x) {
+                    curIndex = Math.floor(Math.random() * x--);
+                    tempVal = array[x];
+                    array[x] = array[curIndex];
+                    array[curIndex] = array[tempVal];
                 }
-                post.message = message;
-                return post
+                return array;
+                }
+            
+            let shuffled = shuffle(smdhArray);
+            post.message = shuffled.join(" ");
+            return post;
+        }
+        if (lCase.startsWith('smdcreate ')) {
+            let split = lCase.substr(9);
+            let letter = split[0];
+            let word = split.substr(1);
+            let search = await LetterService.createALetterToWord(letter, word);
+            if (search) {
+                post.message = `great you added ${word} to the letter ${letter}`;
+                return post;
             }
         }
-    }*/
+        if (lCase.startsWith('smddelete ')) {
+            let split = lCase.substr(9);
+            let letter = split[0];
+            let word = split.substr(1);
+            let search = await LetterService.deleteAWordForLetter(letter, word);
+            if (search) {
+                post.message = `great you deleted ${word} from the letter ${letter}`;
+                return post;
+            }
+
+        } 
+    }
 
     /* This is my version Bitches, also if you would like to add in a REAL food choice of some food establishment near the Atlanta area, you are welcome to.*/
     /* static fatBoit(bot, storedUser, text, channel){

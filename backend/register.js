@@ -217,6 +217,13 @@ const Register = [
       "Looking for the real definition of a word? Urbanboit can assist with that.",
     function: James.urbanBoit
   },
+  {
+    acknowledge: 'smdh',
+    name: "smdhBoit",
+    command: "To add a word to a letter 'smdcreate [letter] [word]' and to delete a word from a letter 'smddelete [letter] [word]'",
+    description: "Defines 'smdh'",
+    function: James.smdhBoit
+  },
 
   // *** Logan *** //
   {
