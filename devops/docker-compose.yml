@@ -16,7 +16,7 @@ services:
       - DB_SEQUELIZE_DIALECT=postgres
   postgres:
     container_name: slackboit_postgres
-    image: postgres:latest
+    image: postgres
     ports:
       - "5432:5432"
     env_file:
