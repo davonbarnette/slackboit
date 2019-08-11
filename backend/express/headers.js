@@ -6,4 +6,4 @@ const EXPRESS_HEADERS = {
     'Cache-Control':'no-cache'
 };
 
-module.exports = EXPRESS_HWEADERS;
+module.exports = EXPRESS_HEADERS;
