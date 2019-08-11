@@ -30,6 +30,17 @@ class IDoThings {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
+    static shufflay(a) {
+        let j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+        return a;
+    }
+
     static emojifyyyyyy(text, maxNumEmojis = 5, maxNumChars = 200){
         let split = text.split(' ');
         if (split.length > maxNumChars) split = split.slice(0, maxNumChars);

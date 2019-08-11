@@ -11,6 +11,7 @@ let config = {
     database:NAME,
     host:HOST,
     dialect:SEQUELIZE_DIALECT,
+    seederStorage: 'sequelize',
 };
 
 module.exports = {

@@ -148,32 +148,22 @@ class James {
         let lCase = text.toLowerCase();
         if (lCase.includes(smdhText)) {
             let smdhArray = [];
-            for (i = 0; i < smdhText.length; i++) {
-                    let x = smdhText.charAt(i);
-                    let search = await LetterService.getAllWordsForLetter(x);
-                    smdhArray.push(search);
-                }
-            /*function shuffle(array){
-                let x = array.length, tempVal, curIndex;
-                while (x) {
-                    curIndex = Math.floor(Math.random() * x--);
-                    tempVal = array[x];
-                    array[x] = array[curIndex];
-                    array[curIndex] = array[tempVal];
-                }
-                return array;
-                }*/
-            
-            //let shuffled = shuffle(smdhArray);
-            let joined = smdhArray.join(" ");
-            post.message = `${joined}`;
+            for (let i = 0; i < smdhText.length; i++) {
+                let x = smdhText.charAt(i);
+                let search = await LetterService.getAllWordsForLetter(x);
+                if (search && search.length > 0) smdhArray.push(IDoThings.pickRandomElement(search));
+                else smdhArray.push(x)
+            }
+
+            let shuffled = IDoThings.shufflay(smdhArray);
+            post.message = shuffled.join(" ");
             return post;
         }
         if (lCase.startsWith('smdcreate ')) {
             let splat = lCase.split(" ");
             let letter = splat[1];
             let word = splat[2];
-            let search = await LetterService.createALetterToWord(letter, word);
+            let search = await LetterService.createALetterToWord(user.id, letter, word);
             if (search) {
                 post.message = `great you added ${word} to the letter ${letter}`;
                 return post;

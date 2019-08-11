@@ -27,7 +27,7 @@ class Slackboit {
     async onOpen(){
         Logger.info('[Slackboit] Slackboit connection opened');
         Store.slackboitedGoodbye = false;
-        this.bot.postMessage('C8D37PPQ9', 'hello', {});
+        if (process.env.NODE_ENV === 'production') this.bot.postMessage('C8D37PPQ9', 'hello', {});
         return UserService.updateUserRegistry(this.bot);
     }
 
@@ -37,7 +37,7 @@ class Slackboit {
 
         // prop "user" is actually an id, so we access Store.usersById to get the storedUser object
         let {type, text, channel, user:userId, bot_id} = event;
-        if (type === 'goodbye') {
+        if (type === 'goodbye' && process.env.NODE_ENV === 'production') {
             Store.slackboitedGoodbye = true;
             let message = `cya later everyone, reboot me at ${SETTINGS.HOST}/slack/reboot`;
             this.bot.postMessage('C8D37PPQ9', message, {});
