@@ -5,6 +5,7 @@ const UserService = require('./services/user_service');
 const USERS_BY_ID = require('./utils/users');
 const IDoThings = require('./utils/idothings');
 const SETTINGS = require('./settings');
+const Register = require ('./register');
 
 class Slackboit {
     constructor(register){
@@ -18,11 +19,15 @@ class Slackboit {
             this.bot = new SlackBot({token, name: 'Slackboit'});
             this.bot.on('open', this.onOpen.bind(this));
             this.bot.on('message', this.onMessage.bind(this));
+            this.bot.on('close', () => console.log('closed connection'));
+            this.bot.on('error', (err) => Logger.info('[Slackboit] Slackboit connection error', err));
         }
     }
 
     async onOpen(){
         Logger.info('[Slackboit] Slackboit connection opened');
+        Store.slackboitedGoodbye = false;
+        this.bot.postMessage('C8D37PPQ9', 'hello', {});
         return UserService.updateUserRegistry(this.bot);
     }
 
@@ -32,6 +37,12 @@ class Slackboit {
 
         // prop "user" is actually an id, so we access Store.usersById to get the storedUser object
         let {type, text, channel, user:userId, bot_id} = event;
+        if (type === 'goodbye') {
+            Store.slackboitedGoodbye = true;
+            let message = `cya later everyone, reboot me at ${SETTINGS.HOST}/slack/reboot`;
+            this.bot.postMessage('C8D37PPQ9', message, {});
+        }
+
         if (type === 'message') {
             if (Store.disabledUntil > new Date().getTime()) return null;
             let storedUser = Store.usersById[userId];
@@ -78,4 +89,4 @@ class Slackboit {
     }
 }
 
-module.exports = Slackboit;
+module.exports = new Slackboit(Register);

@@ -5,7 +5,6 @@ const Settings = require('../settings');
 const zalgo = require('to-zalgo');
 const UserService = require('../services/user_service');
 const Reddit = require('../utils/reddit');
-const Tesseract = require('tesseract.js');
 
 class Yeetus {
 
@@ -199,37 +198,20 @@ class Yeetus {
             const config = IDoThings.deletusAcknowledge(text, acknowledge);
             const [subreddit, maxNumEmojis, maxNumChars] = config.split(' ');
 
-            if (!subreddit) return post;
+            if (!subreddit) {
+                post.message = 'enter a subroidit';
+                return post;
+            }
 
             let submissions = await Reddit.api.getSubreddit(subreddit).getHot();
-            if (submissions){
+            if (submissions && submissions.length !== 0){
                 let randoSubmittion = IDoThings.pickRandomElement(submissions);
-                let { selftext, title, preview } = randoSubmittion;
-                if (!selftext || selftext === ''){
-                    if (Store.tesseractWorkerRunning) post.message = 'already running ocr cannot do again pls';
-                    else if (preview && preview.images && preview.images[0] && preview.images[0].source){
-                        const {url} = preview.images[0].source;
-                        let worker = new Tesseract.TesseractWorker();
-                        worker.recognize(url)
-                            .catch(err => worker.terminate())
-                            .then(result => {
-                                let payload = '';
-                                result.words.forEach(word => {
-                                    const {text, confidence} = word;
-                                    if (confidence > 60) payload += `${text} `
-                                });
-                                payload = IDoThings.emojifyyyyyy(payload);
-                                bot.postMessage(channel, payload, {attachments: [{title: text, image_url: url}]});
-                                worker.terminate();
-                                Store.tesseractWorkerRunning = false;
-                            });
-                        post.message = 'running ocr on that b...';
-                    }
-                    else post.message = IDoThings.emojifyyyyyy(title, maxNumEmojis, maxNumChars);
-                }
+                let { selftext, title } = randoSubmittion;
+                if (!selftext || selftext === '') post.message = IDoThings.emojifyyyyyy(title, maxNumEmojis, maxNumChars);
                 else post.message = IDoThings.emojifyyyyyy(selftext, maxNumEmojis, maxNumChars);
             }
-            else post.message = 'no subroidit found';
+
+            else post.message = 'subroidit not found';
             return post;
         }
     }

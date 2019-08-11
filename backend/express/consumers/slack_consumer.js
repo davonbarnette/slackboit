@@ -4,6 +4,8 @@ const SlackMessageFactory = require('../../factories/slack_message_factory');
 const IDoThings = require('../../utils/idothings');
 const USERS_BY_ID = require('../../utils/users');
 const path = require('path');
+const Slackboit = require('../../slackboit');
+const Store = require('../../store');
 
 class SlackConsumer {
 
@@ -16,6 +18,15 @@ class SlackConsumer {
         const {token, challenge} = body;
 
         if (token && challenge) res.status(200).json({challenge})
+    }
+
+    static reboot(req, res){
+        if (Store.slackboitedGoodbye){
+            Slackboit.startEmUp();
+            res.status(200).send('you did it');
+        }
+        else res.status(200).send('slackboit is not ded yet, cannot reboot')
+
     }
 
     static onGetFunctions(req, res){
