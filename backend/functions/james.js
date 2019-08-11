@@ -141,7 +141,7 @@ class James {
 
         let post = {
             message: null, 
-            params: {icon_url: IDoThings.getImageURL(``)},
+            params: {},
         };
 
         const smdhText = `smdh`;
@@ -153,7 +153,7 @@ class James {
                     let search = await LetterService.getAllWordsForLetter(x);
                     smdhArray.push(search);
                 }
-            function shuffle(array){
+            /*function shuffle(array){
                 let x = array.length, tempVal, curIndex;
                 while (x) {
                     curIndex = Math.floor(Math.random() * x--);
@@ -162,10 +162,11 @@ class James {
                     array[curIndex] = array[tempVal];
                 }
                 return array;
-                }
+                }*/
             
-            let shuffled = shuffle(smdhArray);
-            post.message = shuffled.join(" ");
+            //let shuffled = shuffle(smdhArray);
+            let joined = smdhArray.join(" ");
+            post.message = `${joined}`;
             return post;
         }
         if (lCase.startsWith('smdcreate ')) {
