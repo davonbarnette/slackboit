@@ -169,9 +169,9 @@ class James {
             return post;
         }
         if (lCase.startsWith('smdcreate ')) {
-            let split = lCase.substr(9);
-            let letter = split[0];
-            let word = split.substr(1);
+            let splat = lCase.split(" ");
+            let letter = splat[1];
+            let word = splat[2];
             let search = await LetterService.createALetterToWord(letter, word);
             if (search) {
                 post.message = `great you added ${word} to the letter ${letter}`;
@@ -179,9 +179,9 @@ class James {
             }
         }
         if (lCase.startsWith('smddelete ')) {
-            let split = lCase.substr(9);
-            let letter = split[0];
-            let word = split.substr(1);
+            let splat = lCase.split(" ");
+            let letter = splat[1];
+            let word = splat[2];
             let search = await LetterService.deleteAWordForLetter(letter, word);
             if (search) {
                 post.message = `great you deleted ${word} from the letter ${letter}`;
