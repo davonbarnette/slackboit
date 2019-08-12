@@ -316,6 +316,44 @@ class Dan {
         }
     }
 
+    // he unclean
+    static async poopSpillerBoit(bot, user, slackMessage) {
+        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url:IDoThings.getImageURL('slackboit_monocle.png')},
+        }
+
+        const acknowledge = "slackboit, spill the poop please"
+        if (text.startsWith(acknowledge)){
+            let letters = ['s', 'm', 'd', 'h']
+            let shuffledLetters = IDoThings.shufflay(letters)
+            let poops = []
+            let poopPrefix = 'po'
+            let poopSuffix = 'op'
+            for(let i = 1; i < 9; i++) {
+                let poop = poopPrefix
+                for(let j = 0; j < i; j++) {
+                    poop += 'o'
+                }
+                poop += poopSuffix
+                poops.push(poop)
+            }
+            for(let letter of shuffledLetters) {
+                for(let word of poops) {
+                    let response = await LetterService.createALetterToWord(user.id, letter, word)
+                    if(response) {
+                        //nice
+                    }
+
+                }
+            }
+            post.message = 'the poop has been spilled, my lord'
+            return post
+        }
+    }
+
     static async giffyBoiteru(bot, user, slackMessage) {
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
         /*

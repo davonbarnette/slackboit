@@ -158,6 +158,15 @@ const Register = [
       "he clean",
     function: Dan.poopCleanerBoit
   },
+  //WRONG AREA DANIEL KUN
+  {
+    acknowledge: "slackboit, spill the poop please",
+    name: "slackboit, spill the poop please",
+    command: "slackboit, spill the poop please",
+    description:
+      "he unclean",
+    function: Dan.poopSpillerBoit
+  },
   // *** Andy *** //
   {
     acknowledge: ["to be fair"],
