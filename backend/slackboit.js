@@ -40,7 +40,7 @@ class Slackboit {
         let {type, text, channel, user:userId, bot_id} = event;
         if (type === 'goodbye' && process.env.NODE_ENV === 'production') {
             Store.slackboitedGoodbye = true;
-            let message = `rIp... ${SETTINGS.HOST}/slack/reboot`;
+            let message = `rIp... reboot me at ${SETTINGS.HOST}`;
             this.bot.postMessage('CLV3SNCDD', message, {});
         }
 
