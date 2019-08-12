@@ -149,6 +149,15 @@ const Register = [
       "Slackboit hands you the perfect gif based on your search terms. If you specify nothing, good luck",
     function: Dan.giffyBoiteru
   },
+  //WRONG AREA DANIEL KUN
+  {
+    acknowledge: "slackboit, clean the poop please",
+    name: "slackboit, clean the poop please",
+    command: "slackboit, clean the poop please",
+    description:
+      "he clean",
+    function: Dan.poopCleanerBoit
+  },
   // *** Andy *** //
   {
     acknowledge: ["to be fair"],

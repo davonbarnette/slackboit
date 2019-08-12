@@ -1,5 +1,6 @@
 const axios = require('axios');
 const IDoThings = require('../utils/idothings');
+const LetterService = require('../services/letter_service');
 
 class Dan {
     static goodBoit(bot, user, slackMessage){
@@ -273,6 +274,44 @@ class Dan {
         const acknowledge = "リマインダー : Happy 420"
         if (text.includes(acknowledge)){
             post.message = ':snoop:'
+            return post
+        }
+    }
+
+    // he clean
+    static poopCleanerBoit(bot, user, slackMessage) {
+        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {icon_url:IDoThings.getImageURL('slackboit_monocle.png')},
+        }
+
+        const acknowledge = "slackboit, clean the poop please"
+        if (text.startsWith(acknowledge)){
+            let letters = ['s', 'm', 'd', 'h']
+            let shuffledLetters = IDoThings.shufflay(letters)
+            let message = ''
+            for(let letter of shuffledLetters) {
+                let words = await LetterService.getAllWordsForLetter(letter)
+                if(!words) {
+                    message += 'the poop was not cleaned for letter ' + letter + ', my lord. '
+                    continue
+                }
+                let poopCounter = 0
+                for(let word of words) {
+                    if(word.startsWith('po') && word.endsWith('op')) {
+                        let response = await LetterService.deleteAWordForLetter(letter, word)
+                        if(response) {
+                            poopCounter++
+                        }
+                    }
+                }
+
+                message += 'the poop is clean, my lord: ' + poopCounter + ' '
+
+            }
+            post.message = message
             return post
         }
     }
