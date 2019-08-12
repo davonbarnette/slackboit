@@ -1,0 +1,22 @@
+body {
+    margin:0;
+}
+#app {
+    height:100vh;
+    width:100vw;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-size: 50px 50px !important;;
+    background-repeat: repeat !important;
+}
+.content{
+    max-width:1000px;
+    display:flex;
+    flex-direction:column;
+    justify-content: flex-start;
+    padding: 24px;
+    box-sizing: border-box;
+    position:relative;
+}

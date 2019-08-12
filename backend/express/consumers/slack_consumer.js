@@ -23,9 +23,9 @@ class SlackConsumer {
     static reboot(req, res){
         if (Store.slackboitedGoodbye){
             Slackboit.startEmUp();
-            res.status(200).send('you did it');
+            res.status(200).json({message:'you did it'});
         }
-        else res.status(200).send('slackboit is not ded yet, cannot reboot')
+        else res.status(200).json({message:'slackboit is not ded yet, cannot reboot'})
 
     }
 
