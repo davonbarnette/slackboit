@@ -279,7 +279,7 @@ class Dan {
     }
 
     // he clean
-    static poopCleanerBoit(bot, user, slackMessage) {
+    static async poopCleanerBoit(bot, user, slackMessage) {
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
 
         let post = {
