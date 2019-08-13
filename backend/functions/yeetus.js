@@ -5,6 +5,7 @@ const Settings = require('../settings');
 const zalgo = require('to-zalgo');
 const UserService = require('../services/user_service');
 const Reddit = require('../utils/reddit');
+const emoji = require('node-emoji');
 
 class Yeetus {
 
@@ -148,25 +149,6 @@ class Yeetus {
             return post;
         }
     }
-
-    static async rechainTheBoit(bot, user, slackMessage){
-        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
-
-        let post = {
-            message: null,
-            params: {},
-        };
-
-        const acknowledge = 'rechain the boit';
-        if (text.startsWith(acknowledge)){
-            let time = parseInt(text.substr(acknowledge.length));
-            if (isNaN(time)) time = 60;
-            Store.slackboitUnchained.rechain(time);
-            post.message = `y'all dudes need jesus for ${time} seconds`;
-            return post;
-        }
-    }
-
     static async updeetusThatYeetus(bot, user, slackMessage){
         const { text, channel, event_ts, subtype, previous_message } = slackMessage;
 
@@ -180,6 +162,25 @@ class Yeetus {
             const users = await UserService.updateUserRegistry(bot);
             if (users) post.message = 'the yeetus has been updeetused';
             else post.message =  'could not updeetus the yeetus :(';
+            return post;
+        }
+    }
+
+    static async clapCheeks(bot, user, slackMessage){
+        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+        let post = {
+            message: null,
+            params: {},
+        };
+
+        const acknowledge = 'clapboit ';
+        if (text.startsWith(acknowledge)){
+            let split = IDoThings.deletusAcknowledge(text, acknowledge).split(' ');
+            let clap = emoji.get('clap');
+            let claps = `${clap} `;
+            split.forEach(word => claps+= `${word.toUpperCase()} ${clap} `);
+            post.message = claps;
             return post;
         }
     }

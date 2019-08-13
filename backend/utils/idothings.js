@@ -53,7 +53,7 @@ class IDoThings {
             }
             else aids += `${word} `;
         });
-        return aids;
+        return aids.substring(0, 1000);
     }
 
     static randoNumber(max, min = 0, round = true){

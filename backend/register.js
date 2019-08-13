@@ -26,20 +26,19 @@ const Register = [
       "Slackboit helps fight crime. If you or a loved one had their message deleted, he will tell you.",
     function: Yeetus.crimeAlert
   },
+  // {
+  //   acknowledge: "roidit ",
+  //   name: "reddit for the boit",
+  //   command: "roidit [SUBREDDIT] [MAX NUM EMOJIS] [MAX NUM WORDS]",
+  //   description: "Get a rando post from a subreddit and then copypasta that b",
+  //   function: Yeetus.roidit
+  // },
   {
-    acknowledge: "rechain the boit",
-    name: "SlackboitRechained",
-    command: "rechain the boit [TIME IN SECONDS]",
-    description:
-      "SlackboitUnchained becomes chained once more... smdh. Passing in no time defaults to 60 seconds.",
-    function: Yeetus.rechainTheBoit
-  },
-  {
-    acknowledge: "roidit ",
-    name: "reddit for the boit",
-    command: "roidit [SUBREDDIT] [MAX NUM EMOJIS] [MAX NUM WORDS]",
-    description: "Get a rando post from a subreddit and then copypasta that b",
-    function: Yeetus.roidit
+    acknowledge: "clapboit ",
+    name: "clap clap",
+    command: "clapboit [PHRASE]",
+    description: "clap the boits cheecks",
+    function: Yeetus.clapCheeks
   },
   {
     acknowledge: "slackboit updeetus the yeetus",

@@ -33,6 +33,7 @@ class Slackboit {
     }
 
     async onMessage(event){
+        if (event.type === 'desktop_notification') return null;
         Logger.info('[Slackboit] Incoming Message Event from Slack > ', event);
         if (!Store.usersById) return null;
 
@@ -50,7 +51,19 @@ class Slackboit {
 
             if (bot_id === USERS_BY_ID.SLACKBOIT) return null; // Prevent Slackboit recursion
 
-            if (text === 'calling slackboit helpdesk') this.sendHelpDesk(channel);
+            if (text.startsWith('chainboit ')){
+                let ripped = IDoThings.deletusAcknowledge(text, 'chainboit ');
+                let [curText, ...commands] = ripped.split('=&gt;');
+
+                for (let i = 0; i < commands.length; i++) {
+                    const command = commands[i].trim();
+                    let copiedEvent = {...event, text: `${command} ${curText}`};
+                    let post = await this.iterateRegister(storedUser, copiedEvent);
+                    if (post && post.message) curText = post.message;
+                }
+                this.bot.postMessage(event.channel, IDoThings.spongebobMemeify(curText), {});
+            }
+            else if (text === 'calling slackboit helpdesk') this.sendHelpDesk(channel);
             else await this.iterateRegister(storedUser, event, this.handlePost.bind(this));
         }
     }
@@ -69,6 +82,7 @@ class Slackboit {
             if (item.hasOwnProperty('function')) exec = item.function;
             let post = await exec(this.bot, user, data);
             if (post) {
+                if (!handlePost) return post;
                 let handled = handlePost(post, data);
                 if (handled === 'stop') return;
             }
