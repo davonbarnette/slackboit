@@ -41,6 +41,13 @@ const Register = [
     function: Yeetus.clapCheeks
   },
   {
+    acknowledge: "boitmandments ",
+    name: "boitMANDMENTS",
+    command: "boitmandments [COMMAND:add,delete,list] [CLAUSE NUMERAL] [CLAUSE TITLE] [CLAUSE DESCRIPTION] [PARENT CLAUSE]",
+    description: "boitmandments at its fullest autism",
+    function: Yeetus.boitmandments
+  },
+  {
     acknowledge: "slackboit updeetus the yeetus",
     name: "Updeetus the Yeetus",
     command: "slackboit updeetus the yeetus",

@@ -6,6 +6,7 @@ const zalgo = require('to-zalgo');
 const UserService = require('../services/user_service');
 const Reddit = require('../utils/reddit');
 const emoji = require('node-emoji');
+const BoitmandmentService = require('../services/boitmandment_service');
 
 class Yeetus {
 
@@ -181,6 +182,44 @@ class Yeetus {
             let claps = `${clap} `;
             split.forEach(word => claps+= `${word.toUpperCase()} ${clap} `);
             post.message = claps;
+            return post;
+        }
+    }
+
+    static async boitmandments(bot, user, slackMessage){
+        const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+        let post = {
+            message: null,
+            params: {},
+        };
+
+        const acknowledge = 'boitmandments ';
+        if (text.startsWith(acknowledge)){
+            let config = IDoThings.deletusAcknowledge(text, acknowledge).split('&amp;&amp;');
+            config = config.map(item => item.trim());
+            const [command, numeral, title, description, parent_clause] = config;
+
+            if (command === 'add'){
+                let created = await BoitmandmentService.createABoitmandment(user.id, numeral, title, description, parent_clause);
+                if (created) post.message = 'successfully added a boitmandment';
+            }
+            else if (command === 'delete'){
+                let deleted = await BoitmandmentService.deleteBoitmandment(numeral);
+                if (deleted) post.message = 'successfully deleted a boitmandment';
+            }
+            else if (command === 'list'){
+                let boitmandments = await BoitmandmentService.getAllBoitmandments();
+                if (boitmandments){
+                    post.message = boitmandments
+                        .map(boitmandment => {
+                            const {numeral, title, description} = boitmandment;
+                            let parent_clause = boitmandment.parent_clause ? `(${boitmandment.parent_clause})` : '';
+                            return `${numeral}(${parent_clause}). ${title}\n ${description}`
+                        })
+                        .join('\n\n');
+                }
+            }
             return post;
         }
     }
