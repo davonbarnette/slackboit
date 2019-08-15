@@ -103,6 +103,25 @@ class James {
             }
     }
 
+    static async judgeBoit(bot, user, slackMessage) {
+        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
+        
+        let post = {
+            message: null,
+            params: {},
+        };
+
+        const judge = 'judgeboit ';
+        let lCase = text.toLowerCase();
+        if (lCase.startsWith(judge)) {
+            let or = IDoThings.deletusAcknowledge(text, judge).split(' or ');
+            let choiceOr = IDoThings.pickRandomElement(or);
+            post.message = `I hereby decide through my decisionism that ${choiceOr} is the decision!`;
+            return post;
+
+        }
+    }
+
     static async urbanBoit(bot, user, slackMessage) {
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
 

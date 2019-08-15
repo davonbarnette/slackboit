@@ -242,11 +242,19 @@ const Register = [
     function: James.urbanBoit
   },
   {
-    acknowledge: 'smdh',
+    acknowledge: "smdh",
     name: "smdhBoit",
     command: "To add a word to a letter 'smdcreate [letter] [word]' and to delete a word from a letter 'smddelete [letter] [word]'",
     description: "Defines 'smdh'",
     function: James.smdhBoit
+  },
+
+  {
+    acknowledge: "judgeboit",
+    name: "JudgeBoit",
+    command: "judgeboit [option 1] or [option 2]",
+    description: "He makes the ultimate decision",
+    function: James.judgeBoit
   },
 
   // *** Logan *** //
