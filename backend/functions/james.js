@@ -115,9 +115,15 @@ class James {
         let lCase = text.toLowerCase();
         if (lCase.startsWith(judge)) {
             let or = IDoThings.deletusAcknowledge(text, judge).split(' or ');
-            let choiceOr = IDoThings.pickRandomElement(or);
-            post.message = `I hereby decide through my decisionism that ${choiceOr} is the decision!`;
-            return post;
+            if (or.length < 2) { 
+                post.message = "view the helpdesk";
+                return post;
+            }
+            else {
+                let choiceOr = IDoThings.pickRandomElement(or);
+                post.message = `I hereby decide through my decisionism that ${choiceOr} is the decision!`;
+                return post;
+            }
 
         }
     }
