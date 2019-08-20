@@ -215,7 +215,7 @@ class Yeetus {
                         .map(boitmandment => {
                             const {numeral, title, description} = boitmandment;
                             let parent_clause = boitmandment.parent_clause ? `(${boitmandment.parent_clause})` : '';
-                            return `${numeral}(${parent_clause}). ${title}\n ${description}`
+                            return `*${numeral}(${parent_clause}).* ${title}\n _${description}_`
                         })
                         .join('\n\n');
                 }
