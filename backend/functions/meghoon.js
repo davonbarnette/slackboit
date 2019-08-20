@@ -32,7 +32,7 @@ class Meghoon {
 
         let post = {
             message: null,
-            params: {},
+            params: {icon_url:IDoThings.getImageURL('bobbyboit.png')},
         };
 
         const acknowledge = 'bobbyboit';
