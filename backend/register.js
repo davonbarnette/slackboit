@@ -281,6 +281,13 @@ const Register = [
     command: "feed me",
     description: "Can only be triggered by the meghoit herself",
     function: Meghoit.ketoizeMe
+  },
+  {
+    acknowledge: "bobbyboit",
+    name: "bobbyboit",
+    command: "bobbyboit",
+    description: "bobbyboit",
+    function: Meghoit.bobbyboit
   }
 ];
 

@@ -1,6 +1,7 @@
 const Store = require('../store');
 const IDoThings = require('../utils/idothings');
 const USERS_BY_ID = require('../utils/users');
+const boobyBPhrases = require('../utils/stuff');
 
 class Meghoon {
     //Post a new example function below this line:
@@ -22,6 +23,21 @@ class Meghoon {
                 "Put in your own fucking entries meghoit"
             ];
             post.message = IDoThings.pickRandomElement(choices);
+            return post;
+        }
+    }
+
+    static bobbyboit(bot, user, slackMessage){
+        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
+
+        let post = {
+            message: null,
+            params: {},
+        };
+
+        const acknowledge = 'bobbyboit';
+        if (text.startsWith(acknowledge)) {
+            post.message = IDoThings.pickRandomElement(boobyBPhrases);
             return post;
         }
     }
