@@ -118,6 +118,41 @@ class Andy {
       return post;
     }
   }
+
+  static async salesboit(bot, user, slackMessage) {
+    let { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+    let post = {
+      message: null,
+      params: {
+        icon_url: IDoThings.getImageURL("slackboit_original.png")
+      }
+    };
+
+    const acknowledge = "salesboit";
+    let lowered = text.toLowerCase();
+    if (lowered.startsWith(acknowledge)) {
+      lowered = IDoThings.deletusAcknowledge(text, acknowledge);
+      if (lowered.startsWith(" ")) {
+        let split = lowered.split(" ");
+        let product = split[1];
+        let thing = split[2];
+
+        let output =
+          "Slaps roof of " +
+          product +
+          " this bad boy can fit so much " +
+          thing +
+          " in it";
+        post.message = output;
+        return post;
+      } else {
+        let output = "Not for sale thot";
+        post.message = output;
+        return post;
+      }
+    }
+  }
 }
 
 module.exports = Andy;

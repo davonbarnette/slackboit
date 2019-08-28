@@ -207,6 +207,14 @@ const Register = [
     function: Andy.asciiBoit
   },
 
+  {
+    acknowledge: "salesboit",
+    name: "Car Salesman Boit",
+    command: "asciiboit",
+    description: "SALESBOIT SLAPS ROOF OF CAR",
+    function: Andy.salesboit
+  }
+
   // *** Burtle *** //
   {
     acknowledge: "smonk or dronk?",
