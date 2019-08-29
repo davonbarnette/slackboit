@@ -43,7 +43,8 @@ const Register = [
   {
     acknowledge: "boitmandments ",
     name: "boitMANDMENTS",
-    command: "boitmandments [COMMAND:add,delete,list] [CLAUSE NUMERAL] [CLAUSE TITLE] [CLAUSE DESCRIPTION] [PARENT CLAUSE]",
+    command:
+      "boitmandments [COMMAND:add,delete,list] [CLAUSE NUMERAL] [CLAUSE TITLE] [CLAUSE DESCRIPTION] [PARENT CLAUSE]",
     description: "boitmandments at its fullest autism",
     function: Yeetus.boitmandments
   },
@@ -198,6 +199,14 @@ const Register = [
     function: Andy.asciiBoit
   },
 
+  {
+    acknowledge: "salesboit",
+    name: "Car Salesman Boit",
+    command: "asciiboit",
+    description: "SALESBOIT SLAPS ROOF OF CAR",
+    function: Andy.salesboit
+  },
+
   // *** Burtle *** //
   {
     acknowledge: "smonk or dronk?",
@@ -235,7 +244,8 @@ const Register = [
   {
     acknowledge: "smdh",
     name: "smdhBoit",
-    command: "To add a word to a letter 'smdcreate [letter] [word]' and to delete a word from a letter 'smddelete [letter] [word]'",
+    command:
+      "To add a word to a letter 'smdcreate [letter] [word]' and to delete a word from a letter 'smddelete [letter] [word]'",
     description: "Defines 'smdh'",
     function: James.smdhBoit
   },
