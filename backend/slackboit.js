@@ -70,6 +70,7 @@ class Slackboit {
 
     handlePost(post, data){
         let {message, params, stop, spongebobify, channel} = post;
+        Logger.info('Attempting to post message to channel > ', message);
         if (spongebobify !== false) message = IDoThings.spongebobMemeify(message);
         this.bot.postMessage(channel || data.channel, message, params);
         if (stop) return 'stop';
