@@ -129,10 +129,11 @@ const Register = [
     function: Dan.greetingBoit
   },
   {
-    acknowledge: ["kawaiiboit", "kawaiiboit act 2", "kawaiiboit act 3"],
+    acknowledge: ["kawaiiboit", "kawaiiboit act 1", "kawaiiboit act 2", "kawaiiboit act 3"],
     name: "hewwo :3",
     command: [
       "kawaiiboit [PHRASE]",
+      "kawaiiboit act 1 [PHRASE]",
       "kawaiiboit act 2 [PHRASE]",
       "kawaiiboit act 3 [PHRASE]"
     ],
@@ -160,7 +161,7 @@ const Register = [
   {
     acknowledge: "teslaboit ['turn on', 'turn off', 'temperature', 'location']",
     name: "teslaboit",
-    command: "teslaboit, whats my car's temperature?",
+    command: "teslaboit, whats my car's temperature? or something like that",
     description:
       "commands for dans tesla",
     function: Dan.elonBoit

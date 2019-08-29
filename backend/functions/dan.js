@@ -138,7 +138,6 @@ class Dan {
             let uWuString = ''
             if (level === 0) {
                 text = lowered.substring(acknowledge[0].length + 1)
-                uWuString = IDoThings.pickRandomElement(heh) + ' '
                 let diceRoll = Math.floor(Math.random() * 100)
                 if (diceRoll <= 33) {
                     level = 1
@@ -282,11 +281,9 @@ class Dan {
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
 
         const acknowledge = 'teslaboit'
-        let lowered = text.toLowerCase().trim()
-        if(lowered.includes(acknowledge) && (lowered.includes('temperature') ||
-                                             lowered.includes('location') ||
-                                             lowered.includes('turn on') ||
-                                             lowered.includes('turn off'))) {
+        let lowered = text.toLowerCase()
+
+        if(lowered.includes(acknowledge)) {
             let post = {
                 message: null,
                 params: {icon_url:IDoThings.getImageURL('rollboit.jpg')},
@@ -298,60 +295,68 @@ class Dan {
             let turnOnMyAC = lowered.includes('turn on')
             let turnOffMyAC = lowered.includes('turn off')
 
+            //errors
             let sadFace = 'only one command at a time, please'
             let errorFace = 'nope :('
 
-            if(temp) {
-                if(location ||
-                    turnOnMyAC ||
-                    turnOffMyAC){
-                    post.message = sadFace
-                }else {
-                    let resp = await TESLAService.getMyCarsTemperature()
-                    if(!resp) { post.message = errorFace }
-                    let convertedDegrees = IDoThings.convertToFahrenheit(resp)
-                    let message = ''
-                    if(convertedDegrees < 65) {
-                        message = 'hope you brought a hoodie'
-                    }else if(convertedDegrees >= 65 && convertedDegrees < 80) {
-                        message = 'nice'
-                    }else if(convertedDegrees >= 80) {
-                        message = 'boy its sure hot out there!!'
+            try {
+                if(temp) {
+                    if(location ||
+                        turnOnMyAC ||
+                        turnOffMyAC){
+                        post.message = sadFace
+                    }else {
+                        let resp = await TESLAService.getMyCarsTemperature()
+                        if(!resp) { post.message = errorFace }
+                        let convertedDegrees = IDoThings.convertToFahrenheit(resp)
+                        let message = ''
+                        if(convertedDegrees < 65) {
+                            message = 'hope you brought a hoodie'
+                        }else if(convertedDegrees >= 65 && convertedDegrees < 80) {
+                            message = 'nice'
+                        }else if(convertedDegrees >= 80) {
+                            message = 'boy its sure hot out there!!'
+                        }
+                        post.message = message + ': ' + convertedDegrees + ' degrees'
                     }
-                    post.message = message + ': ' + convertedDegrees + ' degrees'
-                }
 
-            }else if(location){
-                if(temp ||
-                    turnOnMyAC ||
+                }else if(location){
+                    if(temp ||
+                        turnOnMyAC ||
+                        turnOffMyAC){
+                        post.message = sadFace
+                    }else {
+                        let resp = await TESLAService.getMyCarsLocation()
+                        if(!resp) { post.message = errorFace }
+                        post.message = 'its not like i wanted you to know where i was... ' + resp
+                    }
+                }else if(turnOnMyAC){
+                    if(location ||
+                    temp ||
                     turnOffMyAC){
-                    post.message = sadFace
+                        post.message = sadFace
+                    }else {
+                        let resp = await TESLAService.startMyCarsClimate()
+                        if(!resp) { post.message = errorFace }
+                        post.message = 'model 3 is preconditioning'
+                    }
+                }else if(turnOffMyAC){
+                    if(location ||
+                    temp ||
+                    turnOnMyAC){
+                        post.message = sadFace
+                    }else {
+                        let resp = await TESLAService.stopMyCarsClimate()
+                        if(!resp) { post.message = errorFace }
+                        post.message = 'model 3 is off'
+                    }
                 }else {
-                    let resp = await TESLAService.getMyCarsLocation()
-                    if(!resp) { post.message = errorFace }
-                    post.message = 'its not like i wanted you to know where i was... ' + resp
+                    post.message = 'no commando given'
                 }
-            }else if(turnOnMyAC){
-                if(location ||
-                temp ||
-                turnOffMyAC){
-                    post.message = sadFace
-                }else {
-                    let resp = await TESLAService.startMyCarsClimate()
-                    if(!resp) { post.message = errorFace }
-                    post.message = 'model 3 is preconditioning'
-                }
-            }else if(turnOffMyAC){
-                if(location ||
-                temp ||
-                turnOnMyAC){
-                    post.message = sadFace
-                }else {
-                    let resp = await TESLAService.stopMyCarsClimate()
-                    if(!resp) { post.message = errorFace }
-                    post.message = 'model 3 is off'
-                }
+            } catch (error) {
+                post.message = error
             }
+
             return post
         }
     }
