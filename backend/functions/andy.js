@@ -125,7 +125,7 @@ class Andy {
     let post = {
       message: null,
       params: {
-        icon_url: IDoThings.getImageURL("slackboit_original.png")
+        icon_url: IDoThings.getImageURL("salesboit.jpg")
       }
     };
 

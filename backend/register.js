@@ -43,7 +43,8 @@ const Register = [
   {
     acknowledge: "boitmandments ",
     name: "boitMANDMENTS",
-    command: "boitmandments [COMMAND:add,delete,list] [CLAUSE NUMERAL] [CLAUSE TITLE] [CLAUSE DESCRIPTION] [PARENT CLAUSE]",
+    command:
+      "boitmandments [COMMAND:add,delete,list] [CLAUSE NUMERAL] [CLAUSE TITLE] [CLAUSE DESCRIPTION] [PARENT CLAUSE]",
     description: "boitmandments at its fullest autism",
     function: Yeetus.boitmandments
   },
@@ -160,8 +161,7 @@ const Register = [
     acknowledge: "slackboit, clean the poop please",
     name: "slackboit, clean the poop please",
     command: "slackboit, clean the poop please",
-    description:
-      "he clean",
+    description: "he clean",
     function: Dan.poopCleanerBoit
   },
   //WRONG AREA DANIEL KUN
@@ -169,8 +169,7 @@ const Register = [
     acknowledge: "slackboit, spill the poop please",
     name: "slackboit, spill the poop please",
     command: "slackboit, spill the poop please",
-    description:
-      "he unclean",
+    description: "he unclean",
     function: Dan.poopSpillerBoit
   },
   // *** Andy *** //
@@ -213,7 +212,7 @@ const Register = [
     command: "asciiboit",
     description: "SALESBOIT SLAPS ROOF OF CAR",
     function: Andy.salesboit
-  }
+  },
 
   // *** Burtle *** //
   {
@@ -252,7 +251,8 @@ const Register = [
   {
     acknowledge: "smdh",
     name: "smdhBoit",
-    command: "To add a word to a letter 'smdcreate [letter] [word]' and to delete a word from a letter 'smddelete [letter] [word]'",
+    command:
+      "To add a word to a letter 'smdcreate [letter] [word]' and to delete a word from a letter 'smddelete [letter] [word]'",
     description: "Defines 'smdh'",
     function: James.smdhBoit
   },
