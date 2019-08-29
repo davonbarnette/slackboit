@@ -139,15 +139,15 @@ class Andy {
         let thing = split[2];
 
         let output =
-          "Slaps roof of " +
+          "* *Slaps roof of " +
           product +
-          " this bad boy can fit so much " +
+          "* * this bad boy can fit so much " +
           thing +
           " in it";
         post.message = output;
         return post;
       } else {
-        let output = "Not for sale thot";
+        let output = "Not for sale, thot";
         post.message = output;
         return post;
       }
