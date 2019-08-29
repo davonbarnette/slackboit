@@ -1,6 +1,6 @@
 const axios = require('axios');
 const IDoThings = require('../utils/idothings');
-const LetterService = require('../services/letter_service');
+const TESLAService = require('../services/dans_tesla_service');
 
 class Dan {
     static goodBoit(bot, user, slackMessage){
@@ -278,81 +278,85 @@ class Dan {
         }
     }
 
-    // he clean
-    static async poopCleanerBoit(bot, user, slackMessage) {
+    static async elonBoit(bot, user, slackMessage){
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
 
-        let post = {
-            message: null,
-            params: {icon_url:IDoThings.getImageURL('slackboit_monocle.png')},
-        }
-
-        const acknowledge = "slackboit, clean the poop please"
-        if (text.startsWith(acknowledge)){
-            let letters = ['s', 'm', 'd', 'h']
-            let shuffledLetters = IDoThings.shufflay(letters)
-            let message = ''
-            for(let letter of shuffledLetters) {
-                let words = await LetterService.getAllWordsForLetter(letter)
-                if(!words) {
-                    message += 'the poop was not cleaned for letter ' + letter + ', my lord. '
-                    continue
-                }
-                let poopCounter = 0
-                for(let word of words) {
-                    if(word.startsWith('po') && word.endsWith('op')) {
-                        let response = await LetterService.deleteAWordForLetter(letter, word)
-                        if(response) {
-                            poopCounter++
-                        }
-                    }
-                }
-
-                message += 'the poop is clean, my lord: ' + poopCounter + ' '
-
+        const acknowledge = 'teslaboit'
+        let lowered = text.toLowerCase().trim()
+        if(lowered.includes(acknowledge) && (lowered.includes('temperature') ||
+                                             lowered.includes('location') ||
+                                             lowered.includes('turn on') ||
+                                             lowered.includes('turn off'))) {
+            let post = {
+                message: null,
+                params: {icon_url:IDoThings.getImageURL('rollboit.jpg')},
             }
-            post.message = message
+
+            //commands
+            let temp = lowered.includes('temperature')
+            let location = lowered.includes('location')
+            let turnOnMyAC = lowered.includes('turn on')
+            let turnOffMyAC = lowered.includes('turn off')
+
+            let sadFace = 'only one command at a time, please'
+            let errorFace = 'nope :('
+
+            if(temp) {
+                if(location ||
+                    turnOnMyAC ||
+                    turnOffMyAC){
+                    post.message = sadFace
+                }else {
+                    let resp = await TESLAService.getMyCarsTemperature()
+                    if(!resp) { post.message = errorFace }
+                    let convertedDegrees = IDoThings.convertToFahrenheit(resp)
+                    let message = ''
+                    if(convertedDegrees < 65) {
+                        message = 'hope you brought a hoodie'
+                    }else if(convertedDegrees >= 65 && convertedDegrees < 80) {
+                        message = 'nice'
+                    }else if(convertedDegrees >= 80) {
+                        message = 'boy its sure hot out there!!'
+                    }
+                    post.message = message + ': ' + convertedDegrees + ' degrees'
+                }
+
+            }else if(location){
+                if(temp ||
+                    turnOnMyAC ||
+                    turnOffMyAC){
+                    post.message = sadFace
+                }else {
+                    let resp = await TESLAService.getMyCarsLocation()
+                    if(!resp) { post.message = errorFace }
+                    post.message = 'its not like i wanted you to know where i was... ' + resp
+                }
+            }else if(turnOnMyAC){
+                if(location ||
+                temp ||
+                turnOffMyAC){
+                    post.message = sadFace
+                }else {
+                    let resp = await TESLAService.startMyCarsClimate()
+                    if(!resp) { post.message = errorFace }
+                    post.message = 'model 3 is preconditioning'
+                }
+            }else if(turnOffMyAC){
+                if(location ||
+                temp ||
+                turnOnMyAC){
+                    post.message = sadFace
+                }else {
+                    let resp = await TESLAService.stopMyCarsClimate()
+                    if(!resp) { post.message = errorFace }
+                    post.message = 'model 3 is off'
+                }
+            }
             return post
         }
     }
 
-    // he unclean
-    static async poopSpillerBoit(bot, user, slackMessage) {
-        let {text, channel, event_ts, subtype, previous_message} = slackMessage;
 
-        let post = {
-            message: null,
-            params: {icon_url:IDoThings.getImageURL('slackboit_monocle.png')},
-        }
-
-        const acknowledge = "slackboit, spill the poop please"
-        if (text.startsWith(acknowledge)){
-            let letters = ['s', 'm', 'd', 'h']
-            let shuffledLetters = IDoThings.shufflay(letters)
-            let poops = []
-            let poopPrefix = 'po'
-            let poopSuffix = 'op'
-            for(let i = 1; i < 9; i++) {
-                let poop = poopPrefix
-                for(let j = 0; j < i; j++) {
-                    poop += 'o'
-                }
-                poop += poopSuffix
-                poops.push(poop)
-            }
-            for(let letter of shuffledLetters) {
-                for(let word of poops) {
-                    let response = await LetterService.createALetterToWord(user.id, letter, word)
-                    if(response) {
-                        //nice
-                    }
-
-                }
-            }
-            post.message = 'the poop has been spilled, my lord'
-            return post
-        }
-    }
 
     static async giffyBoiteru(bot, user, slackMessage) {
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;

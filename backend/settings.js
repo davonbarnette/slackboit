@@ -29,6 +29,8 @@ const Settings =  {
     RELATIVE_ASSET_DIR: path.resolve(__dirname, 'assets'),
     SERVER_PORT:process.env.SERVER_PORT,
     SLACK_TOKEN:process.env.SLACK_TOKEN,
+    TESLA_MICROSERVICE_URL:process.env.TESLA_MICROSERVICE_URL,
+    TESLA_MICROSERVICE_API_KEY:process.env.TESLA_MICROSERVICE_API_KEY,
 };
 
 module.exports = Settings;

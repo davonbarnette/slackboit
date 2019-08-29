@@ -157,21 +157,12 @@ const Register = [
   },
   //WRONG AREA DANIEL KUN
   {
-    acknowledge: "slackboit, clean the poop please",
-    name: "slackboit, clean the poop please",
-    command: "slackboit, clean the poop please",
+    acknowledge: "teslaboit ['turn on', 'turn off', 'temperature', 'location']",
+    name: "teslaboit",
+    command: "teslaboit, whats my car's temperature?",
     description:
-      "he clean",
-    function: Dan.poopCleanerBoit
-  },
-  //WRONG AREA DANIEL KUN
-  {
-    acknowledge: "slackboit, spill the poop please",
-    name: "slackboit, spill the poop please",
-    command: "slackboit, spill the poop please",
-    description:
-      "he unclean",
-    function: Dan.poopSpillerBoit
+      "commands for dans tesla",
+    function: Dan.elonBoit
   },
   // *** Andy *** //
   {
