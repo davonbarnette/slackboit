@@ -1,6 +1,7 @@
-const axios = require('axios');
-const IDoThings = require('../utils/idothings');
-const TESLAService = require('../services/dans_tesla_service');
+const axios = require('axios')
+const IDoThings = require('../utils/idothings')
+const TESLAService = require('../services/dans_tesla_service')
+const ThesaurusService = require('../services/thesaurus_service')
 
 class Dan {
     static goodBoit(bot, user, slackMessage){
@@ -290,68 +291,101 @@ class Dan {
             }
 
             //commands
-            let temp = lowered.includes('temperature')
-            let location = lowered.includes('location')
-            let turnOnMyAC = lowered.includes('turn on')
-            let turnOffMyAC = lowered.includes('turn off')
+            let temp = (lowered.includes('temperature') || lowered.includes('temp') || lowered.includes('cold') || lowered.includes('hot'))
+            let location = (lowered.includes('location') || lowered.includes('where') || lowered.includes('place'))
+            let batteryLevel = (lowered.includes('battery') || lowered.includes('charge'))
+            let isCharging = (lowered.includes('charging'))
+            let turnOnMyAC = (lowered.includes('on') || lowered.includes('up'))
+            let turnOffMyAC = (lowered.includes('off') || lowered.includes('down'))
+
 
             //errors
-            let sadFace = 'only one command at a time, please'
             let errorFace = 'nope :('
 
             try {
+                //command priority based on order here if multiple keywords in slack command
                 if(temp) {
-                    if(location ||
-                        turnOnMyAC ||
-                        turnOffMyAC){
-                        post.message = sadFace
+                    let degrees = await TESLAService.getMyCarsTemperature()
+                    if(!degrees) { post.message = errorFace }
+                    let message = ''
+                    if(degrees == 69) {
+                        message = 'ayy'
                     }else {
-                        let resp = await TESLAService.getMyCarsTemperature()
-                        if(!resp) { post.message = errorFace }
-                        let convertedDegrees = IDoThings.convertToFahrenheit(resp)
-                        let message = ''
-                        if(convertedDegrees < 65) {
-                            message = 'hope you brought a hoodie'
-                        }else if(convertedDegrees >= 65 && convertedDegrees < 80) {
-                            message = 'nice'
-                        }else if(convertedDegrees >= 80) {
-                            message = 'boy its sure hot out there!!'
+                        if(degrees < 65) {
+                            let possibleChoices = [
+                                'brrr its ' + await ThesaurusService.getSynonym('cold'),
+                                'hope you brought a ' + await ThesaurusService.getSynonym('jacket'),
+                            ]
+                            message = IDoThings.pickRandomElement(possibleChoices)
+                        }else if(degrees >= 65 && degrees < 80) {
+                            let possibleChoices = [
+                                'get in, its ' + await ThesaurusService.getSynonym('nice') + ' in here',
+                            ]
+                            message = IDoThings.pickRandomElement(possibleChoices)
+                        }else if(degrees >= 80) {
+                            let possibleChoices = [
+                                'boy its sure ' + await ThesaurusService.getSynonym('hot') + ' out there!!',
+                                'feels like a(n) ' + await ThesaurusService.getSynonym('oven'),
+                            ]
+                            message = IDoThings.pickRandomElement(possibleChoices)
                         }
-                        post.message = message + ': ' + convertedDegrees + ' degrees'
+                    }
+                    post.message = message + ': ' + degrees + ' degrees'
+                }else if(location){
+                    let resp = await TESLAService.getMyCarsLocation()
+                    if(!resp) { post.message = errorFace }
+                    let possibleChoices = [
+                        'its not like i wanted you to know where i was...',
+                        'dans car is at',
+                        ''
+                    ]
+                    post.message = IDoThings.pickRandomElement(possibleChoices) + ' ' + resp
+                }else if(batteryLevel){
+                    let resp = await TESLAService.getMyCarsBatteryLevel()
+                    if(!resp) { post.message = errorFace }
+                    let level = parseInt(resp.replace('%', ''), 10)
+                    let message = ''
+                    if(level > 20) {
+                        let possibleChoices = [
+                            'electric gas tank is at',
+                            'battery level',
+                            'zoop'
+                        ]
+                        message = IDoThings.pickRandomElement(possibleChoices)
+                    }else {
+                        let possibleChoices = [
+                            'ruh-roh',
+                            'gettin low :( ',
+                            'pls feed me'
+                        ]
+                        message = IDoThings.pickRandomElement(possibleChoices)
                     }
 
-                }else if(location){
-                    if(temp ||
-                        turnOnMyAC ||
-                        turnOffMyAC){
-                        post.message = sadFace
+                    post.message = message + ': ' + resp
+                }else if(isCharging){
+                    let resp = await TESLAService.isMyCarCharging()
+                    let message = ''
+                    if(resp == 'true' || resp) {
+                        let possibleChoices = [
+                            'im charging... dont look!!!',
+                            'fillin up!',
+                            'yep'
+                        ]
+                        message = IDoThings.pickRandomElement(possibleChoices)
                     }else {
-                        let resp = await TESLAService.getMyCarsLocation()
-                        if(!resp) { post.message = errorFace }
-                        post.message = 'its not like i wanted you to know where i was... ' + resp
+                        message = 'nope'
                     }
+                    post.message = message
                 }else if(turnOnMyAC){
-                    if(location ||
-                    temp ||
-                    turnOffMyAC){
-                        post.message = sadFace
-                    }else {
-                        let resp = await TESLAService.startMyCarsClimate()
-                        if(!resp) { post.message = errorFace }
-                        post.message = 'model 3 is preconditioning'
-                    }
+                    let resp = await TESLAService.startMyCarsClimate()
+                    if(!resp) { post.message = errorFace }
+                    post.message = 'AC/Heater is preconditioning'
                 }else if(turnOffMyAC){
-                    if(location ||
-                    temp ||
-                    turnOnMyAC){
-                        post.message = sadFace
-                    }else {
-                        let resp = await TESLAService.stopMyCarsClimate()
-                        if(!resp) { post.message = errorFace }
-                        post.message = 'model 3 is off'
-                    }
+                    let resp = await TESLAService.stopMyCarsClimate()
+                    if(!resp) { post.message = errorFace }
+                    post.message = 'AC/Heater is off'
                 }else {
-                    post.message = 'no commando given'
+                    post.message = errorFace
                 }
             } catch (error) {
                 post.message = error

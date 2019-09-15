@@ -159,11 +159,17 @@ const Register = [
   },
   //WRONG AREA DANIEL KUN
   {
-    acknowledge: "teslaboit ['turn on', 'turn off', 'temperature', 'location']",
+    acknowledge: "teslaboit <command keyword>",
     name: "teslaboit",
-    command: "teslaboit, whats my car's temperature? or something like that",
+    command: "teslaboit, whats my car's temperature?",
     description:
-      "commands for dans tesla",
+      "commands for dans tesla. Only does one command per message, prioritize whatever is first here. Keywords: " + "/n" +
+      "Internal temp: temperature, temp, cold, hot" + "/n" +
+      "Current location: location, where, place" + "/n" +
+      "Battery: battery, charge" + "/n" +
+      "Is charging: charging" + "/n" +
+      "let turnOnMyAC: on, up" + "/n" +
+      "let turnOffMyAC: off, down",
     function: Dan.elonBoit
   },
   // *** Andy *** //
