@@ -180,8 +180,8 @@ class James {
                 else smdhArray.push(x)
             }
 
-            let shuffled = IDoThings.shufflay(smdhArray);
-            post.message = shuffled.join(" ");
+            //let shuffled = IDoThings.shufflay(smdhArray);
+            post.message = smdharray.join(" ");
             return post;
         }
         if (lCase.startsWith('smdcreate ')) {
