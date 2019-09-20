@@ -181,7 +181,7 @@ class James {
             }
 
             //let shuffled = IDoThings.shufflay(smdhArray);
-            post.message = smdharray.join(" ");
+            post.message = smdhArray.join(" ");
             return post;
         }
         if (lCase.startsWith('smdcreate ')) {
