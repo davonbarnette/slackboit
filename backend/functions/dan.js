@@ -1,7 +1,7 @@
 const axios = require('axios')
 const IDoThings = require('../utils/idothings')
 const TESLAService = require('../services/dans_tesla_service')
-const ThesaurusService = require('../services/thesaurus_service')
+const THESAURUSService = require('../services/thesaurus_service')
 
 class Dan {
     static goodBoit(bot, user, slackMessage){
@@ -301,7 +301,6 @@ class Dan {
 
             //errors
             let errorFace = 'im dead'
-            let scope = this
             try {
                 //command priority based on order here if multiple keywords in slack command
                 if(temp) {
@@ -312,9 +311,9 @@ class Dan {
                         message = ':ok_hand: _nice_ :ok_hand:'
                     }else {
                         if(degrees < 65) {
-                            let cold = await ThesaurusService.getSynonym('cold')
-                            let hope = await ThesaurusService.getSynonym('hope')
-                            let jack = await scope.ThesaurusService.getSynonym('jacket')
+                            let cold = await THESAURUSService.getSynonym('cold')
+                            let hope = await THESAURUSService.getSynonym('hope')
+                            let jack = await THESAURUSService.getSynonym('jacket')
                             let possibleChoices = [
                                 `its ${cold}`,
                                 `:snowman: :snowman: :snowman:`
@@ -322,12 +321,12 @@ class Dan {
                             ]
                             message = IDoThings.pickRandomElement(possibleChoices)
                         }else if(degrees >= 65 && degrees < 80) {
-                            let get_in = await ThesaurusService.getSynonym('get_in')
-                            let nice = await ThesaurusService.getSynonym('nice')
+                            let get_in = await THESAURUSService.getSynonym('get_in')
+                            let nice = await THESAURUSService.getSynonym('nice')
                             message = `${get_in}, its ${nice} in here`
                         }else if(degrees >= 80) {
-                            let boy = await ThesaurusService.getSynonym('boy')
-                            let hot = await ThesaurusService.getSynonym('hot')
+                            let boy = await THESAURUSService.getSynonym('boy')
+                            let hot = await THESAURUSService.getSynonym('hot')
                             let possibleChoices = [
                                 `${boy} its sure ${hot} out there!!`,
                                 `:fire: :fire: :fire:`,
@@ -349,8 +348,8 @@ class Dan {
                         let possibleChoices = [
                             'electric gas tank is at',
                             ':b:attery level',
-                            ':bearoverdrive: zoop :bearoverdrive:',
-                            ':dancedino:'
+                            'zoop',
+                            ':bearoverdrive: :bearoverdrive: :bearoverdrive: :bearoverdrive:'
                         ]
                         message = IDoThings.pickRandomElement(possibleChoices)
                     }else {
@@ -380,12 +379,12 @@ class Dan {
                 }else if(turnOnMyAC){
                     let resp = await TESLAService.startMyCarsClimate()
                     if(!resp) { post.message = errorFace }
-                    let starting = await scope.ThesaurusService.getSynonym('starting')
+                    let starting = await THESAURUSService.getSynonym('starting')
                     post.message = `AC/Heater is ${starting}`
                 }else if(turnOffMyAC){
                     let resp = await TESLAService.stopMyCarsClimate()
                     if(!resp) { post.message = errorFace }
-                    let stopping = await scope.ThesaurusService.getSynonym('shutting off')
+                    let stopping = await THESAURUSService.getSynonym('shutting off')
                     post.message = `AC/Heater is ${stopping}`
                 }else {
                     post.message = errorFace
