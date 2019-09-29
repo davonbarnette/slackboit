@@ -1,7 +1,7 @@
 const axios = require('axios')
 const IDoThings = require('../utils/idothings')
 const TESLAService = require('../services/dans_tesla_service')
-const THESAURUSService = require('../services/thesaurus_service')
+const thesaurus = require('../services/thesaurus_service')
 
 class Dan {
     static goodBoit(bot, user, slackMessage){
@@ -311,9 +311,9 @@ class Dan {
                         message = ':ok_hand: _nice_ :ok_hand:'
                     }else {
                         if(degrees < 65) {
-                            let cold = await THESAURUSService.getSynonym('cold')
-                            let hope = await THESAURUSService.getSynonym('hope')
-                            let jack = await THESAURUSService.getSynonym('jacket')
+                            let cold = await thesaurus.getSynonym('cold')
+                            let hope = await thesaurus.getSynonym('hope')
+                            let jack = await thesaurus.getSynonym('jacket')
                             let possibleChoices = [
                                 `its ${cold}`,
                                 `:snowman: :snowman: :snowman:`
@@ -321,12 +321,12 @@ class Dan {
                             ]
                             message = IDoThings.pickRandomElement(possibleChoices)
                         }else if(degrees >= 65 && degrees < 80) {
-                            let get_in = await THESAURUSService.getSynonym('get_in')
-                            let nice = await THESAURUSService.getSynonym('nice')
+                            let get_in = await thesaurus.getSynonym('get_in')
+                            let nice = await thesaurus.getSynonym('nice')
                             message = `${get_in}, its ${nice} in here`
                         }else if(degrees >= 80) {
-                            let boy = await THESAURUSService.getSynonym('boy')
-                            let hot = await THESAURUSService.getSynonym('hot')
+                            let boy = await thesaurus.getSynonym('boy')
+                            let hot = await thesaurus.getSynonym('hot')
                             let possibleChoices = [
                                 `${boy} its sure ${hot} out there!!`,
                                 `:fire: :fire: :fire:`,
@@ -379,12 +379,12 @@ class Dan {
                 }else if(turnOnMyAC){
                     let resp = await TESLAService.startMyCarsClimate()
                     if(!resp) { post.message = errorFace }
-                    let starting = await THESAURUSService.getSynonym('starting')
+                    let starting = await thesaurus.getSynonym('starting')
                     post.message = `AC/Heater is ${starting}`
                 }else if(turnOffMyAC){
                     let resp = await TESLAService.stopMyCarsClimate()
                     if(!resp) { post.message = errorFace }
-                    let stopping = await THESAURUSService.getSynonym('shutting off')
+                    let stopping = await thesaurus.getSynonym('shutting off')
                     post.message = `AC/Heater is ${stopping}`
                 }else {
                     post.message = errorFace
@@ -393,6 +393,8 @@ class Dan {
                 post.message = error
             }
 
+            let test = await thesaurus.getSynonym('shutting off')
+            post.message = test
             return post
         }
     }

@@ -7,8 +7,14 @@ class ThesaurusService {
   static async getSynonym(word, definition_id = 0) {
     let url = `https://dictionaryapi.com/api/v3/references/thesaurus/json/${word}?key=${SETTINGS.THESAURUS_API_TOKEN}`
 
-    let resp = await axios.get(url)
-    if(!resp) return word
+    try {
+      let resp = await axios.get(url)
+      if(!resp) return word
+    } catch (error) {
+      return word
+    }
+
+
 
     let arrayOfSynonymArray = resp.data.meta.syns //dunno why it return arrays inside of an array, maybe if the word has multiple meanings it returns array for each?
     let synonym = IDoThings.pickRandomElement(arrayOfSynonymArray[definition_id])
@@ -20,8 +26,12 @@ class ThesaurusService {
   static async getRandoSynonym(word) {
     let url = `https://dictionaryapi.com/api/v3/references/thesaurus/json/${word}?key=${SETTINGS.THESAURUS_API_TOKEN}`
 
-    let resp = await axios.get(url)
-    if(!resp) return word
+    try {
+      let resp = await axios.get(url)
+      if(!resp) return word
+    } catch (error) {
+      return word
+    }
 
     let arrayOfSynonymArray = resp.data.meta.syns //dunno why it return arrays inside of an array, maybe if the word has multiple meanings it returns array for each?
     let randoArrayOfArray = IDoThings.pickRandomElement(arrayOfSynonymArray)
