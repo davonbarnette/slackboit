@@ -293,14 +293,14 @@ class Dan {
             //commands
             let temp = (lowered.includes('temperature') || lowered.includes('temp') || lowered.includes('cold') || lowered.includes('hot'))
             let location = (lowered.includes('location') || lowered.includes('where') || lowered.includes('place'))
-            let batteryLevel = (lowered.includes('battery') || lowered.includes('charge'))
+            let batteryLevel = (lowered.includes('battery') || lowered.includes('charge') || lowered.includes('level'))
             let isCharging = (lowered.includes('charging'))
-            let turnOnMyAC = (lowered.includes('on') || lowered.includes('up'))
-            let turnOffMyAC = (lowered.includes('off') || lowered.includes('down'))
+            let turnOnMyAC = (lowered.includes('on') || lowered.includes('up') || lowered.includes('activate'))
+            let turnOffMyAC = (lowered.includes('off') || lowered.includes('down') || lowered.includes('deactivate'))
 
 
             //errors
-            let errorFace = 'nope :('
+            let errorFace = 'im dead'
 
             try {
                 //command priority based on order here if multiple keywords in slack command
@@ -309,23 +309,21 @@ class Dan {
                     if(!degrees) { post.message = errorFace }
                     let message = ''
                     if(degrees == 69) {
-                        message = 'ayy'
+                        message = ':ok_hand: _nice_ :ok_hand:'
                     }else {
                         if(degrees < 65) {
                             let possibleChoices = [
-                                'brrr its ' + await ThesaurusService.getSynonym('cold'),
-                                'hope you brought a ' + await ThesaurusService.getSynonym('jacket'),
+                                `its ${await ThesaurusService.getSynonym('cold')}`,
+                                `:snowman: :snowman: :snowman:`
+                                `i ${await ThesaurusService.getSynonym('hope')} you brought a ${await ThesaurusService.getSynonym('jacket')} :eyes:`,
                             ]
                             message = IDoThings.pickRandomElement(possibleChoices)
                         }else if(degrees >= 65 && degrees < 80) {
-                            let possibleChoices = [
-                                'get in, its ' + await ThesaurusService.getSynonym('nice') + ' in here',
-                            ]
-                            message = IDoThings.pickRandomElement(possibleChoices)
+                            message = `${await ThesaurusService.getSynonym('get_in')}, its ${await ThesaurusService.getSynonym('nice')} in here`
                         }else if(degrees >= 80) {
                             let possibleChoices = [
-                                'boy its sure ' + await ThesaurusService.getSynonym('hot') + ' out there!!',
-                                'feels like a(n) ' + await ThesaurusService.getSynonym('oven'),
+                                `${await ThesaurusService.getSynonym('boy')} its sure ${await ThesaurusService.getSynonym('hot')} out there!!`,
+                                `:fire: :fire: :fire:`,
                             ]
                             message = IDoThings.pickRandomElement(possibleChoices)
                         }
@@ -334,12 +332,7 @@ class Dan {
                 }else if(location){
                     let resp = await TESLAService.getMyCarsLocation()
                     if(!resp) { post.message = errorFace }
-                    let possibleChoices = [
-                        'its not like i wanted you to know where i was...',
-                        'dans car is at',
-                        ''
-                    ]
-                    post.message = IDoThings.pickRandomElement(possibleChoices) + ' ' + resp
+                    post.message = resp
                 }else if(batteryLevel){
                     let resp = await TESLAService.getMyCarsBatteryLevel()
                     if(!resp) { post.message = errorFace }
@@ -348,8 +341,9 @@ class Dan {
                     if(level > 20) {
                         let possibleChoices = [
                             'electric gas tank is at',
-                            'battery level',
-                            'zoop'
+                            ':b:attery level',
+                            ':bearoverdrive: zoop :bearoverdrive:',
+                            ':dancedino:'
                         ]
                         message = IDoThings.pickRandomElement(possibleChoices)
                     }else {
@@ -367,23 +361,23 @@ class Dan {
                     let message = ''
                     if(resp == 'true' || resp) {
                         let possibleChoices = [
-                            'im charging... dont look!!!',
-                            'fillin up!',
+                            ':thumbsup_all:',
                             'yep'
                         ]
                         message = IDoThings.pickRandomElement(possibleChoices)
                     }else {
-                        message = 'nope'
+                        message = 'nope',
+                        message = `:thumbsdown:`
                     }
                     post.message = message
                 }else if(turnOnMyAC){
                     let resp = await TESLAService.startMyCarsClimate()
                     if(!resp) { post.message = errorFace }
-                    post.message = 'AC/Heater is preconditioning'
+                    post.message = `AC/Heater is ${await ThesaurusService.getSynonym('starting')}`
                 }else if(turnOffMyAC){
                     let resp = await TESLAService.stopMyCarsClimate()
                     if(!resp) { post.message = errorFace }
-                    post.message = 'AC/Heater is off'
+                    post.message = `AC/Heater is ${await ThesaurusService.getSynonym('shutting off')}`
                 }else {
                     post.message = errorFace
                 }
@@ -394,8 +388,6 @@ class Dan {
             return post
         }
     }
-
-
 
     static async giffyBoiteru(bot, user, slackMessage) {
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
