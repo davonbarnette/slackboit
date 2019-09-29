@@ -301,7 +301,7 @@ class Dan {
 
             //errors
             let errorFace = 'im dead'
-
+            let scope = this
             try {
                 //command priority based on order here if multiple keywords in slack command
                 if(temp) {
@@ -313,16 +313,16 @@ class Dan {
                     }else {
                         if(degrees < 65) {
                             let possibleChoices = [
-                                `its ${await ThesaurusService.getSynonym('cold')}`,
+                                `its ${await scope.ThesaurusService.getSynonym('cold')}`,
                                 `:snowman: :snowman: :snowman:`
-                                `i ${await ThesaurusService.getSynonym('hope')} you brought a ${await ThesaurusService.getSynonym('jacket')} :eyes:`,
+                                `i ${await scope.ThesaurusService.getSynonym('hope')} you brought a ${await scope.ThesaurusService.getSynonym('jacket')} :eyes:`,
                             ]
                             message = IDoThings.pickRandomElement(possibleChoices)
                         }else if(degrees >= 65 && degrees < 80) {
-                            message = `${await ThesaurusService.getSynonym('get_in')}, its ${await ThesaurusService.getSynonym('nice')} in here`
+                            message = `${await scope.ThesaurusService.getSynonym('get_in')}, its ${await scope.ThesaurusService.getSynonym('nice')} in here`
                         }else if(degrees >= 80) {
                             let possibleChoices = [
-                                `${await ThesaurusService.getSynonym('boy')} its sure ${await ThesaurusService.getSynonym('hot')} out there!!`,
+                                `${await scope.ThesaurusService.getSynonym('boy')} its sure ${await scope.ThesaurusService.getSynonym('hot')} out there!!`,
                                 `:fire: :fire: :fire:`,
                             ]
                             message = IDoThings.pickRandomElement(possibleChoices)
@@ -373,11 +373,11 @@ class Dan {
                 }else if(turnOnMyAC){
                     let resp = await TESLAService.startMyCarsClimate()
                     if(!resp) { post.message = errorFace }
-                    post.message = `AC/Heater is ${await ThesaurusService.getSynonym('starting')}`
+                    post.message = `AC/Heater is ${await scope.ThesaurusService.getSynonym('starting')}`
                 }else if(turnOffMyAC){
                     let resp = await TESLAService.stopMyCarsClimate()
                     if(!resp) { post.message = errorFace }
-                    post.message = `AC/Heater is ${await ThesaurusService.getSynonym('shutting off')}`
+                    post.message = `AC/Heater is ${await scope.ThesaurusService.getSynonym('shutting off')}`
                 }else {
                     post.message = errorFace
                 }
