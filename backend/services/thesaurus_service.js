@@ -9,15 +9,9 @@ class ThesaurusService {
 
     try {
       let resp = await axios.get(url)
-      if(!resp) return word
-    } catch (error) {
-      return word
-    }
-
-    try {
-      let arrayOfSynonymArray = resp.data.meta.syns //dunno why it return arrays inside of an array, maybe if the word has multiple meanings it returns array for each?
-      let synonym = IDoThings.pickRandomElement(arrayOfSynonymArray[definitionId])
-
+      let arrayOfDefinitions = resp.data
+      let synonyms = arrayOfDefinitions[definitionId].meta.syns
+      let synonym = IDoThings.pickRandomElement(synonyms[definitionId])
       return synonym
     } catch (error) {
       return word
@@ -30,15 +24,9 @@ class ThesaurusService {
 
     try {
       let resp = await axios.get(url)
-      if(!resp) return word
-    } catch (error) {
-      return word
-    }
-
-    try {
-      let arrayOfSynonymArray = resp.data.meta.syns //dunno why it return arrays inside of an array, maybe if the word has multiple meanings it returns array for each?
-      let randoArrayOfArray = IDoThings.pickRandomElement(arrayOfSynonymArray)
-      let randoSynonym = IDoThings.pickRandomElement(randoArrayOfArray)
+      let arrayOfDefinitions = resp.data
+      let randoSynonyms = IDoThings.pickRandomElement(arrayOfDefinitions).meta.syns
+      let randoSynonym = IDoThings.pickRandomElement(randoSynonyms)
 
       return randoSynonym
     } catch (error) {

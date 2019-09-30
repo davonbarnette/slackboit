@@ -384,7 +384,7 @@ class Dan {
                 }else if(turnOffMyAC){
                     let resp = await TESLAService.stopMyCarsClimate()
                     if(!resp) { post.message = errorFace }
-                    let stopping = await thesaurus.getSynonym('shutting off')
+                    let stopping = await thesaurus.getSynonym('shutting_off')
                     post.message = `AC/Heater is ${stopping}`
                 }else {
                     post.message = errorFace
@@ -393,8 +393,6 @@ class Dan {
                 post.message = error
             }
 
-            let test = await thesaurus.getSynonym('shutting off')
-            post.message = test
             return post
         }
     }
