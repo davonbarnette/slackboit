@@ -172,6 +172,15 @@ const Register = [
       "let turnOffMyAC: off, down",
     function: Dan.elonBoit
   },
+  //WRONG AREA DANIEL KUN
+  {
+    acknowledge: "spookboit",
+    name: "spookboit",
+    command: "spookboit",
+    description:
+      "spookboit",
+    function: Dan.spookBoit
+  },
   // *** Andy *** //
   {
     acknowledge: ["to be fair"],
