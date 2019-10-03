@@ -1300,15 +1300,13 @@ BEGONE THOT
     static spookBoit(bot, user, slackMessage){
         let {text, channel, event_ts, subtype, previous_message} = slackMessage;
 
-        let post = {
-            message: null,
-            params: {icon_url:IDoThings.getImageURL('slackboit_spook.png')},
-            spongebobify: false
-        }
-
         const acknowledge = "spookboit"
         if (text.includes(acknowledge)){
-            post.message = 'https://imgur.com/a/kGhRDN3'
+            let post = {
+                message: 'https://imgur.com/a/kGhRDN3',
+                params: {icon_url:IDoThings.getImageURL('slackboit_spook.png'),attachments: [{"title": '', "image_url": 'https://imgur.com/a/kGhRDN3'}]},
+                spongebobify: false
+            }
             return post
         }
     }
