@@ -1303,7 +1303,7 @@ BEGONE THOT
         const acknowledge = "spookboit"
         if (text.includes(acknowledge)){
             let post = {
-                message: 'https://imgur.com/a/kGhRDN3',
+                message: 'https://i.imgur.com/yGTUsK0.gif',
                 params: {icon_url:IDoThings.getImageURL('slackboit_spook.png'),attachments: [{"title": '', "image_url": 'https://imgur.com/a/kGhRDN3'}]},
                 spongebobify: false
             }
