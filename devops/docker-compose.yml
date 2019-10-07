@@ -16,7 +16,7 @@ services:
       - DB_SEQUELIZE_DIALECT=postgres
   postgres:
     container_name: slackboit_postgres
-    image: postgres
+    image: postgres:11
     volumes:
       - ./data:/var/lib/postgresql/
     ports:
