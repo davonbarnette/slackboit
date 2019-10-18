@@ -83,6 +83,42 @@ class Andy {
     }
   }
 
+  static sebreneboit(bot, user, slackMessage) {
+    const { text, channel, event_ts, subtype, previous_message } = slackMessage;
+
+    let post = {
+      message: null,
+      params: { icon_url: IDoThings.getImageURL("sebreneboit.jpg") },
+      spongebobify: false
+    };
+
+    const acknowledge = "sebreneboit";
+    let lowered = text.toLowerCase();
+
+    if (lowered.startsWith(acknowledge)) {
+      if (lowered.endsWith("spotify")) {
+        post.message =
+          "LiStEn To ThIs U tHoT https://open.spotify.com/album/1Nu8geDXPXTwrnYqcqU2ws?si=91S5rQe1TPmM7sHF2CtcXg";
+        return post;
+      } else if (lowered.endsWith("itunes")) {
+        post.message =
+          "LiStEn To ThIs STEVE JOBS https://music.apple.com/us/album/melancholia-ep/1482342906?app=itunes";
+        return post;
+      } else if (lowered.endsWith("youtube")) {
+        post.message =
+          "WaTcH tHiS iF bOiTiE bAnNeD SpOtIfY https://youtu.be/T7hgsULM27U";
+        return post;
+      } else if (lowered.endsWith("soundcloud")) {
+        post.message =
+          "sure ok why not https://soundcloud.com/sebrene/sets/melancholia-ep";
+        return post;
+      } else {
+        post.message = "LiStEn To ThIs U tHoT http://sebrene.com/";
+        return post;
+      }
+    }
+  }
+
   static async asciiBoit(bot, user, slackMessage) {
     let { text, channel, event_ts, subtype, previous_message } = slackMessage;
 

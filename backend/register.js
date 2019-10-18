@@ -129,7 +129,12 @@ const Register = [
     function: Dan.greetingBoit
   },
   {
-    acknowledge: ["kawaiiboit", "kawaiiboit act 1", "kawaiiboit act 2", "kawaiiboit act 3"],
+    acknowledge: [
+      "kawaiiboit",
+      "kawaiiboit act 1",
+      "kawaiiboit act 2",
+      "kawaiiboit act 3"
+    ],
     name: "hewwo :3",
     command: [
       "kawaiiboit [PHRASE]",
@@ -163,12 +168,18 @@ const Register = [
     name: "teslaboit",
     command: "teslaboit, whats my car's temperature?",
     description:
-      "commands for dans tesla. Only does one command per message, prioritize whatever is first here. Keywords: " + "/n" +
-      "Internal temp: temperature, temp, cold, hot" + "/n" +
-      "Current location: location, where, place" + "/n" +
-      "Battery: battery, charge" + "/n" +
-      "Is charging: charging" + "/n" +
-      "let turnOnMyAC: on, up" + "/n" +
+      "commands for dans tesla. Only does one command per message, prioritize whatever is first here. Keywords: " +
+      "/n" +
+      "Internal temp: temperature, temp, cold, hot" +
+      "/n" +
+      "Current location: location, where, place" +
+      "/n" +
+      "Battery: battery, charge" +
+      "/n" +
+      "Is charging: charging" +
+      "/n" +
+      "let turnOnMyAC: on, up" +
+      "/n" +
       "let turnOffMyAC: off, down",
     function: Dan.elonBoit
   },
@@ -177,8 +188,7 @@ const Register = [
     acknowledge: "spookboit",
     name: "spookboit",
     command: "spookboit",
-    description:
-      "spookboit",
+    description: "spookboit",
     function: Dan.spookBoit
   },
   // *** Andy *** //
@@ -196,6 +206,15 @@ const Register = [
     description:
       "Slackboit repeats whenever someone says technically with matrix icon",
     function: Andy.technically
+  },
+
+  {
+    acknowledge: ["sebreneboit"],
+    name: "Sebrene Boit",
+    command: "sebreneboit",
+    description:
+      "Slackboit tells u to listen to sum hot trax. (try adding spotify, youtube, itunes, or soundcloud)",
+    function: Andy.sebreneboit
   },
 
   {
