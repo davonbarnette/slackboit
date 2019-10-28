@@ -77,6 +77,7 @@ class IDoThings {
             'UL4TKUJG3': 'meghoit', //Meghan
             'UDKRCNYUU': 'chinn-chan', //Jessica
             'UL6FD65TM': 'coitnoisty "the noistiest"', //Cortney
+            'UPJDNTS3V': 'danenhoover the black cock', //Dani
         };
         return nameMap[username] || username;
     }
