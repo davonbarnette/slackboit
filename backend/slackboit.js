@@ -16,20 +16,25 @@ class Slackboit {
     startEmUp(){
         const {SLACK_TOKEN:token} = SETTINGS;
         if (token){
+            Store.slackboitedGoodbye = false;
             this.bot = new SlackBot({token, name: 'Slackboit'});
             this.bot.on('open', this.onOpen.bind(this));
             this.bot.on('message', this.onMessage.bind(this));
-            this.bot.on('close', () => console.log('closed connection'));
+            this.bot.on('close', () => this.onClose.bind(this));
             this.bot.on('error', (err) => Logger.info('[Slackboit] Slackboit connection error', err));
         }
     }
 
     async onOpen(){
         Logger.info('[Slackboit] Slackboit connection opened');
-        Store.slackboitedGoodbye = false;
         if (process.env.NODE_ENV === 'production')
             this.bot.postMessage('CLV3SNCDD', IDoThings.spongebobMemeify('hello'), {});
         return UserService.updateUserRegistry(this.bot);
+    }
+
+    onClose(){
+        Logger.error('[Slackboit] Connection closed.');
+        Store.slackboitedGoodbye = true;
     }
 
     async onMessage(event){
