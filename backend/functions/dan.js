@@ -300,7 +300,7 @@ class Dan {
 
 
             //errors
-            let errorFace = 'im dead'
+            let errorFace = 'oi'
             try {
                 //command priority based on order here if multiple keywords in slack command
                 if(temp) {
@@ -316,8 +316,9 @@ class Dan {
                             let jack = await thesaurus.getSynonym('jacket')
                             let possibleChoices = [
                                 `its ${cold}`,
-                                `:snowman: :snowman: :snowman:`
+                                `:snowman: :snowman: :snowman:`,
                                 `i ${hope} you brought a ${jack} :eyes:`,
+                                `poop on my butthole`
                             ]
                             message = IDoThings.pickRandomElement(possibleChoices)
                         }else if(degrees >= 65 && degrees < 80) {
@@ -330,6 +331,7 @@ class Dan {
                             let possibleChoices = [
                                 `${boy} its sure ${hot} out there!!`,
                                 `:fire: :fire: :fire:`,
+                                `pee in my butthole`
                             ]
                             message = IDoThings.pickRandomElement(possibleChoices)
                         }
@@ -344,21 +346,9 @@ class Dan {
                     if(!resp) { post.message = errorFace }
                     let level = parseInt(resp.replace('%', ''), 10)
                     let message = ''
-                    if(level > 20) {
-                        let possibleChoices = [
-                            'electric gas tank is at',
-                            ':b:attery level',
-                            'zoop',
-                            ':bearoverdrive: :bearoverdrive: :bearoverdrive: :bearoverdrive:'
-                        ]
-                        message = IDoThings.pickRandomElement(possibleChoices)
-                    }else {
-                        let possibleChoices = [
-                            'ruh-roh',
-                            'gettin low :( ',
-                            'pls feed me'
-                        ]
-                        message = IDoThings.pickRandomElement(possibleChoices)
+
+                    for(let i = 1; i <= (level/10); i++) {
+                        message += ':bearoverdrive:'
                     }
 
                     post.message = message + ': ' + resp
@@ -380,12 +370,12 @@ class Dan {
                     let resp = await TESLAService.startMyCarsClimate()
                     if(!resp) { post.message = errorFace }
                     let starting = await thesaurus.getSynonym('starting')
-                    post.message = `AC/Heater is ${starting}`
+                    post.message = `HVAC is ${starting}`
                 }else if(turnOffMyAC){
                     let resp = await TESLAService.stopMyCarsClimate()
                     if(!resp) { post.message = errorFace }
                     let stopping = await thesaurus.getSynonym('shutting_off')
-                    post.message = `AC/Heater is ${stopping}`
+                    post.message = `HVAC is ${stopping}`
                 }else {
                     post.message = errorFace
                 }
